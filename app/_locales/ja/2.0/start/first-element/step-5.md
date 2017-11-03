@@ -1,27 +1,23 @@
 ---
-title: "Step 5: Theming with custom CSS properties"
-subtitle: "Build your first Polymer element"
+title: "Step 5: カスタムCSSプロパティによるテーマ設定"
+subtitle: "Polymer Elementを作ろう"
 ---
 
-You now have a button that's basically functional. But it's stuck using the
-existing text color for both pressed and unpressed states. What if you want to
-get a little flashier?
+ここまでで基本的な機能を持ったボタンができました。しかし、それは押された状態と押されていない状態の両方に既存のテキストカラーを使用したまま止まっています。もうちょっと装飾されたものが欲しいと思ったらどうすれば良いのでしょうか？
 
-Shadow DOM helps prevent users from styling your element's internals by accident.
-To allow users to style your component, you can use _custom CSS properties_. Polymer
-provides a custom CSS property implementation inspired by the
-[CSS Custom Properties for Cascading Variables](http://www.w3.org/TR/css-variables/) specification.
+Shadow DOMはユーザーが誤ってエレメントの内部をスタイリングしてしまうのを防ぐのに役立ちます。_カスタムCSSプロパティ_ を使用することでコンポーネントにスタイルを設定できるようになります。
+Polymerは、[カスケーディング変数のCSSカスタムプロパティ](http://www.w3.org/TR/css-variables/)仕様からインスピレーションを得たカスタムCSSプロパティを実装しています。
 
-You apply a custom property inside your element using the `var` function.
+`var`関数を使用してエレメント内にカスタムプロパティを適用します。
 
 <pre><code>background-color: var(<em>--my-custom-property</em>, <em>defaultValue</em>);</pre></code>
 
-Where <code>--<em>my-custom-property</em></code> is a custom property name, always starting with two dashes (`--`), and <code><em>defaultValue</em></code> is an (optional) CSS value that's used if the custom property isn't set.
+<code>--<em>my-custom-property</em></code>はカスタムプロパティ名で、常に2つのダッシュ（ - ）で始まり、
+<code><em>defaultValue</em></code>はカスタムプロパティが設定されていない場合に使用される（オプションの）CSSの値です。
 
 ## Add new custom property values
 
-Edit your element's `<style>` tag and replace the `fill` and `stroke`
-values with custom properties:
+エレメントの`<style>`タグ内を編集し、`fill`と`stroke`の値をカスタムプロパティで置き換えます:
 
 icon-toggle.html: Before  { .caption }
 
@@ -59,10 +55,9 @@ icon-toggle.html: After  { .caption }
   </style>
 ```
 
-Because of the default values, you can still style the `<icon-toggle>` just by
-setting `color`, but now you have other options.
+デフォルト値のおかげで、`color`を設定するだけで`<icon-toggle>`のスタイルを変更することができますが、他にもオプションがあります。
 
-From the `demo` folder, open up `demo-element.html` and set the new properties.
+`demo`フォルダから`demo-element.html`を開き、新しいプロパティを設定します。
 
 demo-element.html: Before { .caption }
 
@@ -87,27 +82,23 @@ demo-element.html: After { .caption }
     </style>
 ```
 
-Run the demo again to get colorful.
+デモをもう一度実行してカラフルなエレメントを手に入れましょう。
 
 
 <img src="/images/2.0/first-element/toggles-styled.png" alt="Demo showing
 icon toggles with star and heart icons. Pressed icons are red.">
 
-That's it — your element is finished. You've created an element that has a basic
-UI, API, and custom styling properties.
+それでおしまいです - エレメントが完成しました。基本的なUI、API、カスタムスタイルプロパティを持つエレメントが作成されました。
 
-If you have any trouble getting the element working, check out the
-[finished version](https://github.com/PolymerLabs/polymer-2-first-element/tree/master/icon-toggle-finished).
+もしエレメントの動作に問題がある場合は、[完成版](https://github.com/PolymerLabs/polymer-2-first-element/tree/master/icon-toggle-finished)をチェックしてください。
 
-If you'd like to learn a little more about custom properties, read on.
+カスタムプロパティについてもう少し詳しく知りたければ、以下の説明を読んでください。
 
-## Extra credit: set custom properties at the document level
+## Extra credit: ドキュメントレベルでカスタムプロパティを設定する
 
-Frequently you want to define custom property values at the document level, to
-set a theme for an entire application, for example. Because custom properties
-aren't built into most browsers yet, you need to use a special `custom-style`
-tag to define custom properties outside of a Polymer element. Try
-adding the following code inside the `<head>` tag of your `index.html` file:
+たとえば、ドキュメントレベルでカスタムプロパティの値を定義して、アプリケーション全体のテーマを設定したいことがよくあります。
+カスタムプロパティはほとんどのブラウザに組み込まれていないため、Polymer Elementの外でカスタムプロパティを定義するには、特別な`custom-style`タグを使用する必要があります。
+`index.html`ファイルの`<head>`タグの中に次のコードを追加してみてください：
 
 ```
 <custom-style>
@@ -128,27 +119,19 @@ adding the following code inside the `<head>` tag of your `index.html` file:
 </custom-style>
 ```
 
-Key information:
+重要事項:
 
-*   The `demo-element` selector matches the `demo-element` element, and
-    has a **higher specificity** than the `html` rule inside `demo-element`,
-    so it overrides the values there.
+*   `demo-element`セレクタは`demo-element`エレメントと一致し、`demo-element`の`html`ルールよりも **高い特異性** を持つため、そこで値を上書きします。
 
-*   Custom properties can **only** be defined in rule-sets that match the `html`
-    selector **or a Polymer custom element.** This is a limitation
-    of the Polymer implementation of custom properties.
+*   カスタムプロパティは、`html`セレクタ **またはPolymer Custom Element** と一致するルールセットの中で **のみ** 定義できます。これは、Polymerに実装されているカスタムプロパティの制限です。
 
-Run the demo again, and you'll notice that the pressed buttons are now blue,
-but **the main color and outline color haven't changed.**
+デモをもう一度実行すると、押されたボタンは青色になりますが、**メインカラーとアウトラインカラーは変更されていません**。
 
-The `--icon-toggle-color` property doesn't get set because it can't be applied
-to the `body` tag. Try moving this rule into the `demo-element` block to see
-it applied.
+`--icon-toggle-color`プロパティは`body`タグに適用できないため、設定されません。このルールを`demo-element`ブロックに移動して、適用されていることを確認してください。
 
-The `html` rule-set creates a document-wide default value for `--icon-toggle-outline-color`.
-But this value is overridden by the corresponding rule inside the `demo-element`
-element. To see this default value at work, comment out the corresponding rule in
-`demo-element.html`:
+`html`ルールセットは、`--icon-toggle-outline-color`のドキュメント全体のデフォルト値を作成します。
+しかし、この値は、`demo-element`エレメント内の対応するルールによってオーバーライドされます。
+このデフォルト値での動作を確認するには、`demo-element.html`の対応するルールをコメントアウトしてください:
 
 demo-element.html { .caption }
 
@@ -163,10 +146,9 @@ demo-element.html { .caption }
     </style>
 ```
 
-Finally, note that to match a selector in the `custom-style`, the element must
-be **in the document scope**—for example, in `index.html`, not inside another
-element's shadow DOM. For example, these rules do **not** work inside the
-`custom-style`:
+最後に、`custom-style`内のセレクタと一致させるには、エレメントが **ドキュメントスコープ内**
+(たとえば、`index.html`など。別のエレメントのShadow DOMの中ではない。)になければならないことに注意してください。
+たとえば、これらのルールは`custom-style`内では機能 **しません**:
 
 ```
     iron-icon {
@@ -175,10 +157,8 @@ element's shadow DOM. For example, these rules do **not** work inside the
     }
 ```
 
-That's because the `iron-icon` elements on the page are inside another element's
-shadow DOM. However, since custom properties inherit down the tree, you can set
-these properties at the document level to set the size for all `iron-icon`
-elements on the page:
+これは、この`iron-icon`エレメントが別の要素のShadow DOMの内側にあるためです。
+ただし、カスタムプロパティはツリーを継承しているため、これらのプロパティをドキュメントレベルで設定して、ページ上のすべての`iron-icon`エレメントのサイズを設定することができます:
 
 ```
     html {
@@ -187,15 +167,14 @@ elements on the page:
     }
 ```
 
-For more information, see the documentation on [custom CSS properties](https://www.polymer-project.org/2.0/docs/devguide/custom-css-properties).
+詳細については、[カスタムCSSプロパティ](https://www.polymer-project.org/2.0/docs/devguide/custom-css-properties)に関するドキュメントを参照してください。
 
-Ready to get started on your own element? You can use the Polymer CLI to
-[Create an element project](/2.0/docs/tools/polymer-cli#element).
+あなたオリジナルのエレメントを使い始める準備はできていますか？Polymer CLIを使用して[エレメントのプロジェクトを作成することができます](/2.0/docs/tools/polymer-cli#element)。
 
-You can also see the [Build an app](/2.0/start/toolbox/set-up)
-tutorial to get started on an app using the Polymer App Toolbox.
+また、Polymer App Toolboxを使用してアプリケーション開発をスタートするには
+[Build an app](/2.0/start/toolbox/set-up)のチュートリアルを見てみましょう。
 
-Or review the previous section:
+または前のセクションを見直してください:
 
 <a class="blue-button" href="step-4">
   Previous Step: React to input
