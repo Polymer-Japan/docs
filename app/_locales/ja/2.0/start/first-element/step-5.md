@@ -177,5 +177,5 @@ demo-element.html { .caption }
 または前のセクションを見直してください:
 
 <a class="blue-button" href="step-4">
-  Previous Step: React to input
+  Previous Step: インプットに反応させる
 </a>

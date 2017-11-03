@@ -104,4 +104,4 @@ placeholder text reading 'Not much here yet'." title="Initial demo">
 
 もしすべてうまく行っていたら、[step 2](step-2)へ進みます.
 
-<a class="blue-button" href="step-2">Step 2: Add local DOM</a>
+<a class="blue-button" href="step-2">Step 2: ローカルDOMの追加</a>

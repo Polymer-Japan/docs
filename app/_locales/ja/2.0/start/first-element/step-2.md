@@ -1,5 +1,5 @@
 ---
-title: "Step 2: ローカルDOMを追加する"
+title: "Step 2: ローカルDOMの追加"
 subtitle: "Polymer Elementを作ろう"
 ---
 
@@ -244,6 +244,6 @@ icon-toggle.html { .caption }
 **もし新しいトグルが表示されない場合、** 上のコードとファイルを再度確認してください。空白のページが表示された場合は、デモフォルダまたはdemo/index.htmlを開いていることを確認してください。
 { .alert .alert-info }
 
-<a class="blue-button" href="intro">Previous step: Intro</a>
+<a class="blue-button" href="intro">Previous step: イントロ</a>
 <a class="blue-button"
-    href="step-3">Next step: Use data binding and properties</a>
+    href="step-3">Next step: データバインディングとプロパティを使う</a>
