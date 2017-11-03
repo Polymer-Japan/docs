@@ -1,0 +1,119 @@
+{% extends "templates/base-devguide.html" %}
+{% block title %}Getting Started{% endblock %}
+
+{% block content %}
+
+<style>
+  pre {
+    background: white;
+  }
+
+  h1 {
+    margin-right: 40px;
+  }
+
+  .example-code {
+    min-width: 60%;
+  }
+
+  @media (max-width: 1000px) {
+    .example-code {
+      width: 100%;
+      margin-bottom: 40px;
+    }
+
+    /* The devguide has a left nav, which means we need to rejigger
+     * the media breakpoints to account for that. */
+    section {
+      padding: 40px;
+    }
+
+    .section-columns {
+      display: block;
+      flex-direction: column;
+    }
+
+    .section-columns > div:not(:last-child),
+    .section-columns > p:not(:last-child),
+    .section-columns > h2:not(:last-child) {
+      margin-right: 0px;
+      margin-bottom: 40px;
+    }
+  }
+</style>
+
+<section class="blue short gradient-light">
+  <div class="section-columns layout start">
+    <h1>はじめよう</h1>
+    <div class="flex">
+      <p>飛び込む準備はできていますか？You're moments away from building your first element or your first app.</p>
+    </div>
+  </div>
+</section>
+
+<section class="light">
+  <div class="section-columns">
+    <div class="flex">
+      <h2 class="underline">Polymerを試す</h2>
+      <p>何もインストールせずにPolymer 2.xを試したいですか？</p>
+      <p>ES6のクラスベース構文を使用してエレメントを定義し、プロパティとイベントを追加する方法を学びます。</p>
+      <a href="/2.0/start/quick-tour" class="blue-button vertical full-width">Polymerを試す</a>
+    </div>
+
+    <div class="flex">
+      <h2 class="underline">Polymer 2.xをインストールする</h2>
+      <p>すぐに新しいバージョンを使い始めよう</p>
+      <p>リンク先の手順に従って、ライブラリとツールの最新バージョンをインストールし、ビルドを開始しましょう。</p>
+      <a href="/2.0/start/install-2-0" class="blue-button vertical full-width">Polymer 2.xをインストールする</a>
+    </div>
+
+    <div class="flex">
+      <h2 class="underline">Elementsを使う</h2>
+      <p>あなたのアプリの中でWeb Componentsを使い始めよう</p>
+      <p>どのウェブサイトでも使用できる相互運用可能なエレメントについては、webcomponents.orgをご覧ください。</p>
+      <a href="https://www.webcomponents.org" target="_blank" class="blue-button vertical full-width">webcomponents.org</a>
+    </div>
+  </div>
+</section>
+
+<section class="grey gradient-light-flipped">
+
+  <div class="subsection">
+    <h2>Polycastsを観る</h2>
+    <div class="section-columns example-code">
+      <div class="example-code flex">
+        <google-youtube video-id="videoseries"
+          list-type="playlist"
+          list="PLNYkxOF6rcIDdS7HWIC_BYRunV6MHs5xo"
+          autoplay="0"
+          rel="0">
+          </google-youtube>
+      </div>
+      <div>
+        <p>PolycastのChromeデベロッパーリレーションチームからRob Dodsonに参加してください。これは、Polymerの機能の詳細を探る包括的なビデオセットです。 新しいPolymerプロジェクトを一から始めたり、エレメントに機能を追加したり、データバインディングを理解するための特訓を受けたりできます。アクセシブルなコンポーネントを作成し、ターゲットオーディエンス向けにローカライズします。</p>
+        <a href="https://www.youtube.com/playlist?list=PLOU2XLYxmsII5c3Mgw6fNYCzaWrsM3sMN" class="blue-button">詳細はこちら</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h2>ツールを入手する</h2>
+    <div class="section-columns">
+      <div class="example-code flex">
+        <pre><code class="hljs">
+npm install -g polymer-cli
+mkdir my-app
+cd my-app
+polymer init
+      </code></pre>
+      </div>
+      <div>
+        <p>Polymer CLIは、Polymer App Toolboxを使用してPolymerとアプリケーションを構築するためのコマンドラインインターフェースです。ワークフローが合理化され、シンプルなコンポーネントから複雑なWebアプリケーションまで、プロジェクトを簡単に管理できます。</p>
+        <a href="/2.0/docs/tools/polymer-cli" class="blue-button">CLIをインストールする</a>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+{% endblock %}
