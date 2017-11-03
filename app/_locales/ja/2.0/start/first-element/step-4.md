@@ -75,9 +75,9 @@ icon-toggle.html { .caption }
 { .alert .alert-info }
 
 <a class="blue-button" href="step-3">
-  Previous step: Use data binding and properties
+  Previous step: データバインディングとプロパティを使う
 </a>
 
 <a class="blue-button" href="step-5">
-  Next step: Theming with custom CSS properties
+  Next step: カスタムCSSプロパティによるテーマ設定
 </a>

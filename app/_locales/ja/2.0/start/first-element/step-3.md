@@ -1,5 +1,5 @@
 ---
-title: "Step 3: データバインディングとプロパティを使用する"
+title: "Step 3: データバインディングとプロパティを使う"
 subtitle: "Polymer Elementを作ろう"
 ---
 
@@ -171,5 +171,5 @@ icon-toggle.html: After { .caption }
 
 <img src="/images/2.0/first-element/static-toggles.png" alt="Demo showing icon toggles with star and heart icons">
 
-<a class="blue-button" href="step-2">Previous step: Add local DOM</a>
-<a class="blue-button" href="step-4">Next step: React to input</a>
+<a class="blue-button" href="step-2">Previous step: ローカルDOMの追加</a>
+<a class="blue-button" href="step-4">Next step: インプットに反応させる</a>
