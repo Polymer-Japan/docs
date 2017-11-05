@@ -5,35 +5,35 @@ title: Polymerライブラリ
 
 PolymerライブラリはCustom Elementsを作成するための機能一式を提供します。これらの機能は、標準のDOMエレメントのように動作するCustom Elementsを迅速かつ容易に作成できるように設計されています。標準的なDOMエレメントと同様、Polymer Elementでは以下のようなことが可能です。：
 
-* コンストラクタまたは`document.createElement`を使用してインスタンス化する。
-* 属性またはプロパティを使用して構成する。
-* 各インスタンスに内部DOMを追加する。
-* プロパティや属性の変化に応じて処理を行う（例えば、DOMにデータを追加したり、イベントを発火させるなど）。
-* 内部のデフォルトから、あるいは外部からスタイルを設定する。
+* コンストラクタまたは`document.createElement`を使用して命令的にインスタンス化する。
+* 属性またはプロパティを利用して設定する。
+* 各インスタンス内部にDOMを追加する。
+* プロパティや属性の変化に応じて処理を行う（オブザーバー）。
+* 内部のデフォルトや外部からスタイルを設定する。
 * 内部の状態を操作するメソッドに応答して処理する。
 
 基本的なPolymer Elementの定義は以下のようになります。：
 
 ```
     <dom-module id="x-custom">
-      <!-- Optional shadow DOM template -->
+      <!-- 任意のshadow DOMテンプレート -->
       <template>
         <style>
-          /* CSS rules for your element */
+          /* エレメントへ適用するCSSルール */
         </style>
 
-        <!-- shadow DOM for your element -->
+        <!-- エレメントのshadow DOM -->
 
-        <div>{{greeting}}</div> <!-- data bindings in local DOM -->
+        <div>{{greeting}}</div> <!-- ローカルDOM内におけるデータバインディング -->
       </template>
 
       <script>
-        // Define the element's API using an ES2015 class
+        // ES2015のクラス構文を使ってエレメントのAPIを定義する
         class XCustom extends Polymer.Element {
 
           static get is() { return 'x-custom'; }
 
-          // Declare properties for the element's public API
+          // エレメントのパブリックAPIとしてプロパティを宣言する
           static get properties() {
             return {
               greeting: {
@@ -43,14 +43,14 @@ PolymerライブラリはCustom Elementsを作成するための機能一式を�
             }
           }
 
-          // Add methods to the element's public API
+          // エレメントのパブリックAPIとしてメソッドを追加する
           greetMe() {
             console.log(this.greeting);
           }
 
         }
 
-        // Register the x-custom element with the browser
+        // ブラウザにx-customエレメントを登録する
         customElements.define(XCustom.is, XCustom);
       </script>
 
@@ -60,11 +60,11 @@ PolymerライブラリはCustom Elementsを作成するための機能一式を�
 
 このドキュメントでは、機能を次のグループに分けて解説しています。：
 
-*   [Custom Elements](custom-elements)：エレメントを登録すると、class名がCustom Element名に関連付けられます。このエレメントは、ライフサイクルを管理するコールバックを提供します。また、Polymerでは、プロパティを宣言することで、エレメントのプロパティAPIをPolymerのデータシステムに統合することもできます。
+*   [Custom Elements](custom-elements)：エレメントを登録すると、classがCustom Element名に関連付けられます。このエレメントは、ライフサイクルを管理するコールバックが備わっています。また、Polymerでは、プロパティを宣言することで、エレメントのプロパティAPIをPolymerのデータシステムに統合することもできます。
 
-*   [Shadow DOM](shadow-dom)：Shadow DOMは、エレメント内にカプセル化されたローカルのDOMツリーを提供します。PolymerはDOMテンプレートからShadow Treeを自動的に生成し、エレメントに挿入することができます。
+*   [Shadow DOM](shadow-dom)：Shadow DOMは、エレメント内にカプセル化されたローカルのDOMツリーを提供します。PolymerはDOMテンプレートによってShadow Treeを自動的に生成しエレメントに挿入することができます。
 
-*   [イベント](events)：Polymerは、Shadow DOMの子にイベントリスナーをアタッチするための宣言的構文を提供します。また、ジェスチャー関連イベントを処理するためのオプションのライブラリも用意しています。
+*   [イベント](events)：Polymerは、Shadow DOMの子にイベントリスナーをアタッチするための宣言的構文を提供します。また、ジェスチャー関連イベントを扱うためのオプションのライブラリも提供されます。
 
 *   [データシステム](data-system)：Polymerのデータシステムは、プロパティオブザーバー(Property Observer)や算出プロパティ(Computed Properties)といった機能によって、プロパティや属性へのデータバインディングを提供しています。
 
