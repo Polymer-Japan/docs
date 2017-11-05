@@ -1,5 +1,5 @@
 ---
-title: のコンセプト
+title: Custom Elementのコンセプト
 ---
 
 <!-- toc -->
