@@ -4,35 +4,37 @@ title: Polymer2.0について
 
 <!-- toc -->
 
-Polymer 2.0は、大部分の主要ブラウザベンダーによって実装されている新しいCustom Element v1とshadow DOM v1の仕様をサポートするように設計されています。また、Polymer 1.xユーザーに対してもスムーズな移行手段を提供しています。
+Polymer 2.0は、大くの主要ブラウザベンダーによって実装済みの新しいCustom Element v1とshadow DOM v1の仕様をサポートするように設計されています。また、Polymer 1.xユーザーに対してもスムーズな移行手段を提供しています。
 
-Polymer 2.0はいくつかの領域において改善も行いました。：
+Polymer 2.0はいくつかの面において改善がなされています。：
 
-*   **相互運用性の向上**：Polymer 2.0では、DOMの操作時にPolymer.domへ依存する必要がなくなったおかげで、Polymerによって作成されたコンポーネントを他のライブラリやフレームワークで簡単に使用できるようにしました。さらに、[Shady DOM](https://github.com/webcomponents/shadydom)のコードは、Polymerに統合せず再利用可能なポリフィルに分離されています。
+*   **相互運用性の向上**：DOMの操作するのにPolymer.domがいらなくなったおかげで、Polymer製のコンポーネントを他のライブラリやフレームワークと併用することが簡単にできるようにしました。さらに、[Shady DOM](https://github.com/webcomponents/shadydom)のコードは、Polymerに統合せず再利用可能なポリフィルに分離されています。
 
-*   **データシステムの改善**：Polymer 2.0では、データシステムの改善も行いました。この変更によって、エレメント内あるいはエレメント間におけるデータの伝播の流れを容易に推測しデバッグできるようになりました。
+*   **データシステムの改善**：Polymer 2.0では、データシステムに対する改善も行いました。この変更により、エレメント内あるいはエレメント間におけるデータの伝播の流れが推測しやすくなりデバッグが容易になりました。
 
-*   **より標準仕様に合わせて**：Polymer 2.0では、Polymerファクトリメソッドではなく、標準ES6のクラスと標準のCustom Element v1のメソッド群を使用してエレメントを定義します。また、機能をミックスインするには、`Polymer`のbehaviorではなく、標準のJavaScript(クラス式のmixin)を利用します。 (`Polymer`ファクトリメソッドは互換レイヤを使用することで引き続きサポートされます)。
+*   **より標準に準拠**：Polymer 2.0では、エレメントを定義するのにPolymerファクトリメソッドに替えて、標準ES6のクラスと標準のCustom Element v1のメソッド群を使用するようになっています。また、機能をミックスするには、`Polymer`のbehaviorではなく、標準のJavaScript(クラス式のmixin)を利用します。 (`Polymer`ファクトリメソッドは互換レイヤを使用することで引き続きサポートされます)。
 
-いくつかのテストは現在、Chrome以外のブラウザで失敗します。これらはすぐに対処される予定ですが、しばらくの間は[Chrome Canary](https://www.google.co.jp/chrome/browser/canary.html)を利用するのが最善の策です。
+現時点ではいくつかのテストはChrome以外のブラウザでは失敗します。これらの問題はすぐに対処される予定ですが、当面は[Chrome Canary](https://www.google.co.jp/chrome/browser/canary.html)を利用するのが最善の策です。
 
-Polymer 2.0では、1.xとの互換性を破棄する変更がいくつも行われていますが、これらの多くは新しいCustom Elements v1とshadow DOM v1の仕様に準拠するためのものです。仕様の新しいバージョンのリリースが近づくにつれ、さらなる変更が見込まれます。
+Polymer 2.0では、1.xとの互換性を破る変更がいくつも行われていますが、これらの多くは新しいCustom Elements v1とshadow DOM v1の仕様に準拠した結果です。仕様の新しいバージョンのリリースが近づけば、さらなる変更が見込まれます。
 
-以下のセクションで、Polymer 2.0における主な変更点について説明します。Polymer 2.0へのエレメントのアップグレードに関する詳細は、[Upgrade guide](https://www.polymer-project.org/2.0/docs/upgrade)を参照してください。
+以下のセクションで、Polymer 2.0における主な変更点について解説します。Polymer 2.0へのエレメントのアップグレードに関する詳細は、[Upgrade guide](https://www.polymer-project.org/2.0/docs/upgrade)を参照してください。
 
 ## Custom elements v1
 
-Polymer 2.0のエレメントは、Custome Elements v1 APIに準拠することを目標としています。これによって、Polymer 1.xで仕様v0に準拠していたいくつかの機能が変更されました。
+Polymer 2.0のエレメントは、Custome Elements v1 APIに準拠することを目標としています。これによって、仕様v0に準拠するPolymer 1.xのいくつかの機能が変更されました。
 
 主な変更点は：
 
-*   Custome Elements v1仕様では、プロトタイプに代わってES6のクラス構文を使用してエレメントを定義します。
+*   Custome Elements v1仕様では、エレメントを定義にプロトタイプではなくES6のクラス構文を使用します。
 
-  Polymer 2.0では、エレメントを拡張するためにES6ベースの基底クラス(`Polymer.Element`)を提供することで、ネイティブのES6フォームを利用できるようにします。さらに、`Polymer`ファクトリメソッドを使用するレガシーなエレメントも、Polymer 1.x互換レイヤーでサポートされています。
+  Polymer 2.0では、エレメントを拡張するのにES6ベースの基底クラス(`Polymer.Element`)を提供することで、ネイティブのES6の様式を利用できるようにします。なお、`Polymer`ファクトリメソッドを利用したレガシーなエレメントについても、Polymer 1.x互換レイヤーで引き続きサポートされています。
 
-*   新しい仕様では、ライフサイクルコールバックをいくつか変更しています。特に大きな変更は、`created`コールバックに代えてクラスのconstructorを呼び出すようになった点です。また仕様では、constructor(Polymer 1.xのcreatedコールバックに相当)の実行に関して新たに制限も課されています。
+*   新しい仕様では、ライフサイクルコールバックのいくつかに変更が加えられています。特に目立った変更点は、`created`コールバックに代えてclassのconstructorを呼び出すようになった点です。また仕様では、constructor(Polymer 1.xのcreatedコールバックに相当)内において行われる処理に関して新たに制限も課されています。
 
-*   さらに、仕様でサポートされているエレメントのタイプ拡張(`is =`)は、現時点のPolymer 2.0ではサポートしていません。
+*   なお、仕様でサポートされているエレメントのタイプ拡張(`is =`)は、Polymer 2.0では現時点においてはサポートしていません。
+
+*   複雑であることを理由に新しい仕様で定義された`disable-upgrade`に関して、Polymer 2.xはサポートしていません。今後、ミックスインやアドオンとして提供される可能でしはあります。
 
 以降のセクションでは、これらの変更点について詳しく解説します。
 
@@ -40,7 +42,7 @@ Custom Elements v1仕様の一般的な情報に関しては、Web Fundamentals�
 
 ### ライフサイクルの変更 {#lifecycle-changes}
 
-クラスベースのエレメントを作成する場合は、新しいネイティブのライフサイクルメソッド(仕様ではCustom Elemnetsの「リアクション(reaction)」と呼ばれます)を使用します。`Polymer`ファクトリメソッドを使用してレガシーなエレメントを作成する場合は、従来のPolymerコールバック名を使用します。
+クラスベースのエレメントを作成した場合には、新しいネイティブのライフサイクルメソッド(仕様ではCustom Elemnetsの「リアクション(reaction)」と呼ばれます)が利用されます。ファクトリメソッド`Polymer`を利用してレガシーなエレメントを作成する場合には、従来通りのPolymerのコールバック名が利用されます。
 
 
 <table>
@@ -55,10 +57,10 @@ Custom Elements v1仕様の一般的な情報に関しては、Web Fundamentals�
         <code>created</code> (レガシー)
     </td>
     <td>
-      Custom Elements v1仕様では、<code>constructor</code>内のDOM API(従来のAPIでは<code>created</code>コールバック)から属性、子、または親の情報を読み取ることを禁止しています。同様に、<code>constructor</code>においては、属性と子は追加されない可能性があります。そのような作業はすべて遅延させる必要があります(例えば、<code>connectedCallback</code>まで)。
-      レガシーな<code>created</code>コールバックは、<code>properties</code>のデフォルト値が設定される前には呼び出されなくなりました。そのため、<code>created</code>の中で設定されたプロパティを、エレメントのデフォルト値を定義する<code>value</code>の関数から参照することがないようにしてください。
+      Custom Elements v1仕様では、<code>constructor</code>内のDOM API(従来のAPIでは<code>created</code>コールバック)から属性、子、または親の情報を読み取ることを禁止しています。同様に、<code>constructor</code>内においては、属性や子は追加されないおそれがあります。そのような作業はすべて遅らせるようにしましょう(例えば、<code>connectedCallback</code>まで)。
+      レガシーな<code>created</code>コールバックは、<code>properties</code>のデフォルト値が設定される前に呼び出されることはなくなりました。そのため、<code>created</code>の中で設定されたプロパティを、エレメントのデフォルト値を定義する<code>value</code>の関数から参照することがないようにしてください。
       <p>
-        その一方で、<code>properties</code>内の<code>value</code>で関数を定義する代わりに、<code>created</code>コールバックの中で<strong>どんな</strong>デフォルトのプロパティでも設定できるようになりました。(Polymer 1.0では監視されたプロパティ(observed properties)に対してこのような方法が禁止されていました。)
+        その一方で、<code>properties</code>内の<code>value</code>で関数を定義する代わりに、<code>created</code>コールバックの中で<strong>あらゆる</strong>デフォルトのプロパティを設定できるようになりました。(Polymer 1.0では監視対象のプロパティ(observed properties)に対してこのような方法で設定を行うことが禁止されていました。)
     </td>
   </tr>
   <tr>
@@ -66,7 +68,7 @@ Custom Elements v1仕様の一般的な情報に関しては、Web Fundamentals�
       <p>
         <code>attached</code> (レガシー)
     </td>
-    <td>Polymer 1.xでは、最初にレンダリングされるまで<code>attached</code>コールバックを遅延していたので、エレメントは自身またはその子を測定することができました。
+    <td>Polymer 1.xでは、初回のレンダリングまで<code>attached</code>コールバックの実行を遅延していたので、エレメントは自身やその子にアクセスすることができました。
     </td>
   </tr>
   <tr>
@@ -83,17 +85,17 @@ Custom Elements v1仕様の一般的な情報に関しては、Web Fundamentals�
         <code>attributeChanged</code> (レガシー)
     </td>
     <td>
-      属性が監視されるようにするには<em>明示的に</em>登録されている必要があります。
+      属性を監視するには<em>明示的に</em>登録する必要があります。
       <p>
-        Polymer Elementの場合、<code>properties</code>オブジェクト内で明示的に宣言されたプロパティだけが属性の変更を追跡(tracking)されます。(つまり、属性の値を変更すると、attribute changedコールバックが呼び出され、Polymerは属性からプロパティの値を設定します)。
+        Polymer Elementの場合、<code>properties</code>オブジェクト内で明示的に宣言されたプロパティだけが属性の変更を追跡(tracking)できます。(つまり、属性の値を変更したとき、attribute changedコールバックが呼び出され、Polymerは属性からプロパティの値をセットします)。
       <p>
-        Custom Elemnets v0では、<strong>どんな</strong>属性の変更に対しても<code>attributeChangedCallback</code>が発生しました。
+        Custom Elemnets v0では、<strong>いかなる</strong>属性の変更に対しても<code>attributeChangedCallback</code>を呼び出していました。
       <p>
-        Polymer 1.xでは、明示的に宣言されたプロパティと<em>暗黙的に宣言されたプロパティ</em>の両方に対して属性がデシリアライズされました。例えば、<code>properties</code>には宣言されてはいないが、バインディングで利用された場合やオブザーバーの依存部に使用された場合に、プロパティは暗黙的に宣言されたと見なされます。
+        Polymer 1.xでは、明示的に宣言されたプロパティと<em>暗黙的に宣言されたプロパティ</em>の両方に対して属性のデシリアライズが行われていました。例えば、<code>properties</code>には宣言されてはいないが、バインディングで利用された場合やオブザーバーの依存部に使用された場合には、プロパティが暗黙的に宣言されたものと見なされます。
     </td>
   </tr>
   <tr>
-    <td><code>ready</code> (Polymerの仕様)</td>
+    <td><code>ready</code> (Polymer独自の仕様)</td>
     <td>
       Polymerは、もはや<code>ready</code>が呼び出される前に、最初のLight DOMの割り当て(distribution)が完了していることを保証しません。
    </td>
@@ -101,18 +103,17 @@ Custom Elements v1仕様の一般的な情報に関しては、Web Fundamentals�
 </table>
 
 
-コールバックの変更に加えて、`lazyRegister`オプションが削除された点や、すべてのメタプログラミング(テンプレートの解析、プロトタイプ上のアクセサの作成など)は、エレメントの最初のインスタンスが生成されるまで遅延される点に注意してください。
+コールバックの変更に加えて、`lazyRegister`オプションが削除された点や、すべてのメタプログラミング(テンプレートの解析、プロトタイプ上のアクセサの作成など)は、エレメントの最初のインスタンスが生成されるまで遅延されるようになった点に注意してください。
 
 ### タイプ拡張エレメント(Type-extension elements) {#type-extension}
 
-Polymer 2.0では、タイプ拡張エレメントをサポートしていません（例：`<input is="iron-input">`）。Custom Elements v1の仕様には、タイプ拡張のサポートは引き続き（「カスタマイズされたビルトインエレメント(customized build-in elements)」として）含まれ、Chromeでは実装が予定されています。しかし、Apple社は、`is`をサポートしないことを表明しており、Custom Elementsのポリフィルが不確定な仕様に依存するのを避けるため、我々は今後その利用を推奨しません。代わりの方法として、ラッパーのCustom Elementでネイティブエレメントを囲むことができます。
+Polymer 2.0は、タイプ拡張エレメントをサポートしていません（例：`<input is="iron-input">`）。Custom Elements v1の仕様では、タイプ拡張は、（「カスタマイズされたビルトインエレメント(customized build-in elements)」として）含引き続きサポートされておりまれ、Chromeでは実装が計画されています。しかし、Apple社は、`is`をサポートしないことを表明しており、不確定な仕様にCustom Elementsのポリフィルが依存するのを避けるため、我々は今後`is`を利用したタイプの拡張を推奨しません。代替的な手段として、ネイティブエレメントをラッパーのCustom Elementで囲むことでタイプの拡張ができるようになっています。
 
 例えば：
 
 `<a is="my-anchor">...</a>`
 
-上記は次のように扱えるようになりました：
-
+上記は次のように扱うようになります：
 
 ```
 <my-anchor>
@@ -122,7 +123,7 @@ Polymer 2.0では、タイプ拡張エレメントをサポートしていませ
 
 ユーザーは、必要に応じて既存のタイプ拡張エレメントを置き換える必要があるかもしれません。
 
-Polymerによって提供されるすべてのテンプレートのタイプ拡張(つまり`dom-if`や`dom-repeat`のこと)は、標準のCustom Elementsと同様に、Light DOM内に`<template>`を持つようになりました。例えば：
+Polymerによって提供されるテンプレートのタイプ拡張(例えば`dom-bind`、`dom-if`や`dom-repeat`)はすべて、標準のCustom Elementsと同様に、Light DOM内に`<template>`を含めるようになりました。例えば：
 
 1.xの場合、コードは次のようになります。：
 
@@ -138,9 +139,9 @@ Polymerによって提供されるすべてのテンプレートのタイプ拡�
 </dom-bind>
 ```
 
-Polymer Elementのテンプレート内(つまり、`dom-module`の内部)で使用された場合には、Polymerはテンプレートのタイプ拡張(例：`dom-if`や`dom-repeat`など)をテンプレートの処理中に自動的にラップします。これは、Polymer Elementの内部にネストされたテンプレートや他のPolymerのテンプレート(例：`dom-bind`)において、`<template is="">`を使い続けることができ、またそうすべきことを意味します。
+Polymer Elementのテンプレート内部(つまり、`dom-module`の内部)でこれらが使用された場合、Polymerはテンプレートのタイプ拡張(例：`dom-if`や`dom-repeat`など)をテンプレートを処理する際に自動的にラップします。つまり、Polymer Elementの内部にネストされたテンプレートや他のPolymerのテンプレート(例：`dom-bind`)においては、`<template is="">`を使い続けることができ、またそうすべきことを意味します。
 
-`index.html`**のようなメインドキュメントで使用されるテンプレートは、手動でラップする必要があります。**
+`index.html`**のようなメインドキュメントテンプレートを利用する場合には、手動でラップする必要があります。**
 
 `custom-style`エレメントも標準仕様のCustom Elementのように、`<style>`エレメントをラップするように変更されました。
 
@@ -150,7 +151,7 @@ Polymer Elementのテンプレート内(つまり、`dom-module`の内部)で使
 <style is="custom-style">...</style>
 ```
 
-上記は、以下のようになりました：
+上記は、以下のようになります：
 
 ```
 <custom-style>
@@ -159,41 +160,41 @@ Polymer Elementのテンプレート内(つまり、`dom-module`の内部)で使
 ```
 
 
-参考文献：
+参照：
 
-*   WHATWGのHTML仕様書内の[Creating a customized built-in element](https://html.spec.whatwg.org/#custom-elements-customized-builtin-example)
+*   WHATWGのHTML仕様文書の[Creating a customized built-in element](https://html.spec.whatwg.org/#custom-elements-customized-builtin-example)
 *   [Apple's position on customized built-in elements](https://github.com/w3c/webcomponents/issues/509#issuecomment-233419167)
 
 ## Shadow DOM v1
 
-Polymer 2.0はShadow DOM v1をサポートしています。Polymerユーザーにとって、Polymer 1.0と2.0の主要な違いは、`<content>`エレメントが、v1仕様の`<slot>`エレメントに置き換わったことです。
+Polymer 2.0はShadow DOM v1をサポートしています。Polymerユーザーにとって、Polymer 1.0と2.0の主要な違いは、`<content>`エレメントが、v1仕様の`<slot>`エレメントに置き換えられたことです。
 
-Polymer 1.xに含まれていたShady DOM及び関連するCSSカスタムプロパティのshimは、Polymerから取り除かれ、ポリフィル`webcomponents-lite.js`のバンドルに追加されました。この新バージョンのShady DOMでは、代わりの(`Polymer.dom`)APIを公開するのではなく、ネイティブDOM APIにパッチを当てることで、Polymer 2.0ユーザーはネイティブのDOM APIを直接利用できるようになりました。
+Polymer 1.xに含まれていたShady DOMとそれに関連するCSSカスタムプロパティのshimは、Polymerライブラリ本体からは取り除かれ、ポリフィル`webcomponents-lite.js`のバンドルに追加されました。新バージョンのShady DOMでは、代替のAPI(`Polymer.dom`)を公開せず、ネイティブDOM APIにパッチを当てることで、Polymer 2.0ユーザーはネイティブのDOM APIを直接利用できるようになりました。
 
-ハイブリッドエレメントの場合、Polymer 2.0には、ネイティブのAPIに直接転送する`Polymer.dom`APIバージョンが含まれています。 2.0だけに依存するエレメントに対しては、ネイティブのDOM APIを選択し、`Polymer.dom`を取り除くこともできます。
+ハイブリッドエレメントの場合、Polymer 2.0にネイティブのAPIに直接振り向ける`Polymer.dom`APIの新たなバージョンが含まれています。2.0だけに依存するエレメントに対しては、ネイティブのDOM APIを選択することで`Polymer.dom`を取り除くこともできます。
 
 **Web Fundamentalsで詳細を確認**。Shadow DOMの概要については、[Shadow DOM v1：self-contained web components](https://developers.google.com/web/fundamentals/primers/shadowdom/?hl=ja)を参照してください。
 {.alert .alert-info}
 
-v1の仕様変更に関する、簡潔で包括的な事例については、Hayato Itoの[What's New in Shadow DOM v1 (by examples)](http://hayato.io/2016/shadowdomv1/)を参照してください。
+v1への仕様の変更に関する、簡潔で包括的な事例は、Hayato Itoの[What's New in Shadow DOM v1 (by examples)](http://hayato.io/2016/shadowdomv1/)を参照してください。
 
 ## データシステムの改善 {#data-system}
 
-Polymer 2.0は、データシステムにいくつかの改善を取り入れています。：
+Polymer 2.0は、データシステムにいくつかの改善を導入しています。：
 
-*   配列操作がよりシンプルになりました。抽象レイヤ`Polymer.Collection`や配列アイテムへのキーベース(key-based)のパスがなくなりました。(訳注：Collectionオブジェクトについては、[Polymer 1.0ドキュメントのObservers and computed properties](https://www.polymer-project.org/1.0/docs/devguide/observers)のObserve array mutationsを参照してください。)
+*   配列操作がよりシンプルになりました。抽象レイヤ`Polymer.Collection`や配列アイテムへのキーベース(key-based)のパスがなくなりました。(訳注：Collectionオブジェクトについては、[Polymer 1.0ドキュメントのObservers and computed properties](https://www.polymer-project.org/1.0/docs/devguide/observers)のObserve array mutationsを参照してください。)
 
-*   データの変更をバッチ処理することで、パフォーマンスと正確性の向上
+*   データの変更をバッチで処理することで、パフォーマンスと正確性が向上しました。
 
-*   オブザーバー、算出バインディング、および算出プロパティにおいて未定義(undefined)の依存部のチェックがなくなりました。これらはすべて初期化の際に一度だけチェックされます。
+*   オブザーバー、算出バインディング、および算出プロパティにおいて未定義(undefined)の依存部のチェックがなくなりました。これらはすべて初期化の際に一度だけチェックが行われます。
 
-*   エレメントにオプションのミックスインを加えることでオブジェクトや配列の*ダーティチェック*(dirty check)をなくすことができます。このミックスインを使うと、オブジェクトや配列のプロパティに監視可能((obsevable)な変更を加えた場合、Polymerはそのプロパティ以下のすべて(サブプロパティ、配列のアイテム)を再評価します。これは、Polymerの`set`メソッドや配列変更メソッドが使用できないアプリケーションや、不変データを使用しないアプリケーションで役立ちます。(訳注：ダーティーチェックとはエレメントがオブジェクトや配列の変更をチェックして、余計なプロパティエフェクトが生じないようにする仕組みです。詳細は、[データシステムのコンセプト](https://github.com/jtakiguchi/polymer-docs-japanese-translation/blob/master/docs/polymer2/data-system/data-system-concepts.md#)のMutableData mixinに関する説明を参照してください。)
+*   エレメントにオプションとしてミックスインを加えることで、オブジェクトや配列の*ダーティチェック*(dirty check)を抑制することができます。これによって、オブジェクトや配列として宣言されたプロパティに監視可能((obsevable)な変更を加えた際、Polymerはそのプロパティ以下すべて(サブプロパティ、配列のアイテム)を再評価します。これは、Polymerの提供する`set`メソッドや配列変更メソッドが使用できないアプリケーションや、不変データ(immutable data)パターンを使用しない場合に役立ちます。(訳注：ダーティーチェックとはエレメントがオブジェクトや配列の変更をチェックして、無駄なプロパティエフェクトが生じないようにする仕組みです。詳細は、データシステムのコンセプトのセクション内の可変データのミックスインに関する説明を参照してください。)
 
 *   プロパティエフェクト(property effect)の順序が変更されました。
 
-*   `properties`で明示的に列挙されたプロパティに限り、属性から設定できるようになりました。
+*   `properties`で明示的に列挙されたプロパティに限り、属性から設定を行うことができるようになりました。
 
-*   エレメントの初期化(テンプレートのスタンプ処理やデータシステムの初期化を含む)は、エレメントがメインドキュメントにコネクトされるまで遅延されます。(これはCustom Elements v1の仕様変更を反映した結果です)。
+*   エレメントの初期化(テンプレートのスタンプ処理やデータシステムの初期化を含む)は、エレメントがメインドキュメントにコネクトされるまで遅延されます。(これはCustom Elements v1の仕様変更を受けた結果です)。
 
 *   その他小さな変更がいくつかの行われています。
 
@@ -203,32 +204,32 @@ Polymer 2.0は、データシステムにいくつかの改善を取り入れて
 
 <!-- TODO: move me to data system concepts doc, summarize briefly here. -->
 
-Polymer 1.xでは、ダーティチェックメカニズムを使用して、データシステムが余分な作業をするのを防いでいました。
+Polymer 1.xでは、*ダーティチェックメカニズム*を使用して、データシステムが余分な作業をするのを抑制していました。
 
-Polymer 2.xにおいても、デフォルトでこのメカニズムの利用し続けていますが、エレメントがオブジェクトや配列のダーティチェックを実施するかどうかオプトアウト(ユーザー自身が利用を制限)できるようになっています。
+Polymer 2.xにおいても、デフォルトでこのメカニズムの利用し続けてますが、エレメント自身がオブジェクトや配列のダーティチェックを行うかどうかオプトアウト(ユーザー自身がデフォルトの機能を利用しないことを選択)できるようになっています。
 
-デフォルトのダーティチェックメカニズムを使用した場合、次のコードが*プロパティエフェクト*を発生させることはありません。：
+デフォルトのダーティチェックメカニズムを使用した場合には、次のコードにおいて*プロパティエフェクト*が生じることはありません。：
 
 ```
 this.property.subproperty = 'new value!';
 this.notifyPath('property');
 ```
 
-`property`は引き続き同じオブジェクトを参照しておりダーティチェックは失敗し、サブプロパティの変更を伝播することがないからです。代わりに、Polymerの`set`メソッドや配列変更メソッドを使用するか、変更された正確なパスに対して`notifyPath`を呼び出す必要があります。：
+`property`が参照するのは同一のオブジェクトでありダーティチェックは失敗します。そのためサブプロパティに対する変更がプロパティエフェクトによって伝播するありません。そこで代わりに、Polymerの提供する`set`メソッドや配列変更メソッドを使用するか、変更された正確なパスに対して`notifyPath`を呼び出す必要があります。：
 
 ```
 this.set('property.subproperty', 'new value!');
-// OR
+// または
 this.property.subproperty = 'new value!';
 this.notifyPath('property.subproperty');
 ```
 
-一般的に、ダーティチェックメカニズムの利用はより効率的な手段と言えます。以下のいずれかの要件が当てはまるアプリケーションにおいてはうまく動作します。：
+一般的に、ダーティチェックメカニズムの利用はパフォーマンス上好ましい手段です。そのため以下の要件が一つでも当てはまるアプリケーションにおいてはうまく機能します。：
 
 *   不変データを使用する。
-*   小さな変更であっても常にPolymerのデータ変更メソッドを利用している。
+*   ちょっとした変更に対しても常にPolymerの提供するデータ変更メソッドを利用する。
 
-一方で、不変データを使用しなかったり、Polymerのデータ変更メソッドを利用できないケースに対して、Polymer 2.0はオプションとして`MutableData`ミックスインを用意しています。`MutableData`ミックスインはダーティチェックを省略し、上記のコードは意図した通り動作します。また、*プロパティエフェクト*の発生前にいくつかの変更をバッチ処理することも可能になります。：
+一方で、不変データを使用しなかったり、Polymerの提供するデータ変更メソッドを利用できないシュチュエーションに対して、Polymer 2.0はオプションとして`MutableData`ミックスインを提供しています。`MutableData`ミックスインはダーティチェックを回避し、上記のコードは意図した通り動作します。また、*プロパティエフェクト*の発生前にいくつかの変更をまとめてバッチ処理することも可能です。：
 
 `this.property.arrayProperty.push({ name: 'Alice' });`
 
@@ -238,73 +239,71 @@ this.property.counter++;
 this.notifyPath('property');
 ```
 
-`set`メソッドを使うこともできますし、単にトップレベル(top-level)のプロパティを設定してプロパティエフェクトを発生させることもできます：
+`set`メソッドを用いることもできますし、単にトップレベル(top-level)のプロパティを設定することでプロパティエフェクトを発生させることもできます：
 
 ```
 this.set('property', this.property);
-// or
+// または
 this.property = this.property;
 ```
 
-特定のサブプロパティを変更するのに`set`メソッドを使用するのが最も効率的な場合があります。しかし、`MutableData`を利用するエレメントでは、このAPIを使用する必要はありません。そうすることで、データバインディングや状態管理を行うライブラリとの互換性が向上するからです。
+特定のサブプロパティを変更するのに`set`メソッドを使用するのが多くの場合最も効率的な方法です。しかし、`MutableData`を利用するエレメントは、このAPIを利用する必要はありません。そうすることで、データバインディングや状態管理を行うライブラリとの互換性が向上するからです。
 
-トップレベルでプロパティ設定し直すと、プロパティやそのサブプロパティ、また配列アイテムなどの*プロパティエフェクト*がすべて再実行さるので注意が必要です。ワイルドカードパスを指定したオブザーバー(例：`prop.*`)には、トップレベルの変更だけが通知されます。
+トップレベルでプロパティを設定し直すと、プロパティやそのサブプロパティ、あるいは配列アイテムなどに対するすべての*プロパティエフェクト*が再度実行さるので注意が必要です。ワイルドカードパスを指定したオブザーバー(例：`prop.*`)には、トップレベルの変更だけが通知されます。
 
 ```js
-// 'property.*' observers fire with the path 'property'
+// 'property.*'に設定されたオブザーバーは、パス`prperty`に変更があった場合に実行されます。
 this.property.deep.path = 'another new value';
-this.notifyPath('property');
+this.notifyPath('property'); // トップレベルのプロパティへ変更を通知する必要があります。
 ```
 
 `set`メソッドを使って特定のパスを設定すると、細かな通知も生成されます。：
 
 
 ```js
-// 'property.*' observers fire with the path 'property.deep.path'
+// 'property.*'に設定されたオブザーバーは、パス`prperty.deep.path`に変更があった場合にも実行されます。
 this.set('property.deep.path', 'new value');
 ```
 
 
 ### よりシンプルな配列操作
 
-`Polymer.Collection`APIとそれに関連した、配列のキーベースのパス指定及びsplice通知は削除されました。
+`Polymer.Collection`APIとそれに関連した、配列でのキー(key)ベースのパス指定やspliceによる通知は削除されました。
 
-この仕様変更には他にもいくつかの利点があります。：
+この仕様変更には他にもいくつか利点があります。：
+
+*   プリミティブな値による配列がサポートされます。
+*   配列アイテムはユニーク(一意)である必要はありません。
 
 
-*   プリミティブ値の配列をサポートします。
-*   配列アイテムはユニークである必要はありません。
-
-
-キー(key)パスが削除されたので、配列のsplice通知には`keySplices`ではなく`indexSplices`プロパティだけが含まれています。
+キー(key)によるパスが削除されたので、配列のsplice通知に`keySplices`は利用できず、`indexSplices`プロパティだけが使えます。
 
 ### データ変更のバッチ処理
 
-バインディングシステムにおけるデータの伝播をバッチで処理するようにないました。それによって、例えばコンプレックスオブザーバーや算出(computing)関数は、まとまった(coherent)変更をセットとして一度に実行されます。まとまった変更を作成するには、2つの方法があります。：
+バインディングシステムにおいてデータの伝播をバッチで処理するようになりました。それによって、コンプレックスオブザーバーや算出(computing)関数は、複数のまとまった(coherent)変更に対して実行されます。変更をまとめるには、2つの方法があります。：
 
-*   エレメントがプロパティを初期化する時は、まとまりのある変更のセットを自動的に生成します。
+*   エレメントがプロパティを初期化する際は、まとめられた変更のセットが自動的に生成されます。
 
-*   新しい`setProperties`メソッドを使用して、まとまりのある変更のセットをプログラムで生成することができます。
+*   新たに導入された`setProperties`メソッドを使用することで、まとまりのある変更のセットをプログラムで生成することもできます。
 
 ```
 this.setProperties({ item: 'Orange', count: 12 });
 ```
 
-単一プロパティのアクセサ(accessors)は、引き続きデータを同期的に伝播します。例えば、`a`と`b`の二つのプロパティを監視するオブザーバーがあるとします。以下の二つのサンプルがどのように動作するか見比べてみてください。：
-
+単一プロパティのアクセサ(accessors)については、なおもデータの伝搬は同期的に行われます。例えば、`a`と`b`の二つのプロパティを監視するオブザーバーがあるとします。：
 
 ```
-// observer fires twice
+// オブザーバーは二度実行されます
 this.a = 10;
 this.b = 20;
 
-// observer fires once
+// オブザーバーは一度だけ実行されます
 this.setProperties({a: 10, b: 20});
 ```
 
 ### プロパティエフェクトの順序
 
-2.0では、オブザーバーは*プロパティ変更通知*の前に発火します。 2.0のプロパティエフェクトの順序は次のとおりです。
+2.0では、オブザーバーは*プロパティ変更通知*の前に実行されます。 2.0におけるプロパティエフェクトの順序は次の通りです。：
 
 *   算出プロパティを再計算する。
 *   データバインディングに値を伝播します。
@@ -312,79 +311,77 @@ this.setProperties({a: 10, b: 20});
 *   オブザーバーを実行する。
 *   プロパティ変更通知を発行する。
 
-1.xでは、オブザーバーはプロパティ変更通知の後、最後に発火されます。ions.
+1.xでは、オブザーバーはプロパティ変更通知に続けて最後に実行されていました。
 
 ### オブザーバーの変更
 
-2.0では、オブザーバーが未定義(undefined)の依存部をもったまま発火するのを防止するためのチェックが削除されました。
+2.0では、オブザーバーが未定義(undefined)の依存部をもったまま実行されるのを防ぐためのチェック機構が削除されました。
 
-具体的には：
+詳細に説明すると：
 
-*   **一つでも**依存部が定義されていれば、複数プロパティオブザーバー、算出プロパティ、算出バインディングが初期化時に一度は実行されます。
+*   **一つでも**依存部が定義されている場合、マルチプロパティオブザーバー、算出プロパティ、算出バインディングが、初期化時に一度実行されます。
 
-*   今後オブザーバーまたは算出関数は、引数として`undefined`を受け取る可能性があるので、それを正しく扱う必要があります。
+*   オブザーバーまたは算出関数は、引数として`undefined`を受け取る可能性が生じてくるので、これを正しく扱う処理が必要です。
 
-2.xでは、オブザーバーと算出プロパティをインスタンスごとに動的に定義する機能も追加されています。
+2.xでは、オブザーバーや算出プロパティをインスタンスごとに動的に定義する機能も追加されています。
 詳細は以下のセクションを参照してください。
 
 [Add observers and computed properties dynamically](devguide/observers#dynamic-observers).
 
 
-### その他データシステムの変更点
+### その他のデータシステムの変更点
 
-*   算出バインディングで使用される関数を設定/変更すると、バインディングシステムは新しい関数と最新のプロパティ値を用いて再計算を行います。例えば、以下のようにバインディングを指定したとします。：
+*   算出バインディングで使用される関数を設定または変更すると、バインディングシステムは新しい関数と最新のプロパティ値を用いて再度計算を実行します。例えば、以下のようにバインディングを指定したとします。：
 
     ```js
     some-property="{{_computeValue(a, b)}}"
     ```
 
-    Changing the `_computeValue` _function_ causes the binding to be re-evaluated, even if `a` and `b`
-    remain the same:
+    以下のように`_computeValue`関数を変更すると、`a`や`b`が変化しなくてもバインディングは再評価されます。：
 
     ```js
       this._computeValue = function(a, b) { ... }
     ```
 
-*   ホストからのバインディングによって値が変化する場合には、プロパティ変更通知(<code><em>property</em>-changed</code> events)は生じません。
+*   ホストからのバインディングによって値が変化する場合には、プロパティ変更通知(<code><em>property</em>-changed</code> events)が発行されることはありません。
 
 
-*   プロパティから属性へデシリアライズするには、その属性を<code>properties</code>内のメタデータオブジェクトとして宣言する必要があります。Polymer 1.xでは、
-    <em>暗黙的に(implicitly)</em>宣言されたプロパティであってもデシリアライズが行われました。（例えば、バインディングまたはオブザーバーの依存部として記述された場合）。
+*   プロパティから属性へデシリアライズする際は、その属性を<code>properties</code>内のメタデータオブジェクトとして宣言する必要があります。Polymer 1.xでは、<em>暗黙的に(implicitly)</em>宣言されたプロパティ（例えば、バインディングの対象やオブザーバーの依存部として記述されたプロパティ）であってもデシリアライズが行われていました。
 
 
 ## Polymer 1.0の互換レイヤ
 
-Polymer 2.0は、現在のPolymer 1.0ユーザーが引き続きインポートできるように`polymer/ polymer.html`を残したままにしています。このインポートには、エレメントを定義するためのレガシーなPolymer関数が含まれ、Polymer 1.0 APIで書かれたコードの互換性を破綻させるような変更を最小限に抑えるよう努めています。
+Polymer 2.0は、現在のPolymer 1.0ユーザーが引き続きインポートできるように`polymer/ polymer.html`を残したままにしています。このインポートには、エレメントを定義するためのレガシーな`Polymer`関数が含まれ、Polymer 1.0のAPIで書かれたコードとの互換性の破綻を招く変更を最小限に抑えるよう配慮がなされています。
 
-ほとんどの場合、Polymer 2.0にアップグレードする既存のユーザーに求められるのは、既存のコードを(コンテンツディストリビューションとスタイリングに関連する)Shadow DOM v1 APIに準拠させることと、Custom Elements v1 APIの仕様変更に伴うわずかな変更を加えるだけです。
+ほとんどの場合、既存のユーザーがPolymer 2.0にアップグレード際に求められるのは、`content`の割り当てやスタイリングに関連したShadow DOM v1 APIに準拠させることと、Custom Elements v1 APIの仕様改訂に伴うわずかな変更を既存のコードに加えることだけです。
 
 ## 削除されたメソッドとプロパティ
 
-不必要なコードを減らすという目的に沿って、新たなES6ベースのエレメント`Polymer.Element`では、様々なメソッドやプロパティが取り除かれました。削除されたAPIはいくつかのカテゴリに分類されます。：
+不必要なコードを減らすという目的に従い、ES6ベースの新たなエレメント`Polymer.Element`においては、様々なメソッドやプロパティが取り除かれています。削除されたAPIはいくつかのカテゴリに分類できます。：
 
-*   ネイティブDOM APIに付加されていたシンプルな機能。(例：`fire`や`trasform`)
-*   まれにしか使用されない属性とプロパティ(例：`attributeFollows`や`classFollows`など)
-*   インスタンスに属していないメソッドやプロパティ(例：1.xでは、`importHref`はインスタンスメソッドでしたが、コールバックのバインディング以外はインスタンス固有の処理は行いませんでした。)
+*   ネイティブDOM APIに付加されていたシンプルな機能(例：`fire`や`trasform`)
+*   まれにしか使用されない属性やプロパティ(例：`attributeFollows`や`classFollows`など)
+*   インスタンスに関連しないメソッドやプロパティ(例：1.xでは、`importHref`はインスタンスメソッドでしたが、コールバックのバインディング以外にインスタンス固有の処理を行うことはありませんでした。)
 
-削除または移管されたAPIの包括的なリストは、`Polymer.Element`APIの最終的な仕様の決定後に公開予定です。
+削除または移管されたAPIの包括的なリストは、`Polymer.Element`APIの最終的な仕様が確定した後に公開する予定です。
 
 ## ブラウザのサポートとポリフィル
 
-リリース時点においてPolymer 2.0は、Polymer 1.xと同ように次のブラウザをサポートします。Polymer 1.0ーIE 11、Edge、Safari（9+）、Chrome、Opera、Firefox
+リリース時点においてPolymer 2.0は、Polymer 1.xと同様に次のブラウザをサポートします。Polymer 1.xーIE 11、Edge、Safari(9+)、Chrome、Opera、Firefox
 
-Polymer 2.0はCustom ElementsとShadow DOMの新しい仕様(v1)への互換ポリフィルと一緒に開発されテストされてきました。Polymer 2.0をテストするには、`1.0.0-rc.7`より上位バージョンの`webcomponentsjs`を使用します。webcomponentsjsはbowerが提供するPoymer 2.xに依存対象として含まれます。
+Polymer 2.0はCustom ElementsとShadow DOMの新しい仕様(v1)に互換のあるポリフィルと一緒に開発されテストされてきました。Polymer 2.0をテストするには、`1.0.0-rc.7`より上位バージョンの`webcomponentsjs`を使用します。webcomponentsjsは、bowerのdependenciesにおいてPoymer 2.xを指定することでバンドルされてきます。
 
 ポリフィルを読み込む方法はいくつか存在します。：
 
-*   `webcomponents-lite.js`には、サポート対象の全ブラウザで動作するのに必要なすべてのポリフィルが含まれています。
-*   `webcomponents-loader.js`は、実行時に機能検出(feature-detection)を行い、必要な場合に限りポリフィルを読み込みます。
+*   `webcomponents-lite.js`には、上記サポート対象の全ブラウザで動作するのに必要な全てのポリフィルが含まれています。
+*   `webcomponents-loader.js`は、実行時に機能検出(feature-detection)を行い、必要な場合にはポリフィルが読み込まれます。
 
-上記以外の方法とその長所と短所について解説を読む：
+上記以外の方法を選択した場合とそのトレードオフについて解説を読む：
 *   [webcomponentsjs on GitHub](https://github.com/webcomponents/webcomponentsjs/blob/master/README.md)
 
 ## EcmaScript 2015(別名：ES6)
 
-Polymer 2.xや2.xのクラススタイルのエレメントは、次世代のJavaScript標準であるEcmaScript 2015(一般的にはES6として知られています)を使用して記述されています。これは、新たなCustom Elementの仕様の要求によるものです。ES6に精通していない場合は、Polymerで使用されるES6の基本を理解することが役立ちます。特に、次の機能はコード例で広く使用されています。：
+Polymer 2.xや2.xのクラススタイルのエレメントは、次世代の標準JavaScriptであるEcmaScript 2015(一般的にはES6として知られています)を使って記述されています。これは、Custom Elementの新たな仕様が要求するものです。ES6に馴染みがない場合、Polymerで使用されているES6の基本の理解が参考になります。特に、以下の機能はコード例で広く使用されています。：
 
 
 * [ES6 classes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)
@@ -392,20 +389,19 @@ Polymer 2.xや2.xのクラススタイルのエレメントは、次世代のJav
 * [Arrow functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions)
 * [Template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals)
 
-ウェブ上には、以下のような様々な学習素材が用意されています。：
+ウェブ上には、以下のような様々な学習用の情報が用意されています。：
 
 * [You Don't Know JS: ES6 and Beyond](https://github.com/getify/You-Dont-Know-JS/blob/master/es6%20&%20beyond/README.md#you-dont-know-js-es6--beyond)
 
-現在のChrome、Safari 10、Safari Technology Preview、Firefox、およびEdgeでは、ES6をコンパイルすることなく実行できます。IE11とSafari 9でPolymer 2.xを実行するにはコンパイルが必要です。
+最新のChrome、Safari 10、Safari Technology Preview、Firefox、およびEdgeでは、ES6をコンパイルすることなく実行できます。IE11とSafari 9でPolymer 2.xを実行するにはコンパイルが必要です。
 
-Polymer CLI及び`polymer-build`ライブラリは、ビルド時のES6からES5へのトランスパイルをサポートします。さらに、ブラウザが必要とする場合には、`polymer serve`や`polymer test`といったコマンドを実行時にトランスパイルすることも可能です。
+Polymer CLIや`polymer-build`ライブラリは、ビルド時にES6からES5へのトランスパイルをサポートしています。さらに、ブラウザが必要とする場合には、`polymer serve`や`polymer test`といったコマンドも実行時にトランスパイルを行います。
 
-For more information, see [Browser compatibility]().
 より詳細な情報は、[Browser compatibility](browsers#es6)を参照してください。
 
 ## Polymer 2.0のインストール {#installing}
 
-bowerを使って、最新のPolymer 2.0 RC(リリース候補)をインストールできます。
+bowerを使って、最新のPolymer 2.xリリースをインストールできます。
 
 ```
 bower install --save Polymer/polymer#^2.0.0
@@ -421,11 +417,11 @@ bower install --save PolymerElements/paper-button#^2.0.0
 
 既存のコードをPolymer 2.0上で動作させる方法については、[Upgrade guide](upgrade)を参照してください。
 
-## Polymer Elementの可用性 {#elements}
+## Polymer Elementの可用性(availability) {#elements}
 
 開発チームは、Polymer 1.7+と2.xの双方に互換性のある、新しい「ハイブリッド」フォーマットを利用できるようにPolymer Elementをアップデート中です。
 
-以下のエレメントはすでにPolymer 2.0をサポートするようにアップデートが完了しています。また、アップデートも不要です。：
+以下のエレメントはすでにPolymer 2.0をサポートするようにアップデートが完了しており、アップデート処理は不要です。：
 
 <ul>
 <li><a href="https://github.com/PolymerElements/app-layout">app-layout</a></li>
