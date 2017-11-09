@@ -13,11 +13,9 @@ e.g.
 | オリジナル | app/2.0/docs/es6.md |
 | 日本語 | app/_locales/ja/2.0/docs/es6.md |
 
-### 翻訳支援( 未対応 )
+### 翻訳支援
 
-[GitLocalize](https://gitlocalize.com) による翻訳に対応する予定ですが、現在は[問題があり](https://github.com/Polymer-Japan/docs/issues/3)利用できません。
-
-問題が解決されたら GitLocalize で翻訳をすることができます。
+[GitLocalize](https://gitlocalize.com/repo/473) により翻訳ファイルを作成できます。
 
 ---
 
