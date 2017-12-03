@@ -1,31 +1,32 @@
 ---
-title: Serve your app
+title: アプリケーションの配信
 ---
 
 <!-- toc -->
 
-You can serve an App Toolbox app using any server technology you want. The [Polymer CLI](/{{{polymer_version_dir}}}/docs/tools/polymer-cli) build
-process supports fast-loading applications that can take advantage of the latest web technologies.
+ユーザーは、任意のサーバーテクノロジーを使用してApp Toolboxアプリケーションを配信できます。 [Polymer CLI](/%7B%7B%7Bpolymer_version_dir%7D%7D%7D/docs/tools/polymer-cli)ビルドプロセスは、最新のWebテクノロジーを活用できる高速ロードアプリケーションをサポートします。
 
-The default output of the `polymer build` command is an unbundled build designed for server/browser combinations that support HTTP/2 and HTTP/2 server push to deliver the resources the browser needs for a fast first paint while optimizing caching.
+`polymer build`コマンドのデフォルト出力は、HTTP / 2およびHTTP / 2サーバープッシュをサポートしているサーバー/ブラウザーの組み合わせ用に設計されたunbundled buildで、キャッシュの最適化をしつつ高速な初期描画に必要なリソースを提供します。
 
-See the [documentation on the PRPL pattern](prpl) for more information.
+詳細は、[PRPLパターンのドキュメント](prpl)を参照してください。
 
-For server and browser combinations that don't support server push, you can generate a bundled build designed to minimize the number of round-trips required to get the application running.
+サーバープッシュをサポートしないサーバーとブラウザーの組み合わせの場合、アプリケーションを実行するために必要なラウンドトリップの回数を最小限に抑えるように設計されたbundled buildを生成できます。
 
-Create a bundled build with the `--bundled` flag:
+`--bundled` フラグを使ってbundled buildを作成します：
 
-    polymer build --bundle
+```
+polymer build --bundle
+```
 
 ## Dynamic serving
 
-If you need to perform dynamic serving (serving different content to users with different browsers), multiple builds are an option. You can generate multiple builds by configuring them in your [polymer.json file](/{{{polymer_version_dir}}}/docs/tools/polymer-json).
+Dynamic serving（ブラウザごとに異なるコンテンツを配信すること）を実行する必要がある場合、multiple buildsが選択されることになります。multiple buildsを生成するには、それらを[polymer.json](/%7B%7B%7Bpolymer_version_dir%7D%7D%7D/docs/tools/polymer-json)ファイルで設定します。
 
-If you have multiple builds, your server logic must deliver the appropriate build for each browser, usually by examining the user-agent string sent by the browser.
+multiple buildsを使用する場合、サーバーロジックは、通常、ブラウザから送信されたユーザーエージェント文字列を調べることによって、各ブラウザに対して適切なビルドを提供する必要があります。
 
-You may need to perform dynamic serving if:
+次の場合、Dynamic servingを実行する必要があります：
 
-* You want to serve a bundled build to some users, and an unbundled build to others.
-* You want to serve ES6 to some users and ES5 to others.
+- あるユーザーにはbundled buildを配信し、他のユーザーにはunbundled buildを配信したい場合。
+- あるユーザーにはES6を配信し、他のユーザーにはES5を配信したい場合。
 
-See the documentation on [building your app for production](build-for-production) for more information.
+詳細については、[プロダクション用のアプリケーションビルド](build-for-production)に関するドキュメントを参照してください。
