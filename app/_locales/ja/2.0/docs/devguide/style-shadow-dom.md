@@ -457,10 +457,6 @@ composition](/2.0/docs/devguide/shadow-dom#shadow-dom-and-composition)を参照�
 
 FOUC（スタイルが適用されていないコンテンツによるちらつき）を避けるために、Custom Elementsが定義される前にスタイルを適用したいかもしれません。（つまり、ブラウザがクラスの定義をマークアップタグにアタッチする前）。仮にスタイルを適用しなければ、ブラウザは最初の描画でエレメントに一切スタイルを適用しない可能性があります。通常、あなたはエレメントの定義がロードされる間にもアプリケーションのレイアウトが表示されるようにトップレベルのいくつかのエレメントにスタイルを適用したいかもしれません。
 
-
-There is a specification for a `:defined` pseudo-class selector to target elements that have been 
-defined, but the custom elements polyfill doesn't support this selector.
-
 定義が完了したターゲットエレメントに対しては擬似クラスセレクタ`：defined`が使えます。しかしCustom Elementsのポリフィルはこのセレクターをサポートしません。
 
 ポリフィルがうまく動作する対処方として、マークアップでエレメントに`unresolved`属性を追加してください。例えば：
