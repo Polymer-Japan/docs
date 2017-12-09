@@ -53,40 +53,7 @@ Polymerが管理するテンプレートには、Polymer Elementのテンプレ�
 
 ほとんどのケースにおいて、`dom-repeat`には、一番目(省略形)のフォームを使用することになるでしょう。
 
-テンプレートリピーターは後方互換性を確保するため、レガシーなインポート(`polymer.html`)によって取り込まれます。もし`polymer.html`をインポートしない場合は、次のコードに示すよう`dom-repeat.html`をインポートして下さい。
-
-
-例：{ .caption }em
-*   `index`：配列内の`item`のインデックス（配列がソートまたはフィルタリングされた場合、`index`の値は変更されます）
-
-There are two ways to use a template repeater:
-
-*   **Polymerエレメントやその他のPolymerの管理するテンプレート内部の場合** 省略形で記述してください。
-    `<template is="dom-repeat">`.
-
-        <template is="dom-repeat" items="{{items}}">
-          ...
-        </template>
-
-*   **Polymerの管理するテンプレートの外部の場合** ラッパーエレメントに`<dom-repeat>`を使用してください:
-
-        <dom-repeat>
-          <template>
-            ...
-          </template>
-        </dom-repeat>
-
-    この形式においては通常、命令的に`items`プロパティを設定します。:
-
-        var repeater = document.querySelector('dom-repeat');
-        repeater.items = someArray;
-
-Polymerによって管理されるテンプレートには、Polymerエレメントのテンプレートの他に、`dom-bind`、`dom-if`、`dom-repeat`といった派生的なテンプレートや`Templatize`ライブラリによって管理されるテンプレートが含まれます。
-
-ほとんどのケースにおいて、`dom-repeat`には最初の(省略形の)形式を使います。
-
-テンプレートリピーターは、下位互換性のためにレガシー(`polymer.html`)インポートに含まれています。
-`polymer.html`をインポートしない場合は、下のコードに示すように`dom-repeat.html`を個別にインポートしてください。
+テンプレートリピーターは後方互換性を確保するため、レガシーなインポート(`polymer.html`)によって取り込まれます。もし`polymer.html`をインポートしない場合は、次のコードに示すよう`dom-repeat.html`を個別にインポートして下さい。
 
 例: { .caption }
 
