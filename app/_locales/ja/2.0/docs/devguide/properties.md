@@ -271,12 +271,7 @@ class XCustom extends Polymer.Element {
 
 ## 読み取り専用プロパティ(readOnly) {#read-only}
 
-プロパティがデータを生成(produce)するだけで消費(consume)しない場合、`properties`の定義においてプロパティの`readOnly`フラグを`true`に設定することで、ホストからの不測の変更を明示的に避けることができます。
-
-エレメントがプロパティの値を実際に変更するには、<code>\_set<var>Property</var>(value)</code> という形式で生成されるプライベートのsetterメソッドを利用する必要があります。`Property`の部分は、プロパティ名の頭文字をアッパーケースに変換して使用します。（アルファベットの場合）
-
-
-例えば、`oneProperty`のsetterメソッドは`setOneProperty`になり、`_privateProperty`のsetterメソッドは`set_privateProperty`になります。
+プロパティがデータを生成(produce)するだけで消費(consume)しない場合、`properties`の定義においてプロパティの`readOnly`フラグを`true`に設定することで、ホストからの不測の変更を明示的に避けることができます。エレメントがプロパティの値を実際に変更するには、<code>\_set<var>Property</var>(value)</code> という形式で生成されるプライベートのsetterメソッドを利用する必要があります。`Property`の部分は、プロパティ名の頭文字をアッパーケースに変換して使用します。（アルファベットの場合）例えば、`oneProperty`のsetterメソッドは`setOneProperty`になり、`_privateProperty`のsetterメソッドは`set_privateProperty`になります。
 
 
 ```
