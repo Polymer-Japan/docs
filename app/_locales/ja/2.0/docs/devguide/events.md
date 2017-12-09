@@ -208,6 +208,7 @@ Shadow DOMには、イベントがバブルアップする際に、ターゲッ�
 </script>
 ```
 
+
 この例では、原初のイベントが`<event-retargeting>`エレメントのローカルDOMツリー内の`<button>`でトリガーされています。リスナーは、メインドキュメント上の`<event-retargeting>`エレメントに対して設定されています。イベントはリターゲティングされるので、エレメントの実装を隠してしまえばクリックイベントは`<button>`エレメントからというよりむしろ`<event-retargeting>`エレメントから生じているようにみえます。
 
 Shadow Rootは`document-fragment`としてコンソールに表示されるかもしれません。Shady DOMでは、`DocumentFragment`のインスタンスになるためです。ネイティブのShadow DOMでは、`ShadowRoot`(`DocumentFragment`を拡張するDOMインターフェース)のインスタンスとして表示されます。
