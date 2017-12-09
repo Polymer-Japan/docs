@@ -159,7 +159,6 @@ Shadow DOMを持たないエレメントを作成するには、（ `<dom-module
 
 デフォルトでは、Polymerは**テンプレート内のURLを変更しません**。そのためすべての相対URLはメイン文書のURLが基準になります。これは、テンプレートのコンテンツが複製(clone)されメイン文書に追加された際、ブラウザがURLをドキュメントに関連付けて評価するためです。（テンプレートの元の文書に対してではありません）
 
-To ensure URLs resolve properly, Polymer provides two properties that can be used in data bindings:
 URLが正しく解決されるように、Polymerはデータバインディングで利用可能な2つのプロパティを提供します。：
 
 | プロパティ | 説明 |
