@@ -114,7 +114,7 @@ Polymerの配列変更メソッドを使用して、配列に[監視可能(obser
 
 
 
-例 { .caption }
+例 { .caption } 
 
 ```html
 <link rel="import" href="components/polymer/polymer-element.html">
