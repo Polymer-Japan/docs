@@ -397,7 +397,7 @@ filter: function(item) {
     this.items = this.items.slice();
     ```
 
-    データ構造が複雑な場合、深いクローン(deep clone)が必要になることがあります。tructures, a deep clone may be required.
+    データ構造が複雑な場合、深いクローン(deep clone)が必要になることがあります。
 
 *   変更箇所を正確に把握していない場合は、`dom-repeat`上で[mutableData](/{{{polymer_version_dir}}}/docs/api/elements/Polymer.DomRepeat#property-mutableData)プロパティを設定して、配列へのダーティチェックを無効にできます。
 
