@@ -323,8 +323,8 @@ customElements.define(XCustom.is, XCustom);
 
 配列の変更の場合、`path`は、`.splices`の前に置かれた変更対象の配列のパスになります。また`value`フィールドには、[配列の変更の監視](#array-observation)で説明した通り、`indexSplices`プロパティが含まれます。
 
-例：
-Example: { .caption }
+
+例： { .caption }
 
 ```html
 <dom-module id="x-custom">
