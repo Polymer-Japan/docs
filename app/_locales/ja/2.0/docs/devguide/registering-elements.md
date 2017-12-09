@@ -76,7 +76,6 @@ class MyElementWithMixin extends MyMixin(Polymer.Element) {
 }
 ```
 
-This pattern may be easier to understand if you think of it as two steps:
 この例に関しては、2つのステップに分けて考えると理解しやすいでしょう。：
 
 ```js
