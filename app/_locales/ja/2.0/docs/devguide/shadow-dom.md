@@ -4,7 +4,7 @@ title: Shadow DOMのコンセプト
 
 <!-- toc -->
 
-Shadow DOMは、コンポーネントの作成に役立つ新しいDOM機能です。*Shadow DOM*は、エレメント内の**スコープ付きのサブツリー**と考えることができます。
+Shadow DOMは、コンポーネントの作成に役立つ新しいDOM機能です。*Shadow DOM*は、エレメント内の**スコープ付きのサブツリー**と考えることができます。 
 
 **詳細はWeb Fundamentalsを読んでください。**このドキュメントでは、Shadow DOMの概要の内、Polymerに関連する部分を説明しています。Shadow DOMに関する包括的な概要説明は、Web Fundamentalsの[Shadow DOM v1: self-contained web components](https://developers.google.com/web/fundamentals/primers/shadowdom/?hl=ja)を参照してください。
 {.alert .alert-info}
