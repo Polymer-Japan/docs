@@ -712,9 +712,6 @@ Polymer Elementは、イベントを使用してデータを上に向けて伝�
 
 プロパティエフェクトは指定されたプロパティへ[監視可能な(observable)変更](#observable-changes)が発生した場合に引き起こされるアクションです。プロパティエフェクトは以下のようなケースで発生します。：
 
-Property effects are actions triggered by [observable changes](#observable-changes) to a given
-property (or path). Property effects include:
-
 *   算出プロパティの再計算
 *   データバインディングの更新
 *   プロパティ値をホストエレメントの属性に反映
