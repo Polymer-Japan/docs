@@ -86,12 +86,6 @@ const BaseClassWithMixin = MyMixin(Polymer.Element);
 class MyElementWithMixin extends BaseClassWithMixin { ... }
 ```
 
-Because mixins are simply adding classes to the inheritance chain, all of the usual rules of
-inheritance apply.
-
-For information on defining mixins, see [Sharing code with class expression mixins](custom-elements#mixins)
-in Custom element concepts.
-
 ミックスインは単に継承チェーンにクラスを追加するだけなので、継承の一般的なルールがそのまま適用されます。
 
 ミックスインの定義に関する詳細は、Custom Elementのコンセプトの[Sharing code with class expression mixins](custom-elements#mixins)を参照してください。
@@ -113,7 +107,7 @@ Polymer Elementを定義するのに三つの主要なHTML Importsがありま�
 
 1.xと2.xの両方で実行できるハイブリッドエレメントを定義するには、`polymer.html`をインポートして使用します。
 
-##クラススタイルのエレメントでハイブリッドな動作を使用
+## クラススタイルのエレメントでハイブリッドな動作を使用
 
 `Polymer.mixinBehavior`関数を使用して、クラススタイルのエレメントにハイブリッドな動作(behavior)を追加することができます。：
 
