@@ -56,7 +56,7 @@ Polymerが管理するテンプレートには、Polymer Elementのテンプレ�
 テンプレートリピーターは後方互換性を確保するため、レガシーなインポート(`polymer.html`)によって取り込まれます。もし`polymer.html`をインポートしない場合は、次のコードに示すよう`dom-repeat.html`をインポートして下さい。
 
 
-例：{ .caption }em used to create this instance.
+例：{ .caption }em
 *   `index`：配列内の`item`のインデックス（配列がソートまたはフィルタリングされた場合、`index`の値は変更されます）
 
 There are two ways to use a template repeater:
