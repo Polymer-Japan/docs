@@ -169,6 +169,7 @@ this.addresses = this.addresses.slice();
 
 
 関連タスク：
+
 *   [オブジェクトのサブプロパティの設定](model-data#set-path)
 *   [配列の変更](model-data#array-mutation)
 *   [サブプロパティの変更をPolymerに通知](model-data#notify-pat)
