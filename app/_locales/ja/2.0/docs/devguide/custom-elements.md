@@ -4,15 +4,16 @@ title: Custom Elementのコンセプト
 
 <!-- toc -->
 
-(Custom Elements)は、Webにコンポーネントモデルを提供します。の仕様は次の通りです。：
+Custom Elementsは、Webにコンポーネントモデルを提供します。Custom
+ Elementsの仕様で実現されるのは以下の項目です。：
 
-*   クラスをCustom Elementの名前に関連付けるためのメカニズム。
-*   Custom Elementのインスタンスの状態が変化した（例えば、ドキュメントに追加またはドキュメントから削除された）際に呼び出される一連のライフサイクルコールバック。
-*   インスタンス上で指定した属性グループのいずれかが変更された際に呼び出されるコールバック。
+- クラスをCustom Elementの名前に関連付けるためのメカニズム。
+- Custom Elementのインスタンスの状態が変化した（例えば、ドキュメントに追加またはドキュメントから削除された）際に呼び出される一連のライフサイクルコールバック。
+- インスタンス上で指定した属性グループのいずれかが変更された際に呼び出されるコールバック。
 
-まとめると、これらの機能を利用することで、状態変化に応じて処理を行う独自のパブリックAPIを持ったエレメントが構築できます。
+まとめると、これらの機能を利用することで、状態変化に応じて処理を行う独自のパブリックAPIを持ったエレメントが構築できるようになります。
 
-このドキュメントでは、Polymerに関連するの概要について説明します。のより詳細な概要については、[Custom Elements v1: Reusable Web Components](https://developers.google.com/web/fundamentals/getting-started/primers/customelements)を参照してください。
+このドキュメントでは、Polymerに関連したCustom Elementsの概要について説明します。Custom Elementsの詳細な解説は、[Custom Elements v1: Reusable Web Components](https://developers.google.com/web/fundamentals/getting-started/primers/customelements)を参照してください。
 
 Custom Elementを定義するには、ES6のクラスを作成し、それをCustom Elementの名前に関連付けます。
 
@@ -42,9 +43,9 @@ const myEl = document.createElement('my-element');
 const myEl = new MyElement();
 ```
 
-エレメントのクラスには、その動作(behavior)とパブリックAPIを定義します。クラスは、`HTMLElement`クラスまたは、そのサブクラスの一つ（例えば、他のCustom Element）を拡張しなければいけません。
+エレメントのクラスには、その動作(behavior)とパブリックAPIを定義します。クラスは、`HTMLElement`クラスまたは、そのサブクラスの一つ（例えば、他のCustom Element）を拡張する必要があります。
 
-**Custom element names.** 仕様上、**Custom Elementの名前は、小文字のASCII文字で始まり、ダッシュ(-)を含まなければなりません。**既出の名前は短いリストで管理され、それに一致する命名は禁止されています。詳細については、HTML仕様の[Custom elements core concepts](https://html.spec.whatwg.org/multipage/scripting.html#custom-elements-core-concepts)を参照してください。
+**Custom element names.** 仕様上、**Custom Elementの名前は、小文字のASCII文字で始まり、ダッシュ(-)を含めなければなりません。**使用済みの名前は短いリストで管理され、それと一致する名前に使用は禁止されています。詳細は、HTML仕様の[Custom elements core concepts](https://html.spec.whatwg.org/multipage/scripting.html#custom-elements-core-concepts)を参照してください。
 {.alert .alert-info}
 
 Polymerは、基本的なCustom Elementの仕様に対して付加的な機能群を提供します。これらの機能をエレメントに付加するには、Polymer Elementの基底クラス`Polymer.Element`を拡張します。：
@@ -63,14 +64,14 @@ Polymerは、基本的なCustom Elementの仕様に対して付加的な機能�
 
 Polymerは基本的なCustom Elementに対して以下の機能を付与します。：
 
-*   一般的なタスクを処理するためのインスタンスメソッド。
-*   対応する属性に応じてプロパティを設定するなど、プロパティと属性を自動的に処理するための機能。
-*   `<template>`の記述を元にエレメントのインスタンスにShadow DOMツリーを生成する。
-*   データバインディング、プロパティ変更のオブザーバーや算出プロパティをサポートするデータシステム。
+- 一般的なタスクを処理するためのインスタンスメソッド。
+- 対応する属性に応じて特定のプロパティを設定するなど、プロパティと属性を自動的に処理するための機能。
+- `<template>`の記述を元にエレメントのインスタンスにShadow DOMツリーを生成する。
+- データバインディング、プロパティ変更のオブザーバーや算出プロパティをサポートするデータシステム。
 
 ## Custom Elementのライフサイクル {#element-lifecycle}
 
-Custom Elementの仕様では、「Custom Elementの反応(reactions)」と呼ばれる一連のコールバックが定義されています。これによって、特定のライフサイクルの変化に応じてユーザーコードを実行することができます。
+Custom Elementの仕様では、「Custom Elementのリアクション(reactions)」と呼ばれる一連のコールバックが定義されています。これによって、特定のライフサイクルの変化に応じてユーザーコードを実行することができます。
 
 <table>
   <tr>
@@ -82,7 +83,7 @@ Custom Elementの仕様では、「Custom Elementの反応(reactions)」と呼�
   <tr>
    <td>constructor
    </td>
-   <td>エレメントがアップグレードされたとき（つまり、エレメントが作成されたとき(created)、あるいは以前に作成されたエレメントが定義された(defined)とき）に呼び出されます。
+   <td>エレメントがアップグレードされたとき（つまり、エレメントが作成されたとき(created)、あるいはすでに作成されたエレメントが定義された(defined)とき）に呼び出されます。
    </td>
   </tr>
   <tr>
@@ -131,9 +132,9 @@ connectedCallback() {
 
 エレメントのコンストラクタにはいくつか特別な制限があります。：
 
-*   コンストラクタ本体の最初の行で、`super`メソッドを引数なしで呼び出さなければなりません。
-*   単純な早期return（`return`または`return this`）を意図とするのでない限り、コンストラクタにreturn文を含めることはできません。
-*   コンストラクタでエレメント自身の属性や子を調べたり追加したりすることはできません。
+- コンストラクタ本体の最初の行で、`super`メソッドを引数なしで呼び出さなければなりません。
+- 単純な早期return（`return`または`return this`）を意図とするのでない限り、コンストラクタにreturn文を含めることはできません。
+- コンストラクタでエレメント自身の属性や子を調べたり追加したりすることはできません。
 
 コンストラクタの制限事項について完全なリストは、WHATWGが公開するHTML仕様の[Requirements for custom element constructors](https://html.spec.whatwg.org/multipage/scripting.html#custom-element-conformance)を参照してください。
 
@@ -141,7 +142,7 @@ connectedCallback() {
 
 ### ワンタイムの初期化
 
-の仕様では、ワンタイムの初期化コールバックは提供されません。そこでPolymerは、エレメントがDOMに初めて追加されたときだけ呼び出される`ready`コールバックを用意しています。
+Custom Elementsの仕様では、ワンタイムの初期化コールバックは提供されていません。そこでPolymerは、エレメントがDOMに初めて追加されたときだけ呼び出される`ready`コールバックを提供しています。
 
 ```js
 ready() {
@@ -154,19 +155,13 @@ ready() {
 }
 ```
 
-
 `Polymer.Element`クラスは、`ready`コールバックの中でエレメントのテンプレートやデータシステムを初期化します。したがって、`ready`コールバックを上書きする場合には、独自の`ready`のどこかで`super.ready()`呼び出す必要があります。
 
-スーパークラスの`ready`メソッドから戻ると、エレメントのテンプレートはインスタンス化され、初期プロパティ値が設定された状態になります。ただし、Light DOMエレメントは、`ready`が呼び出された時点で割り当てられて(distributed)いないかもしれません。
+スーパークラスの`ready`メソッドから返る(returnする)と、エレメントのテンプレートはインスタンス化され、プロパティの初期値が設定された状態になります。ただし、Light DOMエレメントは、`ready`が呼び出された時点で割り当てられて(distributed)いないかもしれません。
 
-エレメントのLight DOMの子やプロパティ値のように、動的な値を元にエレメントを初期化する場合には、`ready`コールバックを使用しないでください。代わりに、プロパティの変更であれば[オブザーバー](observers)を設定し、追加・削除される子に対しては`observeNodes`メソッドや`slotChanged`イベントで監視を行ってください。
+エレメントのLight DOMの子やプロパティ値のように、動的な値を元にエレメントを初期化する際は、`ready`コールバックを使用しないでください。代わりに、プロパティの変更に対して処理を行うのであれば[オブザーバー](observers)を設定し、追加・削除される子に対して処理を行うには`observeNodes`メソッドや`slotChanged`イベントによる監視を行ってください。
 
 関連トピック：
-
-*   [DOM templating]()
-*   [Data system concepts]()
-*   [Observers and computed properties]()
-*   [Observe added and removed children]()
 
 - [DOMテンプレート](dom-template)
 - [データシステムのコンセプト](data-system)
@@ -175,7 +170,7 @@ ready() {
 
 ## エレメントのアップグレード
 
-仕様によれば、Custom Elementsは定義する前であっても利用することができます。エレメントの定義を追加すると、既存のエレメントのインスタンスはすべてカスタムクラスに*アップグレード*されます。
+仕様によれば、Custom Elementsは定義する前であっても利用することができます。エレメントの定義が追加されると、既存のエレメントのインスタンスはすべてカスタムクラスに*アップグレード*されます。
 
 例として、次のようなコードを考えます。：
 
@@ -189,22 +184,20 @@ ready() {
 </script>
 ```
 
-
-このページを解析すると、ブラウザはスクリプトを解析して実行する前に`<my-element>`のインスタンスを作成します。この場合、エレメントは`MyElement`ではなく`HTMLElement`のインスタンスとして生成されます。エレメントが定義されると、`<my-element>`のインスタンスはアップグレードされ適切なクラス(`MyElement`)になります。クラスのコンストラクタは、アップグレードの過程で呼び出され、その後他の待機中のライフサイクルコールバックが続けて呼び出されます。
+このページを解析(parsing)すると、ブラウザはスクリプトを解析して実行する前に`<my-element>`のインスタンスを生成します。この場合、エレメントは`MyElement`ではなく`HTMLElement`のインスタンスとして生成されます。エレメントが定義されると、`<my-element>`のインスタンスはアップグレードされ適切なクラス(`MyElement`)になります。クラスのコンストラクタは、アップグレードの過程で呼び出され、その後他の待機中のライフサイクルコールバックが続けて呼び出されます。
 
 エレメントをアップグレードさせることで、エレメントの初期化にかかるコストを遅延させながらDOMに追加することができます。これは進歩的な機能の強化といえるでしょう。
 
-エレメントは、次のいずれかの*Custom Elementの状態*を持っています。：
+エレメントは、*Custom Elementの状態*として次のいずれかを持っています。：
 
-*   "uncustomized"：エレメントには有効な名がありません。これは、ビルトインエレメント(`<p>`、`<input>`)または、Custom Elementになることができない未知のエレメント(`<nonsense>`)のどちらかです。
-*   "undefined"：エレメントに有効なCustom Element名(例えば、my-elementのような)はありますが、まだ定義されていません。
-*   "custom"：エレメントは有効なCustom Element名を持ち、定義もなされ、アップグレードもされています。
-*   "custom". The element has a valid custom element name and has been defined and upgraded.
-*   "failed"：エレメントのアップグレードに失敗しました（例えば、クラスが無効な場合）。
+- "uncustomized"：エレメントには有効な名がありません。これは、ビルトインエレメント(`<p>`、`<input>`)または、Custom Elementになることができない未知のエレメント(`<nonsense>`)のどちらかです。
+- "undefined"：エレメントは(my-elementのような)有効なCustom Element名を持つが、まだ定義はされていません。
+- "custom"：エレメントは有効なCustom Element名を持ち、定義もなされ、アップグレードもされています。
+- "failed"：エレメントのアップグレードに失敗しました（例えば、クラスが有効でない場合）。
 
-*Custom Elementの状態*はプロパティとして公開はされませんが、エレメントが定義済みかどうかに関わらずスタイルを設定することができます。
+*Custom Elementの状態*はプロパティとして公開されませんが、エレメントが定義済みかどうかに関わらずスタイルを設定することはできます。
 
-"custom"及び"uncustomized"状態にあるエレメントは、定義済み(defied)であるとみなされます。定義済みのエレメントに対しては、擬似クラスセレクタ`:defined`を使用することができます。これを利用して、エレメントがアップグレードされる前のプレースホルダ用スタイルを提供できます。：
+"custom"及び"uncustomized"状態にあるエレメントは、定義済み(defined)であるとみなされます。定義済みのエレメントに対しては、擬似クラスセレクタ`:defined`を使用することができます。これを利用して、エレメントがアップグレードされる前のプレースホルダ用スタイルを提供できます。：
 
 ```
 my-element:not(:defined) {
@@ -218,7 +211,6 @@ my-element:not(:defined) {
 ## 他のエレメントの拡張 {#extending-elements}
 
 Custom Elementは、HTMLElementだけでなく他のCustom Elementを拡張することもできます。：
-
 
 ```
 class ExtendedElement extends MyElement {
@@ -240,11 +232,11 @@ class ExtendedElement extends MyElement {
 customElements.define(ExtendedElement.is, ExtendedElement);
 ```
 
-**Polymerは現在、ビルトインエレメントの拡張をサポートしていません。**の仕様では、`<button>`や`<input>`のようなビルトインエレメントを拡張するためのメカニズムを用意します。仕様では、これらのエレメントを「カスタマイズされたビルトインエレメント(customized built-in elements)」と呼んでいます。*カスタマイズされたビルトインエレメント*には、多くの利点があります。（例えば、`<button>`や`<input>`のようなビルトインUIエレメントでユーザー補助機能(accessibility feature)を利用することができます）しかし、すべてのブラウザベンダーが__カスタマイズされたビルトインエレメント__をサポートすることに同意おらず、現時点でPolymerはそれらをサポートしていません。
+<strong>Polymerは現在、ビルトインエレメントの拡張をサポートしていません。</strong>の仕様では、<code>button</code>や<code>input</code>のようなビルトインエレメントを拡張するためのメカニズムを用意します。仕様では、これらのエレメントを「カスタマイズされたビルトインエレメント(customized built-in elements)」と呼んでいます。<em>カスタマイズされたビルトインエレメント</em>には、多くの利点があります。（例えば、<code>button</code>や<code>input</code>のようなビルトインUIエレメントにユーザーアクセシビリティ機能(accessibility feature)を提供することができます）しかし、すべてのブラウザベンダーがカスタマイズされたビルトインエレメントをサポートすることに同意おらず、現時点でPolymerはそれらをサポートしていません。
 {.alert .alert-info}
 
 Custom Elementsを拡張すると、Polymerは `properties`オブジェクトと
-配列`observers`は特別な扱いをします。エレメントをインスタンス化するとき、Polymerはプロトタイプチェーンを巡回し
+配列`observers`について特別な扱いをします。エレメントをインスタンス化するとき、Polymerはプロトタイプチェーンを巡回し
 これらのオブジェクトをフラット化します。そうすることで、スーパークラスによって定義されたプロパティやオブザーバーが、サブクラスにも追加されます。
 。
 
@@ -252,9 +244,9 @@ Custom Elementsを拡張すると、Polymerは `properties`オブジェクトと
 
 ## クラス式のミックスインでコードを共有 {#mixins}
 
-ES6のクラスでは単一継承のみサポートしており、異なるエレメント間でコードを共有するには困難が伴います。クラス式のミックスインを利用すると、エレメント間でコードを共有できるようになります。
+ES6のクラスでは単一継承のみサポートしており、異なるエレメント間でコードを共有するには困難が伴います。クラス式のミックスイン(Mixin)を利用すると、共通のスーパークラスを加えることなくエレメント間でコードを共有できるようになります。
 
-クラス式のミックスインは基本的にクラスのファクトリーとして機能する関数です。以下の例のように、スーパークラスを渡すことで、関数はミックスインのメソッドを使いスーパークラスを拡張した新たなクラスを生成します。
+クラス式のミックスインは基本的に<em>クラスのファクトリー</em>として機能する関数です。以下の例のように、スーパークラスを引数として渡すことで、関数はミックスインのメソッドを使いスーパークラスを拡張した新たなクラスを生成します。
 
 ```js
 const fancyDogClass = FancyMixin(dogClass);
@@ -350,43 +342,38 @@ MyCompositeMixin = (base) => class extends MyMixin2(MyMixin1(base)) {
 }
 ```
 
-
-ミックスインは単に継承チェーンにクラスを追加するだけなので、通常の継承に関するルールは全て適用されます。例えば、ミックスインクラスにはコンストラクタを定義でき、`super`を使ってスーパークラスメソッドを呼び出すことができます。
+ミックスインは単に継承チェーンにクラスを追加するだけなので、通常の継承に関するルールは全て適用されます。例えば、ミックスインクラスにはコンストラクタを定義でき、`super`を使ってスーパークラスメソッドを呼び出すことができるといった点です。
 
 **ミックスインをドキュメント化しましょう** Polymerビルドツールとlintツールには、プロパティが使用するミックスインとエレメントを解析するために追加のドキュメンテーションタグがいくつか必要です。ドキュメンテーションタグがなければ、ツールは警告を記録されます。ミックスインのドキュメント化の詳細は、[Class mixins](../tools/documentation#class-mixins)を参照してください。
 {.alert .alert-info}
-
-
 
 ### ミックスインをパッケージ化してシェアする
 
 作成したミックスインを他のグループと共有したり、公開したりする場合には、以下の手順が推奨されます。：
 
--   [`Polymer.dedupingMixin`](/{{{polymer_version_dir}}}/docs/api/#function-Polymer.dedupingMixin)関数を使用して、
-    一度しか適用できないミックスインを作成する。
+- [`Polymer.dedupingMixin`](/%7B%7B%7Bpolymer_version_dir%7D%7D%7D/docs/api/#function-Polymer.dedupingMixin)関数を使用して、一度しか適用できないミックスインを作成する。
 
--   類似の名前を持つ可能性があるミックスインやクラスが他者のものと衝突をしないように、ミックスインに一意の名前空間を提供します。
+- 同じ名前を持つ可能性があるミックスインやクラスが他者のものと衝突しないように、ミックスインに一意の名前空間を提供します。
 
-`dedupingMixin`関数は、他のミックスインで使用されているミックスインが意図せず複数回適用することを避けることが。例えば、 `MixinA`が`MixinB`と`MixinC`を含んでいて、
+`dedupingMixin`関数は、他のミックスインで使用されているミックスインが意図せず複数回適用することを避けるのに役立ちます。例えば、 `MixinA`が`MixinB`と`MixinC`を含んでいて、
 `MixinA`だけでなく`MixinB`を直接利用する場合には：
 
 ```js
 class MyElement extends MixinB(MixinA(Polymer.Element)) { ... }
 ```
 
-この時点で、あなたのエレメントはそのプロトタイプチェーンには`MixinB`の2つのコピーが存在することになります。`dedupingMixin`
-はミックスイン関数を引数にとりますが、返り値のミックスイン関数においては重複が排除されます。：
+この時点で、あなたのエレメントにはそのプロトタイプチェーンに`MixinB`の2つのコピーが存在することになります。`dedupingMixin`
+はミックスイン関数を引数にとりますが、返り値のミックスイン関数においては重複が回避されます。：
 
 ```js
 dedupingMixinB = Polymer.dedupingMixin(mixinB);
 ```
 
-dedupingミックスインには2つの利点があります。第一に、このミックスインを使用するたびに、生成された
-基本クラスが記憶され、繰り返し使用された場合にはこのクラスオブジェクトが返されます。これはオブジェクトAを少しだけ最適化します。
+dedupingミックスインには2つの利点があります。第一に、このミックスインを使用するたびに、生成されたクラスが記憶され、繰り返し使用された場合にはこの基底クラスのオブジェクトが返されます。これはオブジェクトAの僅かばかりの最適化になります。
 
 さらに重要なことは、dedupingミックスインは、すでに基底クラスのプロトタイプチェーンのどこかでミックスインが利用されたかどうかをチェックします。そして利用済みの場合には、ミック単に基底クラスを返します。上記の例では、 両方の`mixinB`に変えて`dedupingMixinB`を利用した場合、ミックスインは一度だけ適用されることになります。
 
-次の例は、dedupingミックスインを利用して名前空間を作成する例を示しています。：
+次のサンプルコードは、dedupingミックスインを利用して名前空間を生成する一つの例です。：
 
 ```js
 // Create my namespace, if it doesn't exist
