@@ -1,4 +1,4 @@
------
+---
 title: Global Polymer settings
 ---
 
