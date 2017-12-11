@@ -4,7 +4,7 @@ title: Global Polymer settings
 
 Document-level global Polymer settings can be set
 by creating a `Polymer` object on window before importing the Polymer
-library, or by calling a setter. 
+library, or by calling a setter.  
 
 
 You should call the setters before defining your first Polymer element. For example, 
