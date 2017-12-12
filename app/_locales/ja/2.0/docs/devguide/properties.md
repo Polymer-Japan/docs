@@ -58,10 +58,8 @@ customElements.define('x-custom', XCustom);
       型：コンストラクタ<br>
       属性からのデシリアライズに利用される属性の型。Polymerは以下の型のデシリアライズをサポートしています。：<code>Boolean</code>, <code>Date</code>, <code>Number</code>, <code>String</code>,<code>Array</code> and <code>Object</code> エレメントの <code>_deserializeValue</code>メソッドを上書きすることでその他型をサポートすることもできます。
 
-<pre data-md-type="block_code" data-md-language=""><code>  0.5系と違い、プロパティの型はコンストラクタの型によって明示的に指定されます。詳細は<a href="#attribute-deserialization">属性のデシリアライズ</a>を参照してください 。
-</td>
-</code></pre>
-<div data-md-type="block_html">  </div>
+<div data-md-type="block_html"><pre data-md-type="block_code" data-md-language=""><code>  0.5系と違い、プロパティの型はコンストラクタの型によって明示的に指定されます。詳細は<a href="#attribute-deserialization">属性のデシリアライズ</a>を参照してください 。
+</code></pre></div>
 </td>
 </tr>
 <tr>
@@ -76,10 +74,8 @@ customElements.define('x-custom', XCustom);
 <td>
       型: <code>boolean</code><br>
 
-<pre data-md-type="block_code" data-md-language=""> <code>true</code> を指定すると、プロパティ値が変更された場合、対応する属性がホストノードに設定されるようになります。プロパティ値がブール値の場合には、属性は標準のHTML属性のブール値として作成されます（trueの場合に記述され、falseの場合には記述されない）。プロパティの型がそれ以外なら、属性値はプロパティ値を文字列で表現したものになります。<br><br>Polymer0.5系の <code>reflect</code>に相当します。詳細については、<a href="#attribute-reflection">属性へのプロパティの反映</a>を参照してください。
-</td>
-</code></pre>
-<div data-md-type="block_html">  </div>
+<div data-md-type="block_html"><pre data-md-type="block_code" data-md-language=""> <code>true</code> を指定すると、プロパティ値が変更された場合、対応する属性がホストノードに設定されるようになります。プロパティ値がブール値の場合には、属性は標準のHTML属性のブール値として作成されます（trueの場合に記述され、falseの場合には記述されない）。プロパティの型がそれ以外なら、属性値はプロパティ値を文字列で表現したものになります。<br><br>Polymer0.5系の <code>reflect</code>に相当します。詳細については、<a href="#attribute-reflection">属性へのプロパティの反映</a>を参照してください。
+</pre></div>
 </td>
 </tr>
 <tr>
@@ -108,18 +104,16 @@ customElements.define('x-custom', XCustom);
 <td>
       型: <code>string</code><br>
 
-<pre data-md-type="block_code" data-md-language=""> プロパティ値は、プロパティ値が変更された時に呼び出されるメソッドの名前として解釈されます。0.5系とは異なり、 <strong>プロパティ変更ハンドラは明示的に登録する必要がある点に注意してください。</strong> <code><var>propertyName</var>Changed</code>メソッドは自動的に実行されることはありません。詳細については、<a href="observers">プロパティ変更コールバック（observers）</a>を参照してください。
+<div data-md-type="block_html"><pre data-md-type="block_code" data-md-language=""> プロパティ値は、プロパティ値が変更された時に呼び出されるメソッドの名前として解釈されます。0.5系とは異なり、 <strong>プロパティ変更ハンドラは明示的に登録する必要がある点に注意してください。</strong> <code><var>propertyName</var>Changed</code>メソッドは自動的に実行されることはありません。詳細については、<a href="observers">プロパティ変更コールバック（observers）</a>を参照してください。
 
-</td>
-</pre>
-<div data-md-type="block_html">  </div>
+</pre></div>
 </td>
 </tr>
 </table>
 
 ## プロパティ名の属性名へのマッピング {#property-name-mapping}
 
-データバインディング、属性からのプロパティへのデシリアライズ、およびプロパティの属性への反映において、Polymerは属性名をプロパティ名に、またその逆に、マッピングを行います。
+データバインディング、属性からのプロパティへのデシリアライズ、およびプロパティの属性への反映において、Polymerは属性名からプロパティ名にまたはその逆に、マッピングを行います。
 
 属性名をプロパティ名にマッピングする場合：
 
@@ -129,7 +123,7 @@ customElements.define('x-custom', XCustom);
 
 上記とは反対に、プロパティ名を属性名に変換する際は、同様のマッピングが逆に実行されます（例えば、プロパティに`reflectToAttribute: true`が定義されている場合など）。
 
-**互換性に関する注意:** 0.5系では、Polymerは属性名を一致したプロパティにマップしようとしました。例えば、もしエレメント上でプロパティでfooBarが定義されている場合、属性`foobar`は、プロパティ`fooBar`にマップされます。このようなプロパティのマッピングは、**1.0系以降の属性では発生しません。**属性からプロパティへのマッピングは、上記で示したルールに従ってエレメントの登録のタイミングで実行されます。
+**互換性に関する注意:** 0.5系では、Polymerは属性名を一致したプロパティにマップしようとしました。例えば、もしエレメント上でプロパティでfooBarが定義された場合、属性`foobar`は、プロパティ`fooBar`にマップされます。このようなプロパティのマッピングは、<strong>1.0系以降の属性では発生しません。</strong>属性からプロパティへのマッピングは、上記で示したルールに従ってエレメントの登録のタイミングで実行されます。
 { .alert .alert-warning }
 
 ## 属性のデシリアライズ{#attribute-deserialization}
@@ -220,7 +214,7 @@ This user is a manager.
 
 ### 独自のデシリアライズを実装
 
-型システムは、組み込みでBooleanとNumberの値とJSONで表現されたObjectとArrayの値をサポートします。また、DateオブジェクトはDateとして解析(parse)可能なDateオブジェクトとして表現されます。エレメントの `_deserializeValue`メソッドをオーバーライドすることで他の型をサポートすることもできます。
+型システムは、組み込みでBooleanとNumberの値とJSONで表現されたObjectとArrayの値をサポートします。また、DateオブジェクトはDateとして解析(parse)可能な文字列として表現されます。エレメントの `_deserializeValue`メソッドをオーバーライドすることで他の型をサポートすることもできます。
 
 ```js
 _deserializeValue(value, type) {
@@ -234,11 +228,11 @@ _deserializeValue(value, type) {
 
 ## デフォルトのプロパティ値の設定 {#configure-values}
 
-`properties`オブジェクトのプロパティのデフォルト値は、`value`フィールドを使用することで設定できます。プロパティ値は、プリミティブな値でも、値を返す関数でも構いません。
+プロパティのデフォルト値は、`properties`オブジェクト内の`value`フィールドを使用することで設定できます。プロパティ値は、プリミティブな値でも、値を返す関数でも構いません。
 
-関数を指定した場合、Polymerはエレメントの_インスタンスごとに_一度ずつ呼び出します。
+関数を指定した場合、Polymerはエレメントの<em>インスタンスごとに</em>一回づつ呼び出します。
 
-オブジェクトのプロパティや配列の値を初期化する際は、関数を利用して、すべてのエレメントのインスタンス間でオブジェクトや配列を共有せず、エレメントごとに独自に値をコピーして取得するようにします。
+プロパティとしてオブジェクトや配列の値を初期化する際は、関数を利用して、エレメントのすべてのインスタンス間でオブジェクトや配列が共有されないよう、エレメントごとに独自に値をコピーして取得するようにします。
 
 例: { .caption }
 
@@ -270,13 +264,13 @@ class XCustom extends Polymer.Element {
 
 イベント名の<code><var>property-name</var></code>部分は、プロパティ名をダッシュケースで表現したものです。例えば、`this.firstName`が変更されると`first-name-changed`が発火するといった具合です。
 
-これらのイベントは、双方向データバインディングシステムによって利用されます。外部のスクリプトから`addEventListener`を使用してイベント(`first-name-changed`のような)をリッスンすることもできます。プロパティの変更イベントはバブリングしないので、イベントリスナーはイベントを生成するエレメントに直接設定しなければいけません。
+これらイベントは、双方向データバインディングシステムによって利用されます。また、外部のスクリプトから`addEventListener`を使用して(`first-name-changed`のような)イベントをリッスンすることもできます。プロパティの変更イベントはバブリングしないので、イベントリスナーはイベントを生成するエレメントに対して直接設定する必要があります。
 
 プロパティ変更通知とデータシステムの詳細については、[データフロー](data-system#data-flow)を参照してください。
 
 ## 読み取り専用プロパティ(readOnly) {#read-only}
 
-プロパティがデータを生成(produce)するだけで消費(consume)しない場合、`properties`の定義においてプロパティの`readOnly`フラグを`true`に設定することで、ホストからの不測の変更を明示的に避けることができます。エレメントがプロパティの値を実際に変更するには、<code>_set<var>Property</var>(value)</code> という形式で生成されるプライベートのsetterメソッドを利用する必要があります。`Property`の部分は、プロパティ名の頭文字をアッパーケースに変換して使用します。（アルファベットの場合）例えば、`oneProperty`のsetterメソッドは`setOneProperty`になり、`_privateProperty`のsetterメソッドは`set_privateProperty`になります。
+プロパティがデータを生成(produce)するだけで消費(consume)しない場合、`properties`の定義においてプロパティの`readOnly`フラグを`true`に設定することで、ホストからの不測の変更を明示的に避けることができます。エレメントがプロパティの値を実際に変更するには、<code>_set<var data-md-type="raw_html">Property</var>(value)</code> という形式で生成されるプライベートのsetterメソッドを利用する必要があります。`Property`の部分は、（アルファベットの場合には）プロパティ名の頭文字をアッパーケースに変換して使用します。例えば、`oneProperty`のsetterメソッドは`setOneProperty`になり、`_privateProperty`のsetterメソッドは`set_privateProperty`になります。
 
 ```
 class XCustom extends Polymer.Element {
@@ -298,12 +292,12 @@ class XCustom extends Polymer.Element {
 }
 ```
 
-読み取り専用プロパティとデータバインディングに関する詳細については、[データフローの制御方法](data-system#data-flow-control)を参照してください 。
+読み取り専用(read-only)プロパティとデータバインディングに関する詳細については、[データフローの制御方法](data-system#data-flow-control)を参照してください 。
 
 ## プロパティの属性への反映(reflectToAttribute)  {#attribute-reflection}
 
-ある特定のケースにおいては、HTMLの属性値とプロパティ値を同期させておくと便利かもしれません。`properties`オブジェクト内のプロパティに`reflectToAttribute: true`を設定することで実現できます。 これによって、プロパティに対する_監視可能(observable)な変更_は、同名の属性にシリアライズされます。(<a href="#property-name-mapping">プロパティ名を属性名にマッピング</a>で説明されています).
-属性は文字列の値だけを受け取るので、<a href="#attribute-serialization">属性のシリアライズ</a>で説明されているようにプロパティの値は文字列にシリアライズする必要があります。
+ある特定のケースにおいては、HTMLの属性値とプロパティ値を同期させておくと便利かもしれません。これは、`properties`オブジェクト内のプロパティに`reflectToAttribute: true`を設定することで実現できます。 これによって、プロパティに対する監視可能(observable)な変更は、同名の属性にシリアライズされます。(<a href="#property-name-mapping">プロパティ名の属性名へのマッピング</a>で説明されている通りです).
+属性は文字列の値だけを受け取るので、<a href="#attribute-serialization">属性へのシリアライズ</a>で説明されているようにプロパティの値は文字列にシリアライズされます。
 
 ```js
 class XCustom extends Polymer.Element {
@@ -326,7 +320,7 @@ class XCustom extends Polymer.Element {
 
 ### 属性へのシリアライズ {#attribute-serialization}
 
-プロパティを属性に反映する場合や[属性にプロパティをバインド](data-binding#attribute-binding)する場合、プロパティの値は属性に_シリアライズ_されます。
+プロパティを属性に反映する場合や[属性にプロパティをバインド](data-binding#attribute-binding)する場合、プロパティの値は属性に<em>シリアライズ</em>されます。
 
 デフォルトでは、プロパティの`type`の値に関係なく、値の**現在の型**に従って以下のようにシリアライズされます。：
 
@@ -336,7 +330,6 @@ class XCustom extends Polymer.Element {
 - `Array`または`Object`：`JSON.stringify`を使用してシリアライズされます。
 
 その他のデータ型に独自のシリアライズ処理を実装したい場合には、エレメントの`_serializeValue`メソッドをオーバーライドして下さい。
-エレメント
 
 ```js
 _serializeValue(value) {
@@ -349,9 +342,9 @@ _serializeValue(value) {
 
 ## 暗黙的に宣言されたプロパティ
 
-データバインディングにプロパティを追加したり、オブザーバー、算出プロパティ、算出バインディングといった機能により、依存関係をもつプロパティを追加した場合には、プロパティが_暗黙的に_宣言されたことになります。
+データバインディングにプロパティを追加したり、オブザーバー、算出プロパティ、算出バインディングといった機能により、依存関係をもつプロパティを追加した場合には、プロパティが<em>暗黙的に</em>宣言されたことになります。
 
-Polymerはこれら暗黙的に宣言されたプロパティに自動的にsetterメソッドを作成します。しかし、暗黙的に宣言されたプロパティをマークアップから作成することはできません。
+Polymerはこれら暗黙的に宣言されたプロパティに自動的にsetterメソッドを作成します。しかし、暗黙的に宣言されたプロパティをマークアップから設定することはできません。
 
 ## 非公開および保護されたプロパティ
 
