@@ -68,7 +68,7 @@ customElements.define('x-custom', XCustom);
 <td><code>value</code></td>
 <td>
       型: <code>boolean</code>, <code>number</code>, <code>string</code> または <code>function</code><br>
-      プロパティのデフォルト値となります。もし<code>value</code>が関数の場合、関数が呼び出され、戻り値がプロパティのデフォルト値に使用されます。デフォルト値が **インスタンスに固有な**配列またはオブジェクトでなければならない場合は、関数内で配列またはオブジェクトを作成します。詳細については、<a href="#configure-values">デフォルトのプロパティ値の設定</a>を参照してください 。
+      プロパティのデフォルト値となります。もし<code>value</code>が関数の場合、関数が呼び出され、戻り値がプロパティのデフォルト値に使用されます。デフォルト値が<strong>インスタンスに固有な</strong>配列またはオブジェクトでなければならない場合は、関数内で配列またはオブジェクトを作成します。詳細については、<a href="#configure-values">デフォルトのプロパティ値の設定</a>を参照してください 。
     </td>
 </tr>
 <tr>
