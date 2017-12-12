@@ -223,7 +223,7 @@ customElements.define('x-class', XClass);
     <td>
       エレメントがドキュメントに追加(attached)された後に呼び出されます。エレメントの存続期間中であれば複数回呼び出すことができます。初回の<code>attached</code>コールバックは<code>ready</code>コールバックが実行されるまで呼び出されないことが保証されています。
       <p>
-        ドキュメントレベル(document-level)のイベントリスナーを追加するのにも利用されます。（ローカルなエレメントに対してイベントリスナーを設定するには、<a href="events.html#annotated-listeners">アノテーション付イベントリスナー</a>や<a href="events#event-listeners">リスナーオブジェクト</a>のような宣言的なイベント処理を利用でき、Polymerはリスナーを自動的に追加します）。
+        ドキュメントレベル(document-level)のイベントリスナーを追加するのにも利用されます。（エレメントに対してローカルなイベントリスナーを設定するには、<a href="events.html#annotated-listeners">アノテーション付イベントリスナー</a>や<a href="events#event-listeners">リスナーオブジェクト</a>のような宣言的なイベント処理を利用できます）。
       </p>
      <p>ネイティブの<code>connectedCallback</code>に相当します。</p>
     </td>
