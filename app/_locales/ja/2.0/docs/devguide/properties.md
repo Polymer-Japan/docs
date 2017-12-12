@@ -56,7 +56,7 @@ customElements.define('x-custom', XCustom);
     <td><code>type</code></td>
     <td>
       型：コンストラクタ<br>
-      属性からのでデシリアライズに利用される属性の型。Polymerは以下の型のデシリアライズをサポートしています。：<code>Boolean</code>, <code>Date</code>, <code>Number</code>, <code>String</code>,<code>Array</code> and <code>Object</code>. エレメントの`_deserializeValue`メソッドを上書きすることでその他型をサポートすることもできます。
+      属性からのデシリアライズに利用される属性の型。Polymerは以下の型のデシリアライズをサポートしています。：<code>Boolean</code>, <code>Date</code>, <code>Number</code>, <code>String</code>,<code>Array</code> and <code>Object</code>. エレメントの`_deserializeValue`メソッドを上書きすることでその他型をサポートすることもできます。
 
       0.5系と違い、プロパティの型はコンストラクタの型によって明示的に指定されます。詳細は<a href="#attribute-deserialization">属性のデシリアライズ</a>を参照してください 。
     </td>
