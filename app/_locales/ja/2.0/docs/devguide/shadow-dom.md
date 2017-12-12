@@ -4,12 +4,12 @@ title: Shadow DOMのコンセプト
 
 <!-- toc -->
 
-Shadow DOMは、コンポーネントの作成に役立つ新しいDOM機能です。*Shadow DOM*は、エレメント内の**スコープ付きのサブツリー**と考えることができます。 
+Shadow DOMは、コンポーネントの作成に役立つ新しいDOM機能です。*Shadow DOM*は、エレメント内の**スコープ付きのサブツリー**と考えることができます。
 
-**詳細はWeb Fundamentalsを読んでください。**このドキュメントでは、Shadow DOMの概要の内、Polymerに関連する部分を説明しています。Shadow DOMに関する包括的な概要説明は、Web Fundamentalsの[Shadow DOM v1: self-contained web components](https://developers.google.com/web/fundamentals/primers/shadowdom/?hl=ja)を参照してください。
+<strong>詳細はWeb Fundamentalsを読んでください。</strong>このドキュメントでは、Shadow DOMの概要の内、Polymerに関連する部分を説明しています。Shadow DOMに関する包括的な解説は、Web Fundamentalsの<a>Shadow DOM v1: self-contained web components</a>を参照してください。
 {.alert .alert-info}
 
-ページタイトルとメニューボタンを含むヘッダーコンポーネントについて考えてみましょう。このエレメントのDOMツリーは次のようになるでしょう。： 
+ページタイトルとメニューボタンのあるヘッダーコンポーネントについて考えてみましょう。このエレメントのDOMツリーは次のようになるでしょう。：
 
 ```html
 <my-header>
@@ -20,7 +20,6 @@ Shadow DOMは、コンポーネントの作成に役立つ新しいDOM機能で�
 
 Shadow DOMを使用すると、スコープ付きサブツリー内に子を置くことができるため、ドキュメントレベル(document-level)のCSSから意図せずボタンのスタイルを再適用してしまうといったことはなくなります。このサブツリーはShadow Treeと呼ばれます。
 
-
 ```
 <my-header>
   #shadow-root
@@ -29,12 +28,11 @@ Shadow DOMを使用すると、スコープ付きサブツリー内に子を置�
       <button>
 ```
 
-*Shadow Root*がShadow Treeのトップです。`<my-header>`に追加(attached)されたツリーのエレメントは*Shadowホスト*と呼ばれます。ホストには、Shadow Rootを参照する`shadowRoot`というプロパティがあります。Shadow Rootには、そのホストエレメントを参照する`host`プロパティがあります。
+*Shadow Root*がShadow Treeのトップです。`<my-header>`に追加(attached)されたツリーのエレメントは*Shadowホスト*と呼ばれます。ホストには、Shadow Rootを参照する`shadowRoot`というプロパティがあります。このShadow Rootには、そのホストエレメントを参照する`host`プロパティがあります。
 
-Shadow Treeはエレメントの`children`とは区別されます。このShadow Treeは、外部のエレメントは関知する必要のない(カプセル化された)コンポーネントの**実装**の一部と考えることができます。一方、エレメントの子(children)は、(外部のエレメントに対しても)publicなインタフェースの一部です。
+Shadow Treeはエレメントの`children`とは区別されます。このShadow Treeは、外部のエレメントにとっては関知する必要のない(カプセル化された)コンポーネントの**実装**の一部と考えることができます。一方、エレメントの子(children)は、(外部のエレメントに対しても)publicなインタフェースの一部です。
 
 以下のように、`attachShadow`を呼び出すことで命令的にエレメントにShadow Treeを追加(attach)できます：
-
 
 ```js
 var div = document.createElement('div');
@@ -60,8 +58,7 @@ Polymerは、[DOMテンプレート](dom-template)を使用して宣言的にSha
 
 ## Shadow DOMと構成
 
-デフォルトでは、エレメントにShdow DOMがある場合、**Shadow Treeがエレメントの子に代わってレンダリングされます。**子をレンダリングするためには、`<slot>`エレメントをShadow Treeに追加します。`<slot>`は、子ノードのレンダリング先を示すプレースホルダと考えることができます。例として、以下のような`<my-header>`のShadow Treeについて考えてみましょう。：
-
+デフォルトでは、エレメントにShdow DOMがある場合、<strong>Shadow Treeがエレメントの子に代わってレンダリングされます。</strong>子をレンダリングするためには、`<slot>`エレメントをShadow Treeに追加します。`<slot>`は、子ノードのレンダリング先を示すプレースホルダと考えることができます。例として、以下のような`<my-header>`のShadow Treeについて考えてみましょう。：
 
 ```html
 <header>
@@ -70,17 +67,13 @@ Polymerは、[DOMテンプレート](dom-template)を使用して宣言的にSha
 </header>
 ```
 
-
 ユーザーは次のように子を追加できます：
-
 
 ```html
 <my-header>Shadow DOM</my-header>
 ```
 
-
 `<slot>`エレメントが子に置き換えられたかのようにヘッダーがレンダリングされます。
-
 
 ```html
 <my-header>
@@ -91,20 +84,18 @@ Polymerは、[DOMテンプレート](dom-template)を使用して宣言的にSha
 </my-header>
 ```
 
-
 実際のエレメント(訳注：上記のように実際にレンダリングされたエレメント)の子孫ツリーは、そのShadow DOMツリーとは区別して、*Light DOM*と呼ばれることもあります。
 
-レンダリングするためにLight DOMとShadow DOMツリーを単一のツリーに変換するプロセスは、*ツリーのフラット化(flattening the tree)*と呼ばれます。`<slot>`エレメントがレンダリングされることはありませんが、*フラット化されたツリー*には含まれるので、イベントバブリングのような処理に加えることができます。
+レンダリングするためにLight DOMとShadow DOMツリーを単一のツリーに変換するプロセスは、<em>ツリーのフラット化(flattening the tree)</em>と呼ばれます。`<slot>`エレメントがレンダリングされることはありませんが、*フラット化されたツリー*には含まれるので、イベントバブリングのような処理に加えることができます。
 
 `name`属性付きのスロットを使用することで、フラット化されたツリーのどこに子を割り当てるべきか指定することもできます。
-
 
 ```html
 <h2><slot name="title"></slot></h2>
 <div><slot></slot></div>
 ```
 
-以下のように、名前付きのスロットは、一致する`slot`属性持つトップレベルの子だけを受け入れます。(訳注：トップレベルでない子に関しては、この三つ先のサンプルコードで改めて実例付きの解説があります。)：
+以下のように、名前付きのスロットは、一致する`slot`属性持つトップレベルの子だけを受け入れます。(訳注：トップレベルでない子のケースは、後述のサンプルコードで改めて実例付きの解説があります。)：
 
 ```html
 <span slot="title">A heading</span>
@@ -146,7 +137,7 @@ Polymerは、[DOMテンプレート](dom-template)を使用して宣言的にSha
 </example-card>
 ```
 
-`<example-card>`にはトップレベルの子として二つの`<div>`エレメントがあります。どちらのエレメントもデフォルトのスロットに割り当てられます。`span`はトップレベルの子ではないため、`span`の`slot`属性が配置に影響することはありません。
+`<example-card>`にはトップレベルの子として二つの`<div>`エレメントがあります。どちらのエレメントもデフォルトのスロットに割り当てられます。`span`はトップレベルの子ではないため、`span`の`slot`属性が割り当てに影響することはありません。
 
 ### フォールバックコンテンツ
 
@@ -192,7 +183,6 @@ Polymerは、[DOMテンプレート](dom-template)を使用して宣言的にSha
 
 `slot`エレメントを他のスロットに割り当てることもできます。例えば、二つのレベルのShadow Treeを考えてみましょう。
 
-
 ```
 <parent-element>
   #shadow-root
@@ -208,9 +198,7 @@ Polymerは、[DOMテンプレート](dom-template)を使用して宣言的にSha
       <slot id="child-slot">
 ```
 
-
 このようなマークアップを考えてみましょう。：
-
 
 ```html
 <parent-element>
@@ -218,9 +206,7 @@ Polymerは、[DOMテンプレート](dom-template)を使用して宣言的にSha
 </parent-element>
 ```
 
-
 フラット化されたツリーは次のようになります。：
-
 
 ```
 <parent-element>
@@ -233,12 +219,11 @@ Polymerは、[DOMテンプレート](dom-template)を使用して宣言的にSha
 
 最初は処理の順番について少し混乱するかもしれません。各レベルにおいて、Light DOMの子は、ホストのShadow DOMの各スロットに割り当てられています。まず`<span>I'm in light</span>`は`<parent-element>`のShadow DOMであるslot(`#parent-slot`)に割り当てられます。次にこのslot(`#parent-slot`)が`<child-element>`のShadow DOMであるslot(`#child-slot`)に割り当てられます。
 
-**注意：**この例では、説明のためにスロットに`id`を使用していますが、これは`name`属性と同じものではありません。
-これらのスロットには`name`が付与されていないのでデフォルトのスロットになります。
+<strong>注意：</strong>この例では、説明のためにスロットに`id`を使用していますが、これは`name`属性と同じ働きをするものではありません。
+これらのスロットには`name`が付与されておらずデフォルトのスロットになります。
 {.alert .alert-info}
 
 `slot`エレメントはレンダリングされないので、 レンダーツリーはとてもシンプルです。：
-
 
 ```html
 <parent-element>
@@ -247,22 +232,21 @@ Polymerは、[DOMテンプレート](dom-template)を使用して宣言的にSha
       <span>I'm in light DOM</span>
 ```
 
-仕様上の用語では、スロットのdistributed nodesとは割り当てられたノードのことであり、各スロットは割り当てられたノードまたはフォールバックコンテンツで置き換えられます。したがって、上記の例では、`＃child-slot`には一つのspanのdistributed nodeがあるといえます。distributed nodesは、*レンダーツリー内のスロットに置き換えられたノードのリスト*と考えることができます。
+仕様上の用語では、スロットのdistributed nodesとは割り当てられたノードのことであり、各スロットは割り当てられたノードまたはフォールバックコンテンツで置き換えられます。したがって、上記の例では、`＃child-slot`には単一のspanのdistributed nodeがあるといえます。distributed nodesは、*レンダーツリー内のスロットに置き換えられたノードのリスト*と考えることができます。
 
 ### スロットのAPI
 
 Shadow DOMには、割り当て(distribution)をチェックするための新しいAPIがいくつか用意されています。：
 
-*   `HTMLElement.assignedSlot`プロパティは、エレメントに割り当てられたスロットを返します。エレメントにスロットが割り当てられていない場合は`null`を返します。
-*   `HTMLSlotElement.assignedNodes`メソッドは、指定されたスロットに関連付けられたノードのリストを返します。 `{flatten：true}`オプションを指定して呼び出すと、スロットのdistributed nodesが返されます。
-*   `HTMLSlotElement.slotchange`イベントは、slotのdistributed nodeが変更された時点で発生します。
+- `HTMLElement.assignedSlot`プロパティは、エレメントに割り当てられたスロットを返します。エレメントにスロットが割り当てられていない場合は`null`を返します。
+- `HTMLSlotElement.assignedNodes`メソッドは、指定されたスロットに関連付けられたノードのリストを返します。 `{flatten：true}`オプションを指定して呼び出すと、スロットのdistributed nodesが返されます。
+- `HTMLSlotElement.slotchange`イベントは、slotのdistributed nodeが変更された時点で発生します。
 
 詳細については、Web Fundamentalsでの[Working with slots in JS](https://developers.google.com/web/fundamentals/primers/shadowdom/?hl=ja#workwithslots)を参照してください。
 
-
 ### 子の追加と削除の監視(observe) {#observe-nodes}
 
-`Polymer.FlattenedNodesObserver`クラスは、エレメントの_フラット化されたツリー_を記録(track)するユーティリティを提供します。つまり、`<slot>`エレメントがdistributed nodeによって置き換えられたノードの子ノードのリストです。 `FlattenedNodesObserver`は`lib/utils/flattened-nodes-observer.html`から読み込むことができるオプションのユーティリティです。
+`Polymer.FlattenedNodesObserver`クラスは、エレメントの<em>フラット化されたツリー</em>を記録(track)するユーティリティを提供します。つまり、`<slot>`エレメントがdistributed nodeによって置き換えられたノードの子ノードのリストです。 `FlattenedNodesObserver`は`lib/utils/flattened-nodes-observer.html`から読み込むことができるオプションのユーティリティです。
 
 ```html
 <link rel="import" href="/bower_components/polymer/lib/utils/flattened-nodes-observer.html">
@@ -279,7 +263,7 @@ this._observer = new Polymer.FlattenedNodesObserver(this.$.slot, (info) => {
 });
 ```
 
-`FlattenedNodesObserver`をノードが追加または削除されたときに呼び出されるコールバックに渡します。コールバックは引数として、`addedNodes`配列と`removedNodes`配列を持つObject(訳注：info)を一つ受け取ります。
+`FlattenedNodesObserver`にはノードが追加または削除されたときに呼び出されるコールバックを渡します。コールバックは引数として、`addedNodes`配列と`removedNodes`配列を持つObject(訳注：info)を一つ受け取ります。
 
 このメソッドは、監視を停止するためのハンドルを返します。：
 
@@ -289,8 +273,7 @@ this._observer.disconnect();
 
 `FlattenedNodesObserver`に関していくつか注意事項があります：
 
-
-*   コールバックの引数には、単なるエレメントでなく、追加および削除されたノードのリストを指定します。エレメントだけに興味がある場合は、ノードのリストをフィルタリングすることができます。：
+- コールバックの引数には、単なるエレメントでなく、追加および削除されたノードのリストを指定します。エレメントだけに興味がある場合は、ノードのリストをフィルタリングすることができます。：
 
     ```js
     info.addedNodes.filter(function(node) {
@@ -298,8 +281,7 @@ this._observer.disconnect();
     });
     ```
 
-*   オブザーバーのハンドルには、ユニットテストに利用できる`flush`メソッドも用意されています。
-
+- オブザーバーのハンドルには、ユニットテストに利用できる`flush`メソッドも用意されています。
 
 ## イベントリターゲティング
 
@@ -308,7 +290,6 @@ Shadow Treeのカプセル化を守るために、いくつかのイベントは
 それ以外のバブリングイベントは、ツリーをバブルアップしながらリターゲティングされます。リターゲティングは、同じスコープ内のエレメントがリッスン対象のエレメントと同等に扱われるようにイベントのターゲットの調整を行います。
 
 例えば、次のようなツリーがあるとします。：
-
 
 ```html
 <example-card>
@@ -321,19 +302,18 @@ Shadow Treeのカプセル化を守るために、いくつかのイベントは
 
 ユーザーが`image`エレメントをクリックすると、クリックイベントはツリーをバブルアップします。：
 
-
-*   `image`エレメントそのもののリスナーは、ターゲットとして`<img>`を受け取ります。
-*   `<fancy-button>`のリスナーは、`<fancy-button>`をターゲットとして受け取ります。元のターゲットはShadow Rootの内側にあるからです。
-*   `<example-card>`のShadow DOM内の`<div>`のリスナーも`<fancy-button>`をターゲットとして受け取ります。やはり、同じShadow DOMツリー内にあるためです。
-*   `<example-card>`のリスナーは、`<example-card>`自身をターゲットとして受け取ります。
+- `image`エレメント自身のリスナーは、ターゲットとして`<img>`を受け取ります。
+- `<fancy-button>`のリスナーは、`<fancy-button>`をターゲットとして受け取ります。元のターゲットはShadow Rootの内側にあるからです。
+- `<example-card>`のShadow DOM内の`<div>`のリスナーも`<fancy-button>`をターゲットとして受け取ります。やはり、同じShadow DOMツリー内にあるためです。
+- `<example-card>`のリスナーは、`<example-card>`自身をターゲットとして受け取ります。
 
 これらイベントには、イベントが通過するノードを配列にして返す、`compositedPath`メソッドを提供します。今回のケースでは、配列には次のものが含まれるでしょう。：
 
-*   `<img>`エレメントそれ自体
-*   `<fancy-button>`のShadow Root
-*   `<div>`エレメント
-*   `<example-card>`のShadow Root
-*   `<example-card>`のすべての祖先（例えば、`<body>`、`<html>`、`document`および`Window`）
+- `<img>`エレメントそれ自体
+- `<fancy-button>`のShadow Root
+- `<div>`エレメント
+- `<example-card>`のShadow Root
+- `<example-card>`のすべての祖先（例えば、`<body>`、`<html>`、`document`および`Window`）
 
 デフォルトでは、カスタムイベントはShadow DOMの境界を越えて伝播することは**ありません**。カスタムイベントがShadow DOMの境界を越えてリターゲティングされるようにするには、`composed`フラグを`true`に設定してイベントを作成する必要があります。：
 
@@ -345,7 +325,7 @@ Shadow Treeのイベントの詳細については、Web FundamentalsのShadow D
 
 ## Shadow DOMのスタイリング
 
-Shadow Tree内のスタイルは、Shadow Treeの内部にスコープされ、Shadow Tree外のエレメントに作用することはありません。Shadow Tree外のスタイルも、Shadow Tree内のセレクタにマッチすることはありません。しかし、`color`のような継承可能なスタイルプロパティは、それでもなおホストからShadow Treeに下位へ継承されます。
+Shadow Tree内のスタイルは、Shadow Treeの内部に<em>スコープされ</em>、Shadow Tree外のエレメントに作用することはありません。Shadow Tree外のスタイルもまた、Shadow Tree内のセレクタにマッチすることはありません。しかし、<code>color</code>のような継承可能なスタイルプロパティは、それにも関わらずホストからShadow Treeに下位へ継承されます。
 
 ```
 <style>
@@ -364,10 +344,9 @@ Shadow Tree内のスタイルは、Shadow Treeの内部にスコープされ、S
     <div class="test">Test</div>
 ```
 
+この例では、`<div>`の背景色は青になりますが、本来`div`セレクタはメインドキュメント内の`.test`セレクタよりもCSSの詳細度が低いはずです。これは、メインドキュメントのセレクタがShadow DOMの`<div>`にマッチしないためです。一方、ドキュメントのbodyに設定された白い文字色は`<styled-element>`に下位へ継承され、Shadow Root内部へ適用されます。
 
-この例では、`<div>`の背景色は青になりますが、本来`div`セレクタはメインドキュメント内の`.test`セレクタよりもCSSの詳細度が低いはずです。これは、メインドキュメントのセレクタがShadow DOMの`<div>`にマッチしないためです。一方、ドキュメント本体に設定された白い文字色は`<styled-element>`に下位へ継承され、Shadow Root内部へ適用されます。
-
-Shadow Tree内で指定したスタイルルールがShadow Tree外のエレメントにマッチするケースが一つだけあります。擬似クラス`:host`または関数型擬似クラス`:host()`を使用して、hostエレメントに対してスタイルを定義することができるのです。
+Shadow Tree内で指定したスタイルルールがShadow Tree外のエレメントにマッチするケースが一つだけあります。擬似クラス`:host`または関数型擬似クラス`:host()`を使用して、<em>hostエレメント</em>に対してスタイルを定義することができるのです。
 
 ```
 #shadow-root
@@ -384,9 +363,7 @@ Shadow Tree内で指定したスタイルルールがShadow Tree外のエレメ�
   </style>
 ```
 
-
-擬似エレメントセレクタ`::slotte()`を使用することで、スロットに割り当てられてたLight DOMの子に対してもスタイルを設定できます。例えば、`::slotted(img)`は、Shadow Tree内のスロットに割り当てられた全ての`image`タグを選択します。
-
+擬似エレメントセレクタ`::slotted()`を使用することで、スロットに割り当てられてたLight DOMの子に対してもスタイルを設定できます。例えば、`::slotted(img)`は、Shadow Tree内のスロットに割り当てられた全ての`image`タグを選択します。
 
 ```
   #shadow-root
@@ -397,19 +374,17 @@ Shadow Tree内で指定したスタイルルールがShadow Tree外のエレメ�
     </style>
 ```
 
-
 詳細については、Web Fundamentalsの記事内の[Styling](https://developers.google.com/web/fundamentals/getting-started/primers/shadowdom#styling)を参照してください。
 
 ## テーマ設定とカスタムプロパティ
 
 Shadow Tree**外の**CSSルールを使用して、Shadow Tree内のいかなるエレメントに対しても**直接的に**スタイルを適用することはできません。例外は、ツリーで下位に継承される一部のCSSプロパティ(colorやfontなど)です。Shadow Treeは、そのホストからCSSプロパティを継承します。
 
-あなたが作成したエレメントをユーザーがカスタマイズするのを許可するには、*CSSカスタムプロパティ*と*カスタムプロパティミックスイン*を利用して、特定のスタイルプロパティを公開します。カスタムプロパティは、エレメントにスタイリングAPIを付与する手段を提供します。
+あなたが作成したエレメントをユーザーがカスタマイズするのを許可するには、*CSSカスタムプロパティ*と*カスタムプロパティミックスイン*を利用して、特定のスタイルプロパティを公開します。カスタムプロパティは、エレメントにスタイリングAPIを追加する手段を提供します。
 
 **ポリフィルの制限事項**：ポリフィルの提供するカスタムプロパティとミックスインを使用する場合、注意すべき多くの制限があります。詳細については、[the Shady CSS README file](https://github.com/webcomponents/shadycss/blob/master/README.md#limitations)を参照してください。
 
 カスタムプロパティは、CSSルールの中で代入可能な変数と考えることもできます：
-
 
 ```
 :host {
@@ -417,9 +392,7 @@ Shadow Tree**外の**CSSルールを使用して、Shadow Tree内のいかなる
 }
 ```
 
-
 これによって、ホストの背景色をカスタムプロパティ`--my-theme-color`の値で設定します。あなたが作成したエレメントを利用するユーザーは誰でも、以下のようにより高いレベルでプロパティを設定できます。：
-
 
 ```
 html {
@@ -429,7 +402,7 @@ html {
 
 カスタムプロパティはツリーを下って継承されるので、ドキュメントレベルで設定された値はShadow Tree内からアクセスすることができます。
 
-代入値は利用者によってプロパティが設定されなかった場合に使用されるデフォルト値を含めることができます。：
+代入値は利用者によってプロパティが設定されなかった場合に適用されるデフォルト値を含めることができます。：
 
 ```
 :host {
@@ -437,16 +410,15 @@ html {
 }
 ```
 
-デフォルト値が別の`var()`関数であっても構いません。：
+デフォルト値は別の`var()`関数であっても構いません。：
 
 ```
 background-color: var(--my-theme-color, var(--another-theme-color, blue));
 ```
 
-
 ### カスタムプロパティミックスイン
 
-カスタムプロパティミックスインは、カスタムプロパティの仕様をベースに構築された機能です。基本的に、ミックスインはオブジェクトの値をとるカスタムプロパティになります。：
+カスタムプロパティ<em>ミックスイン</em>は、カスタムプロパティの仕様をベースに構築された機能です。基本的に、ミックスインはオブジェクトの値をとるカスタムプロパティになります。：
 
 ```
 html {
@@ -457,7 +429,7 @@ html {
 }
 ```
 
-コンポーネントは、`@apply`ルールを使用することでルールセット全体をインポートしたりミックスインしたりできます。：
+コンポーネントは、<code>@apply</code>ルールを使用することでルールセットをまとめてインポートしたり<em>ミックスイン</em>したりできます。：
 
 ```
 :host {
@@ -469,17 +441,16 @@ html {
 
 ## Shadow DOMのポリフィル
 
-Shadow DOMはすべてのプラットフォームで利用できるわけではないため、PolymerではShady DOMとShadow CSSポリフィルをインストールして活用することができます。これらのポリフィルは、`webcomponents-lite.js`ポリフィルのバンドルに含まれています。
+Shadow DOMはすべてのプラットフォームで利用できるわけではないため、PolymerではShady DOMとShady CSSのポリフィルをインストールして活用することができます。これらのポリフィルは、`webcomponents-lite.js`ポリフィルのバンドルに含まれています。
 
-これらのポリフィルは、**優れたパフォーマンス性を担保しながら**、ネイティブのShadow DOMの合理的(reasonable)なエミュレーションを提供します。しかし、完全なポリフィルを提供できないShadow DOMの機能もいくつか存在します。ネイティブのShadow DOMが実装されていないブラウザをサポートする必要がある場合、これらの制限に注意する必要があります。また、Shady DOMの利用したアプリケーションをデバッグする際は、Shady DOMのポリフィルに関するいくらか詳細な理解があると役立ちます。
+これらのポリフィルは、優れたパフォーマンス性を担保しながら、ネイティブのShadow DOMの合理的(reasonable)なエミュレーションを提供します。しかし、完全なポリフィルを提供できないShadow DOMの機能もいくつか存在します。ネイティブのShadow DOMが実装されていないブラウザをサポートする必要がある場合、これらの制限に注意する必要があります。また、Shady DOMの利用したアプリケーションをデバッグする際は、Shady DOMのポリフィルに関するいくらか詳細な理解があると役立ちます。
 
 ### ポリフィルの仕組み
 
-ポリフィルは、Shadow DOMをエミュレートするために複数の技術を組み合わせて使用します。：
+ポリフィルは、Shadow DOMをエミュレートするために複数の技術を組み合わせて利用しています。：
 
-*   Shady DOM：Shady DOMはShadow Tree及びその子孫ツリーの論理的な分割を内部的に維持します、それによりLight DOMやShadow DOMに追加された子は正しくレンダリングされます。さらにShady DOMはネイティブのShadow DOM APIをエミュレートするために、影響を受けるエレメントのDOM APIにパッチを適用します。
-
-*   Shady CSS： Shady CSSは、Shadow DOMの子にクラスを追加したり、スタイルルールの書き換えを行うことでスタイルのカプセル化を提供します。それによって、正しいスコープを適用します。
+- Shady DOM：Shady DOMはShadow Tree及びその子孫ツリーの論理的な分割を内部的に維持します。それによりLight DOMやShadow DOMに追加された子は正しくレンダリングされます。さらにShady DOMはネイティブのShadow DOM APIをエミュレートするために、影響を受けるエレメントのDOM APIにパッチを適用します。
+- Shady CSS： Shady CSSは、Shadow DOMの子にクラスを追加したり、スタイルルールの書き換えを行うことでスタイルのカプセル化を提供します。それによって、正しいスコープを適用します。
 
 以降のセクションでは、各ポリフィルについて掘り下げて考察しています。
 
@@ -492,7 +463,7 @@ Shadow DOMはすべてのプラットフォームで利用できるわけでは�
 ポリフィルを使用した場合、ブラウザのツリーのビューに`slot`エレメントは現れません。したがって、ネイティブのShadow DOMと異なり、スロットがイベントバブリングに加わることもありません。
 
 ポリフィルはShadow DOMに影響を受けるノードの既存のDOM APIにパッチを適用します。影響を受けるノードは、Shadow Tree内のノード、Shadow TreeをホストするノードやShadowホストのLight DOMの子ノードです。例えば、あるノード上で、Shadow Rootを渡して`appnedChild`メソッドを呼び出すと、ポリフィルはLight DOMの子の*仮想*ツリーに子を追加し、レンダリングツリーのどこに表示すべきか計算した後で、それを実際の子孫ツリーのあるべき場所へ追加します。
-(訳補：説明だけでは分かりにくいので、READ MEに記載されたサンプルコードを引用して紹介します。)
+(訳補：説明だけでは分かりにくいので、READ MEに記載されたサンプルコードを参照してください。)
 
 詳細には、[Shady DOM polyfill README](https://github.com/webcomponents/shadydom/blob/master/README.md)を参照してください。
 
@@ -500,9 +471,9 @@ Shadow DOMはすべてのプラットフォームで利用できるわけでは�
 
 Shady CSSポリフィルはShadow DOMのスタイルのカプセル化をエミュレートするだけでなく、CSSカスタムプロパティとカスタムプロパティミックスインのエミュレーションも提供します。
 
-カプセル化をエミュレートするために、Shady CSSポリフィルは、Shady DOMツリー内のエレメントにクラスを追加します。また、エレメントのテンプレート内で定義されたスタイルルールを書き換えてエレメントだけに適用されるようにします。
+カプセル化をエミュレートするために、Shady CSSポリフィルは、Shady DOMツリー内のエレメントにクラスを追加します。また、エレメントのテンプレート内で定義されたスタイルルールを書き換えてそのエレメントだけに適用されるようにします。
 
-Shady CSSは、ドキュメントレベル(document-level)のスタイルシートに定義されたスタイルルールについては書き換えません。つまり、ドキュメントレベルで定義したスタイルがShadow Treeにリークする可能性があるこということです。ただし、Custom Elementには`<custom-style>`が用意されており、エレメントの外側でもポリフィルが適用されたスタイルを記述できます。これには、カスタムCSSプロパティのサポートや、スタイルがShadow Treeへのリークを防ぐために行うルールの書き換えも含まれます。
+Shady CSSは、ドキュメントレベル(document-level)のスタイルシートに定義されたスタイルルールについては書き換えを行いません。つまり、ドキュメントレベルで定義したスタイルがShadow Treeにリークする可能性があるこということです。ただし、`<custom-style>`というCustom Elementが提供されており、エレメントの外側であってもポリフィルが適用されたスタイルを記述できます。これには、カスタムCSSプロパティのサポートや、スタイルがShadow Treeへのリークするのを防ぐために行うルールの書き換えも含まれます。
 
 ```html
 <custom-style>
@@ -521,8 +492,8 @@ Shady CSSは、ドキュメントレベル(document-level)のスタイルシー�
 
 さらなる理解のために：
 
-*   Web Fundamentalsの[Shadow DOM v1: self-contained web components](https://developers.google.com/web/fundamentals/primers/shadowdom/?hl=ja)
-*   [Custom properties specification](https://www.w3.org/TR/css-variables-1/)
-*   [Custom property mixins proposal](https://tabatkins.github.io/specs/css-apply-rule/)
-*   [Shady DOM polyfill README](https://github.com/webcomponents/shadydom/blob/master/README.md)
-*   [Shady CSS polyfill README](https://github.com/webcomponents/shadycss/blob/master/README.md)
+- Web Fundamentalsの[Shadow DOM v1: self-contained web components](https://developers.google.com/web/fundamentals/primers/shadowdom/?hl=ja)
+- Custom properties specification
+- Custom property mixins proposal
+- Shady DOM polyfill README
+- Shady CSS polyfill README
