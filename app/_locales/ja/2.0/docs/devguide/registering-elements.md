@@ -236,7 +236,6 @@ customElements.define('x-class', XClass);
         <code>attached</code>コールバックで追加されたイベントリスナーの削除にも利用されます。
       </p>
       <p>ネイティブの<code>disconnectedCallback</code>に相当します。</p>
-      
     </td>
   </tr>
   <tr>
