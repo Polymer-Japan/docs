@@ -56,7 +56,7 @@ customElements.define('x-custom', XCustom);
 <td><code>type</code></td>
 <td>
       型：コンストラクタ<br>
-      属性からのデシリアライズに利用される属性の型。Polymerは以下の型のデシリアライズをサポートしています。：<code>Boolean</code>, <code>Date</code>, <code>Number</code>, <code>String</code>,<code>Array</code> and <code>Object</code>. エレメントの`_deserializeValue`メソッドを上書きすることでその他型をサポートすることもできます。
+      属性からのデシリアライズに利用される属性の型。Polymerは以下の型のデシリアライズをサポートしています。：<code>Boolean</code>, <code>Date</code>, <code>Number</code>, <code>String</code>,<code>Array</code> and <code>Object</code> エレメントの `_deserializeValue`メソッドを上書きすることでその他型をサポートすることもできます。
 
 <pre data-md-type="block_code" data-md-language=""><code>  0.5系と違い、プロパティの型はコンストラクタの型によって明示的に指定されます。詳細は<a href="#attribute-deserialization">属性のデシリアライズ</a>を参照してください 。
 </td>
@@ -67,8 +67,8 @@ customElements.define('x-custom', XCustom);
 <tr>
 <td><code>value</code></td>
 <td>
-      型: <code>boolean</code>, <code>number</code>, <code>string</code> または <code>function</code>.<br>
-      プロパティのデフォルト値となります。もし<code>value</code>が関数の場合、関数が呼び出され、戻り値がプロパティのデフォルト値に使用されます。デフォルト値が**インスタンスに固有な**配列またはオブジェクトでなければならない場合は、関数内で配列またはオブジェクトを作成します。詳細については、<a href="#configure-values">デフォルトのプロパティ値の設定</a>を参照してください 。
+      型: <code>boolean</code>, <code>number</code>, <code>string</code> または <code>function</code><br>
+      プロパティのデフォルト値となります。もし<code>value</code>が関数の場合、関数が呼び出され、戻り値がプロパティのデフォルト値に使用されます。デフォルト値が **インスタンスに固有な**配列またはオブジェクトでなければならない場合は、関数内で配列またはオブジェクトを作成します。詳細については、<a href="#configure-values">デフォルトのプロパティ値の設定</a>を参照してください 。
     </td>
 </tr>
 <tr>
@@ -76,7 +76,7 @@ customElements.define('x-custom', XCustom);
 <td>
       型: <code>boolean</code><br>
 
-<pre data-md-type="block_code" data-md-language=""><code>  <code>true</code>を指定すると、プロパティ値が変更された場合、対応する属性がホストノードに設定されるようになります。プロパティ値がブール値の場合には、属性は標準のHTML属性のブール値として作成されます（trueの場合に記述され、falseの場合には記述されない）。プロパティの型がそれ以外なら、属性値はプロパティ値を文字列で表現したものになります。<br><br>Polymer0.5系の<code>reflect</code>に相当します。詳細については、<a href="#attribute-reflection">属性へのプロパティの反映</a>を参照してください。
+<pre data-md-type="block_code" data-md-language=""> <code>true</code> を指定すると、プロパティ値が変更された場合、対応する属性がホストノードに設定されるようになります。プロパティ値がブール値の場合には、属性は標準のHTML属性のブール値として作成されます（trueの場合に記述され、falseの場合には記述されない）。プロパティの型がそれ以外なら、属性値はプロパティ値を文字列で表現したものになります。<br><br>Polymer0.5系の <code>reflect</code>に相当します。詳細については、<a href="#attribute-reflection">属性へのプロパティの反映</a>を参照してください。
 </td>
 </code></pre>
 <div data-md-type="block_html">  </div>
@@ -108,10 +108,10 @@ customElements.define('x-custom', XCustom);
 <td>
       型: <code>string</code><br>
 
-<pre data-md-type="block_code" data-md-language=""><code>  プロパティ値は、プロパティ値が変更された時に呼び出されるメソッドの名前として解釈されます。0.5系とは異なり、 <strong>プロパティ変更ハンドラは明示的に登録する必要がある点に注意してください。</strong><code><var>propertyName</var>Changed</code>メソッドは自動的に実行されることはありません。詳細については、<a href="observers">プロパティ変更コールバック（observers）</a>を参照してください。
+<pre data-md-type="block_code" data-md-language=""> プロパティ値は、プロパティ値が変更された時に呼び出されるメソッドの名前として解釈されます。0.5系とは異なり、 <strong>プロパティ変更ハンドラは明示的に登録する必要がある点に注意してください。</strong> <code><var>propertyName</var>Changed</code>メソッドは自動的に実行されることはありません。詳細については、<a href="observers">プロパティ変更コールバック（observers）</a>を参照してください。
 
 </td>
-</code></pre>
+</pre>
 <div data-md-type="block_html">  </div>
 </td>
 </tr>
