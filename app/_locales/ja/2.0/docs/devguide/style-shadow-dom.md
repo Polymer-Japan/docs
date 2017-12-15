@@ -6,13 +6,14 @@ title: Shadow DOMのスタイリング
 
 ## エレメントのスタイリング
 
-PolymerはDOMテンプレートとShadow DOM APIをサポートしています。Custom ElementにDOMテンプレートを利用すると、Polymerはあなたがエレメントに用意したテンプレートの内容をコピーします。
+PolymerはDOMテンプレートとShadow DOM APIをサポートしています。Custom ElementにDOMテンプレートを利用すると、Polymerはあなたがエレメントに作成したテンプレートの内容をコピーします。
 
 例:
 
 [Plunkerで動作を確認](http://plnkr.co/edit/TOgaxeSzuQsWFSIpzN7S?p=preview)
 
 `custom-element.html` { .caption }
+
 ```html
 <!-- Import polymer-element -->
 <link rel="import" 
@@ -40,6 +41,7 @@ t.html">
 ```
 
 `index.html` { .caption }
+
 ```html
 <!-- Load the polyfills -->
 <script 
@@ -57,13 +59,14 @@ onents-loader.js"></script>
 
 同様に、Shadow DOM内部のスタイルルールについても、Shadow DOM外部のエレメントにリークして影響を与えることはありません。
 
-Shadow DOMは、Custom Elementsに対するスタイルルールのカプセル化を可能にします。エレメントのスコープ外にスタイルが適用されてしまう心配をせず、フォントやテキスト色、クラスなどのスタイル情報をエレメントに自由に定義できます。
+Shadow DOMは、Custom Elementsに対するスタイルルールのカプセル化を可能にします。エレメントのスコープ外にスタイルが適用されてしまう心配をせず、フォントやテキストカラー、クラスなどのスタイル情報をエレメントに自由に定義できます。
 
 例:
 
 [Plunkerで動作を確認](http://plnkr.co/edit/cHSjdQTa0h6fWXAygkje?p=preview)
 
 `x-foo.html` { .caption}
+
 ```html
 <dom-module id='x-foo'>
   <template>
@@ -84,6 +87,7 @@ Shadow DOMは、Custom Elementsに対するスタイルルールのカプセル�
 ```
 
 `index.html` { .caption }
+
 ```html
 <link rel="import" href="x-foo.html">
 <!-- Document-level stylesheet -->
@@ -109,6 +113,7 @@ HTMLドキュメントで使用された場合、エレメントはその親エ�
 [Plunkerで動作を確認](http://plnkr.co/edit/7ugStflqbexg2dNqmtDQ?p=preview)
 
 `x-foo.html` { .caption}
+
 ```html
 <dom-module id='x-foo'>
   <template>
@@ -121,6 +126,7 @@ HTMLドキュメントで使用された場合、エレメントはその親エ�
 ```
 
 `index.html` { .caption}
+
 ```html
 <link rel="import" href="x-foo.html">
 <!-- Document-level stylesheet -->
@@ -143,6 +149,7 @@ Shadow DOMの内側で宣言されたスタイルは、その外側で宣言さ�
 [Plunkerで動作を確認](http://plnkr.co/edit/0Fid1Gupd0jk9jggAKuv?p=preview)
 
 `x-foo.html` { .caption}
+
 ```html
 <dom-module id='x-foo'>
   <template>
@@ -159,6 +166,7 @@ Shadow DOMの内側で宣言されたスタイルは、その外側で宣言さ�
 ```
 
 `index.html` { .caption}
+
 ```html
 <link rel="import" href="x-foo.html">
 <!-- Document-level stylesheet -->
@@ -178,10 +186,10 @@ Shadow DOMが追加されたエレメントは、*ホスト*と呼ばれます�
 
 ホストエレメントの継承可能なプロパティは、Shadow Treeを下って継承され、Shadowの子にも適用されます。
 
-
 [Plunkerで動作を確認](http://plnkr.co/edit/7771DvsQ3iPWnn2gEIf8?p=preview)
 
 `x-foo.html` { .caption}
+
 ```html
 <dom-module id='x-foo'>
   <template>
@@ -202,6 +210,7 @@ Shadow DOMが追加されたエレメントは、*ホスト*と呼ばれます�
 ```
 
 `index.html` { .caption}
+
 ```html
 <link rel="import" href="x-foo.html">
 <x-foo></x-foo>
@@ -219,16 +228,17 @@ x-foo {
 
 #### CSSセレクタを使用してホストエレメントをスタイリング
 
-CSSセレクタを使用して、ホストのスタイルを設定するタイミングや方法を指定できます。このコードサンプルでは、
+CSSセレクタを使用することで、ホストのスタイルを設定するタイミングや方法を指定できます。このコードサンプルでは、
 
-* セレクタ`:host`は、どんな`<x-foo>`エレメントにもマッチします
-* セレクタ`:host(.blue)`は、classが`blue`の`<x-foo>`エレメントにマッチします
-* セレクタ`:host(.red)`は、classが`red`の`<x-foo>`エレメントにマッチします
-* セレクタ`:host(:hover)`は、`<x-foo>`エレメントにマウスがホバーした時にマッチします
+- セレクタ`:host`は、どんな`<x-foo>`エレメントにもマッチします
+- セレクタ`:host(.blue)`は、classが`blue`の`<x-foo>`エレメントにマッチします
+- セレクタ`:host(.red)`は、classが`red`の`<x-foo>`エレメントにマッチします
+- セレクタ`:host(:hover)`は、`<x-foo>`エレメントにマウスがホバーした時にマッチします
 
 [Plunkerで動作を確認](http://plnkr.co/edit/FsXnCAz65SR6fZ7YKuy6?p=preview)
 
 `x-foo.html` { .caption}
+
 ```html
 <dom-module id="x-foo">
   <template>
@@ -244,6 +254,7 @@ CSSセレクタを使用して、ホストのスタイルを設定するタイ�
 ```
 
 `index.html` { .caption}
+
 ```html
 <link rel="import" href="x-foo.html">
 
@@ -251,11 +262,12 @@ CSSセレクタを使用して、ホストのスタイルを設定するタイ�
 <x-foo class="red"></x-foo>
 ```
 
-セレクタ`:host`の後に、子孫セレクタがShadow Tree内のエレメントにマッチします。次の例では、CSSセレクタがShadow Tree内の全ての`p`エレメントへホストがクラス`warning`を持っているか問い合わせを行います。：
+セレクタ`:host`に続けて、子孫セレクタがShadow Tree内のエレメントにマッチします。次の例では、CSSセレクタがShadow Tree内の全ての`p`エレメントへホストがクラス`warning`を持っているか問い合わせます。：
 
 [Plunkerで動作を確認](http://plnkr.co/edit/MRN9blKg6A3w8G0RkyJD?p=preview)
 
 `x-foo.html` { .caption}
+
 ```html
 <dom-module id="x-foo">
   <template>
@@ -270,6 +282,7 @@ CSSセレクタを使用して、ホストのスタイルを設定するタイ�
 ```
 
 `index.html` { .caption}
+
 ```html
 <link rel="import" href="x-foo.html">
 
@@ -277,11 +290,12 @@ CSSセレクタを使用して、ホストのスタイルを設定するタイ�
 <x-foo></x-foo>
 ```
 
-Shadow Tree内部ルールがShadow Tree外部のエレメントに影響を与える可能性のあるインスタンスは二つあり、`:host`セレクタによるスタイリングはその内の一つです。もう一つのインスタンスは、次のセクションで紹介する`::slotted()`構文を使用した、割り当てられた子(distributed children)へのスタイリングルールの適用です。詳細については、[Composition and slots in Eric Bidelman's article on shadow DOM](https://developers.google.com/web/fundamentals/getting-started/primers/shadowdom#composition_slot)を参照してください。
+Shadow Tree内部ルールがShadow Tree外部のエレメントに影響を与える可能性のあるインスタンスは二つあり、`:host`セレクタによるスタイリングはその内の一つです。もう一つのインスタンスは、次のセクションで紹介する`::slotted()`構文を使用した、割り当てられた子(distributed children)へのスタイルルールの適用です。詳細については、[<em>Composition and slots in Eric Bidelman's article on shadow DOM</em>](https://developers.google.com/web/fundamentals/getting-started/primers/shadowdom#composition_sl
+ot)を参照してください。
 
-### スロットのコンテンツ(割り当てられた子)へのスタイリング
+### スロットされるコンテンツ(割り当てられた子)へのスタイリング
 
-実行時に割り当てを行うエレメントのテンプレートに**slots**を作成することができます。スロットに関する詳細な情報は、ドキュメント中の[shadow DOM and 
+実行時に割り当てられるエレメントのテンプレートに**slots**を作成することができます。スロットに関する詳細な情報は、ドキュメント中の[shadow DOM and
 composition](/2.0/docs/devguide/shadow-dom#shadow-dom-and-composition)を参照してだい。
 
 スロットに組み込まれるコンテンツの基本的な構文は、次のようになります。：
@@ -289,6 +303,7 @@ composition](/2.0/docs/devguide/shadow-dom#shadow-dom-and-composition)を参照�
 [Plunkerで動作を確認](http://plnkr.co/edit/bNvOvQqCEmC4DaoeNtwZ?p=preview)
 
 `x-foo.html` { .caption}
+
 ```html
 <dom-module id="x-foo">
   <template>
@@ -301,6 +316,7 @@ composition](/2.0/docs/devguide/shadow-dom#shadow-dom-and-composition)を参照�
 ```
 
 `index.html` { .caption}
+
 ```html
 <link rel="import" href="x-foo.html">
 
@@ -311,7 +327,7 @@ composition](/2.0/docs/devguide/shadow-dom#shadow-dom-and-composition)を参照�
 
 スロットされたコンテンツにスタイルを適用するには、`::slotted()`構文を使用します。
 
-**注意：** Shady CSSのスShimの制限内で
+**注意：** Shady CSSのスコープに関するShimの制限内で
 ブラウザ間で一貫した動作を確保するには、`::slotted(.classname)`の左側にセレクタを追加します。（例：`p ::slotted(.classname)`）
 
 `::slotted(*)`はスロットされた全てのコンテンツを選択します。：
@@ -319,6 +335,7 @@ composition](/2.0/docs/devguide/shadow-dom#shadow-dom-and-composition)を参照�
 [Plunkerで動作を確認](http://plnkr.co/edit/pb0D6r15jvvxYVWsZ95U?p=preview)
 
 `x-foo.html` { .caption}
+
 ```html
 <dom-module id="x-foo">
   <template>
@@ -340,6 +357,7 @@ composition](/2.0/docs/devguide/shadow-dom#shadow-dom-and-composition)を参照�
 ```
 
 `index.html` { .caption}
+
 ```html
 <link rel="import" href="x-foo.html">
 <x-foo>
@@ -353,6 +371,7 @@ composition](/2.0/docs/devguide/shadow-dom#shadow-dom-and-composition)を参照�
 エレメントの型で選択することもできます：
 
 `x-foo.html` { .caption}
+
 ```html
 <dom-module id="x-foo">
   <template>
@@ -374,6 +393,7 @@ composition](/2.0/docs/devguide/shadow-dom#shadow-dom-and-composition)を参照�
 ```
 
 `index.html` { .caption}
+
 ```html
 <link rel="import" href="x-foo.html">
 
@@ -388,6 +408,7 @@ composition](/2.0/docs/devguide/shadow-dom#shadow-dom-and-composition)を参照�
 [Plunkerで動作を確認](http://plnkr.co/edit/Ep8AVOHgiwQjtv8x5kwd?p=preview)
 
 `x-foo.html` { .caption}
+
 ```html
 <dom-module id="x-foo">
   <template>
@@ -408,6 +429,7 @@ composition](/2.0/docs/devguide/shadow-dom#shadow-dom-and-composition)を参照�
 ```
 
 `index.html`
+
 ```html
 <link rel="import" href="x-foo.html">
 
@@ -419,11 +441,12 @@ composition](/2.0/docs/devguide/shadow-dom#shadow-dom-and-composition)を参照�
 </x-foo>
 ```
 
-スロットの`name`で選択することもできます：
+スロットの名前で選択することもできます：
 
 [Plunkerで動作を確認](http://plnkr.co/edit/PzypR0973pxg3fquWhco?p=preview)
 
 `x-foo.html` { .caption}
+
 ```html
 <dom-module id="x-foo">
   <template>
@@ -444,6 +467,7 @@ composition](/2.0/docs/devguide/shadow-dom#shadow-dom-and-composition)を参照�
 ```
 
 `index.html` { .caption}
+
 ```html
 <link rel="import" href="x-foo.html">
 
@@ -453,19 +477,19 @@ composition](/2.0/docs/devguide/shadow-dom#shadow-dom-and-composition)を参照�
 </x-foo>
 ```
 
-### 未定義のエレメントをスタイリングを適用する
+### 未定義のエレメントにスタイルを適用
 
-FOUC（スタイルが適用されていないコンテンツによるちらつき）を避けるために、Custom Elementsが定義される前にスタイルを適用したいかもしれません。（つまり、ブラウザがクラスの定義をマークアップタグにアタッチする前）。仮にスタイルを適用しなければ、ブラウザは最初の描画でエレメントに一切スタイルを適用しない可能性があります。通常、あなたはエレメントの定義がロードされる間にもアプリケーションのレイアウトが表示されるようにトップレベルのいくつかのエレメントにスタイルを適用したいかもしれません。
+FOUC（スタイルが適用されていないコンテンツによるちらつき）を避けるために、Custom Elementsが定義される前にスタイルを適用したい場合があるかもしれません。（つまり、ブラウザがクラスの定義をマークアップタグにアタッチする前）。仮にスタイルを適用しなければ、ブラウザは最初の描画でエレメントに一切スタイルを適用しない可能性があります。通常、あなたはエレメントの定義がロードされる間にもアプリケーションのレイアウトが表示されるようにトップレベルのいくつかのエレメントにスタイルを適用したいかもしれません。
 
-定義が完了したターゲットエレメントに対しては擬似クラスセレクタ`：defined`が使えます。しかしCustom Elementsのポリフィルはこのセレクターをサポートしません。
+定義が完了したターゲットエレメントに対しては擬似クラスセレクタ`：defined`が使えます。しかしCustom Elementsのポリフィルはこのセレクタをサポートしていません。
 
-ポリフィルがうまく動作する対処方として、マークアップでエレメントに`unresolved`属性を追加してください。例えば：
+ポリフィルがうまく動作するための対処法として、マークアップでエレメントに`unresolved`属性を追加してください。例えば：
 
 ```html
 <my-element unresolved></my-element>
 ```
 
-そのあと、未解決(unresolved)のエレメントにスタイルが適用されます。例えば：
+そうすれば、未解決(unresolved)のエレメントであってもスタイルが適用されます。例えば：
 
 ```html
 <style>
@@ -477,7 +501,7 @@ FOUC（スタイルが適用されていないコンテンツによるちらつ�
 </style>
 ```
 
-最終的に、`ready`コールバック内で`unresolved`属性が取り除かれます。：
+最終的に、`ready`コールバック内で`unresolved`属性を取り除くようにします。：
 
 ```js
 class myElement extends Polymer.Element(){
@@ -491,11 +515,11 @@ class myElement extends Polymer.Element(){
 }
 ```
 
-## エレメント間でスタイルを共有する
+## エレメント間でスタイルを共有
 
 ### スタイルモジュール(Style Modules)を使用 {#style-modules}
 
-スタイルを共有するのに望ましい方法は、*スタイルモジュール*を使うことです。スタイルモジュールにスタイルをパッケージ化し、エレメント間でそれを共有することができます。
+スタイルを共有するのに望ましい方法は、*スタイルモジュール*を使うことです。スタイルモジュールにスタイルをパッケージ化し、エレメント間でそれらを共有することができます。
 
 スタイルモジュールを作成するには、スタイルのブロックを`<dom-module>`エレメントと`<template>`エレメントで以下のようにラップします。：
 
@@ -509,7 +533,7 @@ class myElement extends Polymer.Element(){
 </dom-module>
 ```
 
-これらスタイルを利用してエレメントを作成する場合、スタイルブロックの開始タグでスタイルモジュールをインクルードします。：
+これらスタイルを利用してエレメントを作成するには、スタイルブロックの開始タグでスタイルモジュールをインクルードします。：
 
 ```html
 <dom-module id="new-element">
@@ -522,13 +546,14 @@ class myElement extends Polymer.Element(){
 </dom-module>
 ```
 
-スタイルモジュールを独自のHTMLファイルにパッケージ化したいと考えるかもしれません。その場合は、スタイルを利用するエレメントでそのHTMLファイルをインポートする必要があります。
+スタイルモジュールを独自のHTMLファイルにパッケージ化したいと考えるかもしれません。その場合は、スタイルを利用するエレメントにおいてHTMLファイルをインポートする必要があります。
 
 例：
 
 [Plunkerで動作を確認](http://plnkr.co/edit/Cd9XdfAF0RNEw5MGOudE?p=preview)
 
 `my-colors.html` { .caption}
+
 ```html
 <!-- Define some custom properties in a style module. -->
 <dom-module id='my-colors'>
@@ -549,6 +574,7 @@ class myElement extends Polymer.Element(){
 ```
 
 `x-foo.html` { .caption}
+
 ```html
 <!-- Import the styles from the style module my-colors -->
 <link rel="import" href="my-colors.html">
@@ -565,16 +591,16 @@ class myElement extends Polymer.Element(){
 ```
 
 `index.html` { .caption}
+
 ```html
 <link rel="import" href="x-foo.html">
 
 <x-foo></x-foo>
 ```
 
+### 外部スタイルシートを使用(非推奨) {#external-stylesheets}
 
-### 外部スタイルシートを使用する(非推奨) {#external-stylesheets}
-
-**非推奨の機能。**この実験的な機能は、現在、[スタイルモジュール](#style-modules)に代替され、その利用は推奨されていません。今もサポートはされていますが、そのサポートも今後削除される見込みです。
+<strong>非推奨の機能。</strong>この実験的な機能は、現在、[スタイルモジュール](#style-modules)に代替され、その利用は推奨されていません。現在もサポートされていますが、そのサポートは今後削除される見込みです。
 {.alert .alert-info}
 
 Polymer includes an experimental feature to support loading external stylesheets
@@ -587,7 +613,7 @@ stylesheet text such that it may be properly shimmed and/or injected as an
 inline style.
 
 To include a remote stylesheet that applies to your Polymer element's local DOM,
-place a special HTML import `<link>` tag with `type="css"` in your 
+place a special HTML import `<link>` tag with `type="css"` in your
 `<dom-module>` that refers to the external stylesheet to load.
 
 For example:
@@ -595,6 +621,7 @@ For example:
 [Plunkerで動作を確認](http://plnkr.co/edit/7AvgX9jQApbJoWHbdPkI?p=preview)
 
 `style.css` { .caption}
+
 ```css
 .red { color: red; }
 .green { color: green; }
@@ -602,6 +629,7 @@ For example:
 ```
 
 `x-foo.html` { .caption}
+
 ```html
 <!-- Include the styles, and use them in x-foo. -->
 <dom-module id="x-foo">
@@ -616,32 +644,33 @@ For example:
 ```
 
 `index.html` { .caption}
+
 ```html
 <link rel="import" href="x-foo.html">
 
 <x-foo></x-foo>
 ```
 
-## ドキュメントレベルのスタイルで`custom-style`使用する {#custom-style}
+## ドキュメントレベルのスタイルで`custom-style`使用 {#custom-style}
 
 最新のShadow DOM v1仕様を実装しているブラウザは、スタイルを自動でカプセル化し、スタイルが定義されたエレメントの内部にスコープします。
 
-一部のブラウザでは、Shadow DOM v1仕様が実装されていません。あなたのアプリやエレメントをこれらのブラウザ上で正常に表示されるようにするには、`custom-style`を使用して、スタイル情報がエレメントのローカルDOM内にリークしないようにする必要があります。.
+一部のブラウザでは、Shadow DOM v1仕様が実装されていません。あなたのアプリやエレメントをこれらのブラウザ上で正常に表示されるようにするには、`custom-style`を使ってスタイル情報がエレメントのローカルDOM内にリークしないようにする必要があります。
 
-`custom-style`はShadow DOM v1仕様を実装していないブラウザであっても、ポリフィルを有効にすることでアプリケーションやエレメントのスタイルが、これらの仕様に沿って期待した通りに動作するようにします。
+`custom-style`はShadow DOM v1仕様を実装していないブラウザであっても、ポリフィルを有効にすることでアプリケーションやエレメントのスタイルが、これらの仕様に沿って期待した通りに動作するようにしてくれます。
 
-定義したスタイルをすべてのブラウザ上でShadow DOM v1仕様に従って動作するようにするには、ドキュメントレベルのスタイルを定義する際に`custom-style`を使用します。`custom-style`は`Polymer.Element`には含まれておらず、別途インポートする必要があります。`custom-style`はレガシーな`polymer.html`インポートには含まれています。
+定義したスタイルをすべてのブラウザ上でShadow DOM v1仕様に従って動作するようにするには、<em>ドキュメントレベル</em>のスタイルを定義する際に`custom-style`を使用します。`custom-style`は`Polymer.Element`に含まれておらず、個別にインポートする必要があります。`custom-style`はレガシーな{code5}polymer.html{/code5}インポートには含まれています。
 
-*注意：`custom-style`はメインドキュメントのスタイルの定義にだけ使用してください。エレメントのローカルDOMのスタイルを定義するには単に`<style>`ブロックを使用します。*
-
+*注意：`custom-style`はメインドキュメントのスタイルの定義だけに使用してください。エレメントのローカルDOMのスタイルを定義するには単に`<style>`ブロックを使用します。*
 
 ### 例
 
-最初のコードサンプルは、Shadow DOM v1仕様を実装していないブラウザ上で、`p`エレメントに適用したスタイルがパラグラフBにリークしている様子を示しています。二番目のコードサンプルでは、`​​custom-style`でスタイルブロックをラップすることでリークを防いでいます。
+最初のサンプルコードは、Shadow DOM v1仕様を実装していないブラウザ上で、`p`エレメントに適用したスタイルがパラグラフBにリークしている様子を示しています。二番目のコードサンプルでは、`​​custom-style`でスタイルブロックをラップすることでリークを防いでいます。
 
 [Plunkerで動作を確認](http://plnkr.co/edit/0o1zuMHgmt4novf2DS8z?p=preview)
 
 `x-foo.html` { .caption}
+
 ```html
 <dom-module id="x-foo">
   <template>
@@ -656,6 +685,7 @@ For example:
 ```
 
 `index.html` { .caption}
+
 ```html
 <link rel="import" href="x-foo.html">
 <style>
@@ -671,6 +701,7 @@ For example:
 [Plunkerで動作を確認](http://plnkr.co/edit/yiD9XWPHaMjHaGGwu4V9?p=preview)
 
 `x-foo.html` { .caption}
+
 ```html
 <dom-module id="x-foo">
   <template>
@@ -681,6 +712,7 @@ For example:
 ```
 
 `index.html` { .caption}
+
 ```html
 <!-- import custom-style -->
 <link rel="import" href="/bower_components/polymer/lib/elements/custom-style.html">
@@ -702,6 +734,7 @@ For example:
 `custom-style`の構文は変更されました。Polymer 2.xでは、`<custom-style>`はラッパーエレメントとなりました。ハイブリッド構文を使用することで、Polymer 1.xと他のバージョンとの互換性を担保することができます。
 
 Polymer 2.x { .caption}
+
 ```html
 <custom-style>
   <style>
@@ -712,7 +745,8 @@ Polymer 2.x { .caption}
 </custom-style>
 ```
 
-ハイブリッド (1.xと2.xで相互に互換がある) { .caption}
+ハイブリッド (1.xと2.xで相互に互換性がある) { .caption}
+
 ```html
 <custom-style>
   <style is="custom-style">
@@ -724,6 +758,7 @@ Polymer 2.x { .caption}
 ```
 
 Polymer 1.x { .caption}
+
 ```html
 <style is="custom-style">
   p {
