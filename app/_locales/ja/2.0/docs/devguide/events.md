@@ -1,12 +1,12 @@
 ---
-title: Handle and fire events
+title: イベントの発火と処理
 ---
 
 <!-- toc -->
 
-エレメントはイベントを使用して状態の変化をDOMツリーを通じて親エレメントに伝達します。Polymer Elementは、標準のDOM  APIを使ってイベントの生成、ディスパッチ、リッスンを行うことができます。
+エレメントはイベントを利用することで状態の変化をDOMツリーを介して親エレメントに伝達します。Polymer Elementsは、標準のDOM APIを用いてイベントの生成、ディスパッチ、リッスンを行うことができます。
 
-Polymerには*アノテーション付イベントリスナー*も用意されています。このリスナーを使用すると、エレメントのDOMテンプレートの一部としてイベントリスナーを宣言的に記述できます。
+Polymerには*アノテーション付イベントリスナー*も用意されています。このリスナーを使用すれば、エレメントのDOMテンプレートの一部としてイベントリスナーを宣言的に記述できます。
 
 ## アノテーション付イベントリスナーを追加 {#annotated-listeners}
 
@@ -33,7 +33,7 @@ Polymerには*アノテーション付イベントリスナー*も用意され�
 </dom-module>
 ```
 
-イベント名はHTML属性を利用して指定されるので、**常に小文字に変換されます。**これは、HTML属性名が大文字と小文字を区別しないためです。したがって、`on-myEvent`を指定した場合、イベント`myEvent`に対してリスナーが追加されます。_イベントハンドラの名前_（例えば、`handleClick`）は**大文字と小文字を区別**します。混乱を避けるため、**常に小文字のイベント名を使用する**ようにして下さい。
+イベント名はHTML属性を通じて記述されるので、<strong>常に小文字に変換されます。</strong>これは、HTML属性名が大文字と小文字を区別しないためです。したがって、`on-myEvent`を指定すると、イベント`myEvent`に対してリスナーが追加されます。*イベントハンドラの名前*（例えば、`handleClick`）は<strong>大文字と小文字を区別します</strong>。混乱を避けるため、**常にイベント名には小文字を使用する**ようにして下さい。
 
 ## リスナーを命令的に追加/削除 {#imperative-listeners}
 
@@ -41,10 +41,9 @@ Polymerには*アノテーション付イベントリスナー*も用意され�
 
 ### Custom Elementにおけるリスナー
 
-Custom Elementにおけるリスナーは、`ready()`において`this.addEventListener()`を使って設定します。リスナーは、Custom ElementがDOMに最初にアタッチされるときに設定されます。
+Custom Elementにおけるリスナーは、`ready()`において`this.addEventListener()`を使って設定します。リスナーは、Custom ElementがDOMに初めてアタッチされるときに設定されます。
 
-
-```
+```js
 ready() {
   super.ready();
   this.addEventListener('click', this._onClick);
@@ -57,21 +56,16 @@ _onClick(event) {
 _makeCoffee () {}
 ```
 
-
-**イベントハンドラ内の`this`について** デフォルトでは、イベントハンドラーが呼び出されると、`this`値が現在のイベントターゲットに設定されます。現在のターゲットは、常にイベントリスナーがアタッチされているエレメント（この場合はCustom Element自体）と同じになります。
+**イベントハンドラ内の`this`に関して**、デフォルトでは、イベントハンドラは`this`値を<em>現在のイベントターゲット</em>に設定して呼び出されます。現在のターゲットは、常にイベントリスナーがアタッチされているエレメント（この場合はCustom Element自体）と同一になります。
 {.alert .alert-info}
-
-
-
 
 ### 子エレメントにおけるリスナー
 
-Custom Elementの子エレメントにリスナーを設定する際は、テンプレート内で[アノテーション付きのイベントリスナー]()を使う方法が推奨されます。
+Custom Elementの子エレメントにリスナーを設定する際は、テンプレート内で[アノテーション付きのイベントリスナー]()を用いる方法が推奨されます。
 
-命令的にリスナーを設定する必要がある場合に重要なことは、 `.bind（）`を使用して`this`値をバインドするか、アロー関数を使用することです。
+子エレメントに命令的にリスナーを設定する必要がある場合に重要なことは、 `.bind（）`を使用して`this`値をバインドするか、アロー関数を使用することです。
 
-
-```
+```js
 ready() {
   super.ready();
   const childElement = ...
@@ -82,9 +76,9 @@ ready() {
 
 ### エレメント外部におけるリスナー
 
-Custom Elementの外部やその子孫以外（例えば、`window`）のイベントをリッスンする場合、イベントリスナーを追加したり削除したりするには、`connectedCallback()`と `disconnectedCallback()`をうまく利用する必要があります。：
+Custom Elementの外部やその子孫以外（例えば、`window`）のイベントをリッスンする場合、イベントリスナーを追加したり削除したりするには、`connectedCallback()`と `disconnectedCallback()`を適切に利用する必要があります。：
 
-```
+```js
 constructor() {
   super();
   this._boundListener = this._myLocationListener.bind(this);
@@ -101,14 +95,12 @@ disconnectedCallback() {
 }
 ```
 
-
-**メモリリークの危険** 自身またはShadow DOMの子のどこかにイベントリスナーを追加したエレメントは、そのエレメントがガベージコレクトされるのを禁止すべきではありません。しかしながら、ウィンドウまたはドキュメントレベルのような外部のエレメントに追加されたイベントリスナーによって、エレメントがガベージコレクションされないことがあります。メモリリークを防止するため`disconnectedCallback`コールバック内でイベントリスナーを削除するようにしてください。
+**メモリリークの危険** メモリリークを防止するため`disconnectedCallback`コールバック内でイベントリスナーを削除するようにしてください。自身またはShadow DOMの子のいずれかにイベントリスナーを設定したエレメントは、そのエレメントがガベージコレクトされるのを禁止すべきではありません。しかしながら、ウィンドウまたはドキュメントレベルのような外部のエレメントに設定されたイベントリスナーによって、エレメントがガベージコレクションされないことがあります。
 {.alert .alert-info}
-
 
 ## カスタムイベントの発火 {#custom-events}
 
-ホストエレメントからカスタムイベント(独自に作成したイベント)を発火するには、標準の`CustomEvent`コンストラクタと`dispatchEvent`メソッドを使用します。
+ホストエレメントからカスタムイベントを発火するには、標準の`CustomEvent`コンストラクタと`dispatchEvent`メソッドを使用します。
 
 例：{ .caption }
 
@@ -140,8 +132,7 @@ disconnectedCallback() {
 </script>
 ```
 
-
-`CustomEvent`コンストラクタはIEではサポートされていませんが、webcomponents polyfillには
+`CustomEvent`コンストラクタはIEではサポートされていませんが、webcomponents polyfillsには
 これをサポートするための小さなポリフィルが含まれており、どこでも同じ構文を使って記述することができます。
 
 デフォルトでは、カスタムイベントはShadow DOMの境界で停止します。カスタムイベントがShadow DOMの境界を越えて伝播するようにするには、イベントを作成する際に`composed`フラグをtrueに設定します。：
@@ -150,15 +141,14 @@ disconnectedCallback() {
 var event = new CustomEvent('my-event', {bubbles: true, composed: true});
 ```
 
-**後方互換性** レガシーAPIの`fire`インスタンスメソッドでは、デフォルトで`bubbles`と`compos`の両方をtrueが設定されました。最新のAPIで同じように動作させるためには、カスタムイベントを作成する際、上記のようにに両方のオプションを指定する必要があります。
+**後方互換性** レガシーAPIのインスタンスメソッド`fire`では、デフォルトで`bubbles`と`compos`の両方をtrueが設定されました。最新のAPIで同じように動作させるためには、カスタムイベントを作成する際、上記のように両オプションを指定する必要があります。
 {.alert .alert-info}
-
 
 ## リターゲティングされたイベントの処理 {#retargeting}
 
 Shadow DOMには、イベントがバブルアップする際に、ターゲットを変更する「イベントリターゲッティング(event retargetting)」という機能があり、そのターゲットは常にイベントを受け取るエレメントと同じスコープになります。（例えば、メインドキュメントのリスナーの場合、ターゲットはShadow Tree内ではなくメインドキュメント内のエレメントになります。）
 
-イベントの`composedPath()`メソッドは、イベントが通過するノードを配列で返します。そのため`event.composedPath()[0]`は、イベントの原初のターゲットを表します（ただし、ターゲットが閉じられたShadow Root内に隠れていない場合に限ります）。
+イベントの`composedPath()`メソッドは、イベントが通過するノード群を配列で返します。そのため`event.composedPath()[0]`は、イベントの原初のターゲットを表します（ただし、ターゲットが閉じられたShadow Root内に隠れていない場合に限ります）。
 
 例： { .caption }
 
@@ -206,13 +196,12 @@ Shadow DOMには、イベントがバブルアップする際に、ターゲッ�
 </script>
 ```
 
-
 この例では、原初のイベントが`<event-retargeting>`エレメントのローカルDOMツリー内の`<button>`でトリガーされています。リスナーは、メインドキュメント上の`<event-retargeting>`エレメントに対して設定されています。イベントはリターゲティングされるので、エレメントの実装を隠してしまえばクリックイベントは`<button>`エレメントからというよりむしろ`<event-retargeting>`エレメントから生じているようにみえます。
 
-Shadow Rootは`document-fragment`としてコンソールに表示されるかもしれません。Shady DOMでは、`DocumentFragment`のインスタンスになるためです。ネイティブのShadow DOMでは、`ShadowRoot`(`DocumentFragment`を拡張するDOMインターフェース)のインスタンスとして表示されます。
+Shadow Rootは`document-fragment`としてコンソールに表示されるかもしれません。Shady DOMでは、`DocumentFragment`のインスタンスになります。ネイティブのShadow DOMでは、`ShadowRoot`(`DocumentFragment`を拡張するDOMインターフェース)のインスタンスとして表示されます。
 
-詳細は、Shadow DOMのコンセプトの[Event retargeting](shadow-dom#event-retargeting)を参照して下さい.
+詳細は、Shadow DOMのコンセプトの[イベントのリターゲティング](shadow-dom#event-retargeting)を参照して下さい.
 
 ## プロパティ変更イベント {#property-changes}
 
-特定のプロパティ値が変更された際に、ノンバブリングなDOMイベントを発生するエレメントを構築することもできます。詳細については、[変更通知イベント](data-system#change-events)を参照してください。 
+特定のプロパティ値が変更された際に、ノンバブリングなDOMイベントを発生するエレメントを構築することもできます。詳細については、[変更通知イベント](data-system#change-events)を参照してください。
