@@ -376,7 +376,7 @@ filter: function(item) {
     this.notifyPath('items');
     ```
 
-    詳細については、[MutableDataミックスインの使用data-system#mutable-data)を参照してください。
+    詳細については、[MutableDataミックスインの利用](data-system#mutable-data)を参照してください。
 
 配列やPolymerデータシステムとの連携に関する詳細は、[配列との連携](model-data#work-with-arrays)を参照してください。
 
