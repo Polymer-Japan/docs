@@ -190,7 +190,7 @@ this.setProperties({
 
 ## 二つのパスを同一オブジェクトにリンク
 
-[linkPaths](/%7B%7B%7Bpolymer_version_dir%7D%7D%7D/docs/api/elements/Polymer.Element#method-linkPaths)メソッドは二つのパスを関連付けます。[二つのパスが同一のオブジェクトを参照]((data-system#two-paths)での説明の通り、`linkPaths`はエレメントが同じオブジェクトを参照する二つのパスを持つ場合に使用できます。
+[`linkPaths`](/%7B%7B%7Bpolymer_version_dir%7D%7D%7D/docs/api/elements/Polymer.Element#method-linkPaths)メソッドは二つのパスを関連付けます。[二つのパスが同一のオブジェクトを参照](data-system#two-paths)で説明している通り、`linkPaths`はエレメントが同じオブジェクトを参照する二つのパスを持つ場合に使用できます。
 
 二つのパスがリンクされている場合、片方のパスへの[監視可能(observable)な変更](data-system#observable-changes)は、もう片方のパスでも同じように監視することができます。
 
