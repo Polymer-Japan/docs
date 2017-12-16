@@ -198,7 +198,7 @@ this.setProperties({
 linkPaths('selectedUser', 'users.1');
 ```
 
-**どちらのパスも同一のエレメントに関連付ける必要があります。**エレメント間で変更を伝播するには、[データバインディング](data-binding)を使用すべきです。
+<strong>どちらのパスも同一のエレメントに関連付ける必要があります。</strong>エレメント<em>間で</em>変更を伝播するには、[データバインディング](data-binding)を使用すべきです。
 {.alert .alert-info}
 
 パスのリンクを解除するには、`linkPaths`に渡した一つ目のパスを引数に指定して`unlinkPaths`を呼び出します：
