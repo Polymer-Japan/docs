@@ -16,7 +16,7 @@ then
   exit 0
 fi
 
-readonly APPDIR=$(dirname $BASH_SOURCE)
+readonly APPDIR=$(dirname $0)
 
 echo "\nBuilding app version: $deployVersion\n"
 gulp
