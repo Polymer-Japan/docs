@@ -1,10 +1,10 @@
 ---
-title: Responsive app layout
+title: レスポンシブレイアウト
 ---
 
 <!-- toc -->
 
-どんなアプリケーションにもレイアウトが必要です。`app-layout`エレメントは、レスポンシブなレイアウトを簡単に作成するツールを提供します。
+どんなアプリケーションにもレイアウトが必要です。`app-layout`エレメントは、レスポンシブなレイアウトを簡易に作成するツールを提供します。
 
 前世代のMaterial Designベースのレイアウトエレメント（`paper-header-panel`や`paper-drawer-panel`など）を使って開発していた場合、`app-layout`エレメントはかなり手軽に感じるはずです。これらのエレメントは次のように設計されています。：
 
@@ -16,9 +16,9 @@ title: Responsive app layout
 
 レイアウトを構築する前に、そのレイアウトを設計する必要があります。
 
--   コンテンツに合わせてスクロールする単純なアプリケーションヘッダーが必要ですか？または手の込んだスクロールエフェクトを使った折りたたみ式ヘッダーが必要ですか？
--   ユーザーはあなたのアプリ内をどのように移動するでしょうか？タブでしょうか？サイドメニューでしょうか？
--   小さな画面上でアプリケーションのレイアウトはどのように変化するでしょうか？
+- コンテンツに合わせてスクロールする単純なアプリケーションヘッダーが必要ですか？または手の込んだスクロールエフェクトを使った折りたたみ式ヘッダーが必要ですか？
+- ユーザーはあなたのアプリ内をどのように移動するでしょうか？タブでしょうか？サイドメニューでしょうか？
+- 小さな画面上でアプリケーションのレイアウトはどのように変化するでしょうか？
 
 実装しようとしているデザインのモックアップがすでにあるかもしれません。あるいはあなたが独自にデザインしているかもしれません。必要なものが正確にわからない場合は、アイディアの出発点として、すでに作成されたアプリのレイアウトのテンプレートを参考にできます。：
 
@@ -29,14 +29,13 @@ title: Responsive app layout
 
 基本的なデザインを決めたら、実装を開始することができます。画面の上部のツールバーとヘッダーから始めましょう。
 
-
 ## ツールバーとヘッダー
 
 ほとんどすべてのアプリには、上部にヘッダーやツールバーがあります。ヘッダーはコンテンツとともにスクロールしたり、画面の上部に固定したり、あるいはユーザーのスクロールに応じて動的な振る舞いを実装することもできます。必要なエレメントは、期待するものによって異なります。：
 
--   コンテンツとともにスクロールする単純なヘッダーが必要な場合、`<app-toolbar>`エレメントをそのまま利用できます。`<app-toolbar>`は、コントロールとラベル用のシンプルな水平のコンテナです。複数行のコントロールが必要な場合には、複数のツールバーを使用するだけです。
+- コンテンツとともにスクロールする単純なヘッダーが必要な場合、`<app-toolbar>`エレメントをそのまま利用できます。`<app-toolbar>`は、コントロールとラベル用のシンプルな水平のコンテナです。複数行のコントロールが必要な場合には、複数のツールバーを使用するだけです。
 
--   スクロールエフェクト（ユーザーがスクロールするとサイズを変化するようなヘッダー）が必要な場合、`<app-header>`エレメントが必要です。`<app-header>`は一つ以上のツールバーを保持でき、スクロールエフェクトを管理します。
+- スクロールエフェクト（ユーザーがスクロールするとサイズを変化するようなヘッダー）が必要な場合、`<app-header>`エレメントが必要です。`<app-header>`は一つ以上のツールバーを保持でき、スクロールエフェクトを管理します。
 
 ### シンプルなツールバー
 
@@ -92,7 +91,6 @@ title: Responsive app layout
 
 ![screenshot of a simple app-toolbar with a menu and search buttons](/images/1.0/toolbox/toolbar-with-buttons.png)
 
-
 ### ダイナミックヘッダー
 
 `<app-header>`エレメントは、スクロールエフェクトに対応するコンテナです。アプリのヘッダーにはあらゆる種類のエレメントを配置することができますが、最も一般的な子はツールバーとタブバーでしょう。複数行をコントロールする場合は複数のツールバーを使用します。
@@ -103,23 +101,19 @@ title: Responsive app layout
 - `reveals`：リビーリング(revealing)ヘッダーは、ページをどんなに下までスクロールしていたとしても、上に向かってスクロールを開始するとすぐにヘッダーが表示されます。
 - `condenses`：コンデンシング(condensing)ヘッダーは通常のヘッダーより高さがありますが、スクロールすると縦に縮みます。コンデンシングヘッダーはたいてい複数のツールバー/タブバーを持ち、どれかひとつ(stickyエレメント)が常時表示されることになります。このモードは、固定ヘッダーやリビーリングヘッダーと組み合わせることもできます。
 
-
 ### コンデンシングヘッダー
 
 複数のツールバーを持つコンデンシングヘッダを使用する場合、次の二つの基本的な方法を選択できます。：
 
-(訳注：以下の文章による説明は分かりづらいので適宜イメージ画像や[デモページ](https://polymerelements.github.io/app-layout/templates/test-drive/)を参照してください。)
-
--   複数のツールバーはすべて画面上に留まりますが、他のツールバーの上部に畳こむ(collapse)ように納まります。ツールバーのコンテンツが、重なり合わないようにずらす必要があります。（[Material Design](https://material.io/guidelines/patterns/scrolling-techniques.html#)のガイドラインでは、このパターンを「フレキシブルスペース(flexible space)」と呼び、一つ以上のスクロールエフェクトと組み合わされることが多いです。）
+- 複数のツールバーはすべて画面上に留まりますが、他のツールバーの上部に畳こむ(collapse)ように納まります。ツールバーのコンテンツが、重なり合わないようにずらす必要があります。（[Material Design](https://material.io/guidelines/patterns/scrolling-techniques.html#)のガイドラインでは、このパターンを「フレキシブルスペース(flexible space)」と呼び、一つ以上のスクロールエフェクトと組み合わされることが多いです。）
 
     ![screenshot of an expanded, tall, app-toolbar with a menu and shop button, and titled My App](/images/1.0/toolbox/collapsing-headers-open.png)
     ![screenshot of the same toolbar collapsed to a regular, smaller size, with the same title and buttons](/images/1.0/toolbox/collapsing-headers-closed.png)
 
--   一番上のツールバーはスクリーンの外へ追い出され、下のツールバーが画面上に残ります。（[Material Design](https://material.io/guidelines/)のパターンでは、通常この下のツールバーはタブバーまたは検索バーになります）。
+- 一番上のツールバーはスクリーンの外へ追い出され、下のツールバーが画面上に残ります。（[Material Design](https://material.io/guidelines/)のパターンでは、通常この下のツールバーはタブバーまたは検索バーになります）。
 
     ![screenshot of an expanded, tall app-toolbar with a back and shop buttons, titled Spork. Below it are three tabs, labelled food, drink, life](/images/1.0/toolbox/spork-tabs-tall.png)
     ![screenshot of the same app-toolbar, but with the title and the buttons gone, and only with the 2 tabs visible](/images/1.0/toolbox/spork-tabs-condensed.png)
-
 
 セット内の特定ツールバーが、`sticky`として識別されます。ページをスクロールすると、stickyツールバーより上のツールバーは画面外へスクロールされます。stickyツールバーに指定するには、`sticky`属性を設定します。`sticky`属性を持つツールバーがない場合、`<app-header>`の最初の子がstickyになります。
 
@@ -241,15 +235,18 @@ Polymer 2.0のApp Layoutでは、`slot="header"`を指定する必要があり�
 
 ドロワーを開閉する方法はいくつかあります。：
 
--   閉じられたドロワーをスワイプで開く。画面の端でスワイプジェスチャーを検知してドロワーを開くには、[swipeOpen](https://www.webcomponents.org/element/PolymerElements/app-layout/app-drawer#property-swipeOpen)を`true`に設定します。
--   ドロワーをドラッグして半分程度まで閉じれ(開け)ば、ドロワーはそのままひとりでに閉じます(開きます)。高速にスワイプ（フリックまたはスワイプ）した場合も同様の効果があり、ジェスチャーが半分に満たなくても開閉します。
--   [open](https://www.webcomponents.org/element/PolymerElements/app-layout/app-drawer#method-open)、[close](https://www.webcomponents.org/element/PolymerElements/app-layout/app-drawer#method-close)、または[toggle](https://www.webcomponents.org/element/PolymerElements/app-layout/app-drawer#method-toggle)を呼び出すことで、ドロワーをプログラムによって開閉します。あるいは、[opened](https://www.webcomponents.org/element/PolymerElements/app-layout/app-drawer#property-opened)プロパティにバインドします。
--   スワイプ/フリングジェスチャーを無効にする`persistent`プロパティを設定することで、ドロワーを固定サイドバー(persistent sidebar)として機能させることができます。
+- 閉じられたドロワーをスワイプで開く。画面の端でスワイプジェスチャーを検知してドロワーを開くには、[swipeOpen](https://www.webcomponents.org/element/PolymerElements/app-layout/app-drawer#property-swipeOpen)を`true`に設定します。
+
+- ドロワーをドラッグして半分程度まで閉じれ(開け)ば、ドロワーはそのままひとりでに閉じます(開きます)。高速にスワイプ（フリックまたはスワイプ）した場合も同様の効果があり、ジェスチャーが半分に満たなくても開閉します。
+
+- [open](https://www.webcomponents.org/element/PolymerElements/app-layout/app-drawer#method-open)、[close](https://www.webcomponents.org/element/PolymerElements/app-layout/app-drawer#method-close)、または[toggle](https://www.webcomponents.org/element/PolymerElements/app-layout/app-drawer#method-toggle)を呼び出すことで、ドロワーをプログラムによって開閉します。あるいは、[opened](https://www.webcomponents.org/element/PolymerElements/app-layout/app-drawer#property-opened)プロパティにバインドします。
+
+- スワイプ/フリングジェスチャーを無効にする`persistent`プロパティを設定することで、ドロワーを固定サイドバー(persistent sidebar)として機能させることができます。
 
 ドロワーは分割されたコンポーネントなので、さまざまな方法で組み立てることができます。例えば：
 
--   ドロワーの高さをフルサイズにする場合、ドロワーを`app-header-layout`の外側に配置するか、`app-drawer-layout`内に`app-header-layout`をラップします。
--   ヘッダーの下でドロワーを開く場合、ドロワーまたは`app-drawer-layout`を`app-header-layout`内に配置します。
+- ドロワーの高さをフルサイズにする場合、ドロワーを`app-header-layout`の外側に配置するか、`app-drawer-layout`内に`app-header-layout`をラップします。
+- ヘッダーの下でドロワーを開く場合、ドロワーまたは`app-drawer-layout`を`app-header-layout`内に配置します。
 
 ### ドロワーのスタイリング
 
