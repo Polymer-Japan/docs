@@ -71,7 +71,7 @@ For more on data flow, see [How data flow is controlled](data-system#data-flow-c
 ## Bind to a target property {#property-binding}
 
 To bind to a target property, specify the attribute name that corresponds to the
-property, with an [annotation](#binding-annotation) or [compound binding](#compound-binding)
+property, with an [annotation](#binding-annotation) or [compound binding](#compound-bindings)
 as the attribute value:
 
 ```
@@ -139,6 +139,60 @@ annotation or compound binding inside the target element.
 
 Binding to text content is always one-way, host-to-target.
 
+#### Binding undefined properties in otherwise empty nodes
+
+Some browsers will delete empty nodes while an element's template is being cloned. For this 
+reason, data binding an undefined property in an otherwise empty node will result in a 
+node populated with a space, instead of an empty node.
+
+For example, the following template:
+
+```html
+<template>
+  ...
+  <div>[[undefinedProperty]]</div>
+  ...
+</template>
+```
+
+Renders as:
+
+```html
+<div> </div>
+```
+
+If you need the node to be empty (for example, in order to use the css `:empty` selector), 
+work around this limitation by instantiating the property with the empty string (`''`):
+
+```html
+<dom-module id='custom-element'>
+  <template>
+    ...
+    <div>[[emptyProperty]]</div>
+    ...
+  </template>
+</dom-module>
+```
+
+```js
+static get properties () {
+  return {
+    ...
+    emptyProperty: {
+      type: String,
+      value: ''
+    },
+    ...
+  }
+}
+```
+
+This renders as:
+
+```html
+<div></div>
+```
+
 ## Bind to a target attribute {#attribute-binding}
 
 In the vast majority of cases, binding data to other elements should use [property
@@ -156,7 +210,7 @@ To bind to an attribute, add a dollar sign (`$`) after the attribute name:
 ```
 
 Where the attribute value is either a [binding annotation](#binding-annotation) or a [compound
-binding](#compound-binding).
+binding](#compound-bindings).
 
 Attribute binding results in a call to:
 
@@ -221,7 +275,7 @@ properties may also be affected.
 
 There are various reasons that properties can't be bound:
 
-*   Cross-browser isssues with the ability to place binding braces `{{...}}` in some of these
+*   Cross-browser issues with the ability to place binding braces `{{...}}` in some of these
     attribute values.
 
 *   Attributes that map to differently-named JavaScript properties (such as `class`).
@@ -406,7 +460,7 @@ Example: { .caption }
         }
       }
       _formatName(first, last) {
-        return `${last}, ${first}`
+        return `${last}, ${first}`;
       }
 
     }
@@ -441,8 +495,8 @@ In addition, a computed binding can include literal arguments.
 For each type of dependent property, the argument passed to the computing function is the same as
 that passed to an observer.
 
-As with observers and computed properties, the computing function **is not called until all
-dependent properties are defined (`!=undefined`)**.
+As with observers and computed properties, the computing function **may be called when one or 
+more dependencies are undefined**.
 
 For an example computed binding using a path with a wildcard, see [Binding to array
 items](#array-binding).

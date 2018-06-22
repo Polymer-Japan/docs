@@ -8,8 +8,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 */
 
 .devguide-main {
-  /* header height + footer height = 354px */
-  min-height: calc(100vh - 354px);
+  min-height: 100vh;
 }
 
 .devguide-main {
@@ -37,6 +36,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 .devguide-main header {
   color: white;
   padding: 20px 40px;
+}
+
+.devguide-main header[data-version="3.0"] {
+  background: #1E88E5;  /* blue-600 */
 }
 
 .devguide-main header[data-version="2.0"] {

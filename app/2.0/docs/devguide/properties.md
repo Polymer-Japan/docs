@@ -287,17 +287,19 @@ _deserializeValue(value, type) {
 ## Configuring default property values {#configure-values}
 
 Default values for properties may be specified in the `properties` object using
-the `value` field.  The value may either be a primitive value, or a function
+the `value` field, **or** set imperatively in the element's `constructor`. 
+
+The value in the `properties` object may either be a primitive value, or a function
 that returns a value.
 
 If you provide a function, Polymer calls the function once
 _per element instance_.
 
-When initializing a property to an object or array value, use a function to
-ensure that each element gets its own copy of the value, rather than having
-an object or array shared across all instances of the element.
+When initializing a property to an object or array value, either initialize the property
+in the constructor, or use a function to ensure that each element gets its own copy of 
+the value, rather than having an object or array shared across all instances of the element.
 
-Example: { .caption }
+Default in properties object { .caption }
 
 ```js
 class XCustom extends Polymer.Element {
@@ -319,6 +321,25 @@ class XCustom extends Polymer.Element {
 }
 ```
 
+Default in constructor {.caption}
+```js
+constructor() {
+  super();  
+  this.mode = 'auto';
+  this.data = {};
+}
+
+static get properties() {
+  return {
+    mode: String,
+
+    data: {
+      type: Object,
+      notify: true
+    }
+  }
+}
+```
 
 ## Property change notification events (notify) {#notify}
 
@@ -346,8 +367,8 @@ explicit to avoid accidental changes from the host by setting the `readOnly`
 flag to `true` in the `properties` property definition.  In order for the
 element to actually change the value of the property, it must use a private
 generated setter of the convention <code>\_set<var>Property</var>(value)</code>
-where <code><var>Property</var></code> is the property name, with the first character converted to uppercase (if alphabetic). For example, the setter for `oneProperty` is `setOneProperty`, and the setter
-for _privateProperty is `set_privateProperty`.
+where <code><var>Property</var></code> is the property name, with the first character converted to uppercase (if alphabetic). For example, the setter for `oneProperty` is `_setOneProperty`, and the setter
+for _privateProperty is `_set_privateProperty`.
 
 ```
 class XCustom extends Polymer.Element {

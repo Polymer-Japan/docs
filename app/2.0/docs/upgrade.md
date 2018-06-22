@@ -657,9 +657,18 @@ them. Instead, it introduces a new `<custom-style>` element that wraps a `<style
     `<custom-style>` elements.
 *   **2.0-only projects.** Replace your existing  `<style is="custom-style">` elements with
     `<custom-style>` elements.
-*   **All projects.** Replace any `:root` selectors with `html`, and update custom property syntax
+*   **All projects.** Ensure the `<custom-style>` element is placed in the document's body,
+    or as the last element in the `<head>`.
+*   **All projects.** Replace any `:root` selectors with `html`, and update custom property syntax
     as described in [Update custom property syntax](#update-custom-property-syntax).
 
+**Custom-style placement**. The `<custom-style>` element should be placed in the document's
+`<body>`, or just before the closing tag for the `<head>` element. Why? Only certain elements 
+can appear inisde a document's `<head>`  element. `<style>` elements are allowed, but custom 
+elements like `<custom-style>` are not. If the browser encounters a `<custom-style>` tag inside 
+`<head>`, it will close the `<head>` element and move the `<custom-style>` and any following 
+tags to the body.
+{.alert .alert-info}
 
 Before {.caption}
 
@@ -1252,7 +1261,7 @@ Because several aspects of timing change in 2.0, you'll need to test your code t
 doesn't rely on any 1.x timing. In particular:
 
 *   Element initialization (including template stamping and data system initialization) is deferred
-    until the the element is connected to the main document. (This is a result of the custom element
+    until the element is connected to the main document. (This is a result of the custom element
     v1 changes.)
 
 In order for a property to be deserialized from its attribute, it must be declared in the
@@ -1358,7 +1367,7 @@ Below are the general steps for defining a custom element using this new syntax:
     2.0 DOM templating and data binding system. It provides the standard custom element lifecycle
     callbacks, plus the Polymer-specific `ready` callback.
 
-*   Implement "behaviors" as [mixins that return class expressions](#mixins). Or use the the
+*   Implement "behaviors" as [mixins that return class expressions](#mixins). Or use the
     `mixinBehaviors` method to mix hybrid behaviors into your element.
 
 *   Element's `is` property should be defined as a static on the class.
@@ -1517,7 +1526,7 @@ For information on writing your own class expression mixins, see
 In some cases, the features you want to use may be available as hybrid behaviors, but not as
 class mixins.
 
-You can add hybrid behaviors to your class-style element using the `Polymer.mixinBehavior` function:
+You can add hybrid behaviors to your class-style element using the `Polymer.mixinBehaviors` function:
 
 ```js
 class XClass extends Polymer.mixinBehaviors([MyBehavior, MyBehavior2], Polymer.Element) {
@@ -1528,7 +1537,7 @@ class XClass extends Polymer.mixinBehaviors([MyBehavior, MyBehavior2], Polymer.E
 customElements.define(XClass.is, XClass);
 ```
 
-The `mixinBehavior` function also mixes in the Legacy APIs, the same as if you extended
+The `mixinBehaviors` function also mixes in the Legacy APIs, the same as if you extended
 `Polymer.LegacyElement`. These APIs are required since since hybrid behaviors depend on them.
 
 ### Import optional features {#optional-features}

@@ -21,25 +21,9 @@ import re
 import json
 
 from google.appengine.api import memcache
-import http2push.http2push as http2push
 
 
 jinja_loader = jinja2.FileSystemLoader(os.path.dirname(__file__))
-
-# include the _escaped_ contents of a file
-def include_file(name):
-  try:
-    return jinja2.Markup.escape(jinja_loader.get_source(env, name)[0])
-  except Exception as e:
-    logging.exception(e)
-
-# include the literal (unescaped) contents of a file
-def include_file_raw(name):
-  try:
-    return jinja2.Markup(jinja_loader.get_source(env, name)[0])
-  except Exception as e:
-    logging.exception(e)
-
 env = jinja2.Environment(
   loader=jinja_loader,
   extensions=['jinja2.ext.autoescape'],
@@ -47,8 +31,6 @@ env = jinja2.Environment(
   trim_blocks=True,
   variable_start_string='{{{',
   variable_end_string='}}}')
-env.globals['include_file'] = include_file
-env.globals['include_file_raw'] = include_file_raw
 
 # memcache logic: maintain a separate cache for each explicit
 # app version, so staged versions of the docs can have new nav
@@ -65,6 +47,9 @@ NAV_FILE = '%s/nav.yaml'
 ARTICLES_FILE = 'blog.yaml'
 AUTHORS_FILE = 'authors.yaml'
 IS_DEV = os.environ.get('SERVER_SOFTWARE', '').startswith('Dev')
+
+# base path for edit-on-github links
+BASE_EDIT_PATH = "https://github.com/Polymer/docs/edit/master/app/%s.md"
 
 def render(out, template, data={}):
   try:
@@ -145,13 +130,13 @@ def handle_500(req, resp, data, e):
   render(resp, '/500.html', data)
 
 
-# class VersionHandler(http2push.PushHandler):
+class SearchHandler(webapp2.RequestHandler):
 
-#   def get(self, version):
-#     render(self.response, '/%s/index.html' % version)
+  def get(self):
+    self.redirect(str('https://www.google.com/search?q=site%3Apolymer-project.org+' + self.request.get('q')))
 
 
-class Site(http2push.PushHandler):
+class Site(webapp2.RequestHandler):
 
   def redirect_if_needed(self, path):
     redirect_cache = MEMCACHE_PREFIX + REDIRECTS_FILE
@@ -194,7 +179,8 @@ class Site(http2push.PushHandler):
   def get_versioned_paths(self, shortpath):
     site_nav_1 = self.get_site_nav('1.0')
     site_nav_2 = self.get_site_nav('2.0')
-    versioned_paths = ['','']
+    site_nav_3 = self.get_site_nav('3.0')
+    versioned_paths = ['','','']
     if site_nav_1:
       for section in site_nav_1:
         if section['shortpath'] == shortpath:
@@ -204,6 +190,11 @@ class Site(http2push.PushHandler):
       for section in site_nav_2:
         if section['shortpath'] == shortpath:
           versioned_paths[1] = section['path']
+          break
+    if site_nav_3:
+      for section in site_nav_3:
+        if section['shortpath'] == shortpath:
+          versioned_paths[2] = section['path']
           break
     return versioned_paths
 
@@ -225,16 +216,18 @@ class Site(http2push.PushHandler):
         return article
     return None
 
-  @http2push.push()
   def get(self, path):
     if self.redirect_if_needed(self.request.path):
       return
 
     template_path = path
+    # edit_on_github_path is different for index files.
+    edit_on_github_path = path
     # Root / serves index.html.
     # Folders server the index file (e.g. /docs/index.html -> /docs/).
     if not path or path.endswith('/'):
       template_path += 'index.html'
+      edit_on_github_path += 'index'
     # Remove index.html from URL.
     elif path.endswith('index'):
       # TODO: preserve URL parameters and hash.
@@ -253,8 +246,9 @@ class Site(http2push.PushHandler):
         'site_nav': self.get_site_nav(version),
         'section_nav': self.get_section_nav(version, shortpath),
         'path': '/' + path,
-        # 1.0 and 2.0 API docs are not editable in GH.
+        # API docs are not editable in GH.
         'edit_on_github': path.find('.0/docs/api/') == -1,
+        'edit_on_github_path': BASE_EDIT_PATH % edit_on_github_path,
         'versioned_paths': self.get_versioned_paths(shortpath),
         # we use this as a macro in cross-references.
         # please don't take it away.
@@ -269,7 +263,7 @@ class Site(http2push.PushHandler):
         active_article = self.get_active_article(articles, template_path)
 
       data = {
-        'site_nav': self.get_site_nav('1.0') + self.get_site_nav('2.0'),
+        'site_nav': self.get_site_nav('1.0') + self.get_site_nav('2.0') + self.get_site_nav('3.0'),
         'articles': articles,
         'active_article': active_article
       }
@@ -281,7 +275,7 @@ class Site(http2push.PushHandler):
     render(self.response, template_path, data)
 
 routes = [
-  # ('/(\d\.\d)/$', VersionHandler),
+  ('/search/', SearchHandler),
   ('/(.*)', Site),
 ]
 
