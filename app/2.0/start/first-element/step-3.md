@@ -3,9 +3,13 @@ title: "Step 3: Use data binding and properties"
 subtitle: "Build your first Polymer element"
 ---
 
+<!-- toc -->
+
 Right now, the element doesn't do much. In this step, you'll give it a basic
 API, allowing you to configure the icon from markup, using an attribute, or
 from JavaScript, using a property.
+
+## Declare a property
 
 First, a bit of data binding. We'll create a `toggleIcon` property that you can use in HTML markup, like this: 
 
@@ -40,7 +44,7 @@ icon-toggle.html: After { .caption }
 <script>
   class IconToggle extends Polymer.Element {
     static get is() {
-    return "icon-toggle";
+      return "icon-toggle";
     }
     static get properties() {
       return {
@@ -69,6 +73,8 @@ The default is `String`, so the declaration of `toggleIcon` is a formality here.
 To learn more, see <a href="/2.0/docs/devguide/properties#attribute-deserialization">Attribute
 deserialization</a> in the Polymer docs.
 { .alert .alert-info }
+
+## Configure the property from markup 
 
 Now find the `<iron-icon>` element and change the value of the `icon` attribute from `"polymer"` to  "`[[toggleIcon]]`".
 
@@ -116,7 +122,7 @@ icon-toggle.html: Before { .caption }
 <script>
   class IconToggle extends Polymer.Element {
     static get is() {
-    return "icon-toggle";
+      return "icon-toggle";
     }
     static get properties() {
       return {
@@ -139,7 +145,7 @@ icon-toggle.html: After { .caption }
 <script>
   class IconToggle extends Polymer.Element {
     static get is() {
-    return "icon-toggle";
+      return "icon-toggle";
     }
     static get properties() {
       return {

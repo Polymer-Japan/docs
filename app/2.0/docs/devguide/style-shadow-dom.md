@@ -58,7 +58,7 @@ The HTML elements in your template become children in your custom element's shad
 provides a mechanism for encapsulation, meaning that elements inside the shadow DOM don't match 
 selectors outside the shadow DOM.
 
-Likewise, styling rules in side the shadow DOM can't "leak" out to affect elements outside the 
+Likewise, styling rules inside the shadow DOM can't "leak" out to affect elements outside the 
 shadow DOM.
 
 Shadow DOM permits encapsulation of styling rules for custom elements. You can freely define 
@@ -290,10 +290,7 @@ selector applies to any `p` element in the shadow tree if the host has class "wa
 
 Styling with the `:host` selector is one of two instances where rules inside a shadow tree can 
 affect an element outside a shadow tree. The second instance uses the `::slotted()` syntax to apply 
-styling rules to distributed children. See [*Composition and slots* in Eric Bidelman's article on 
-shadow 
-DOM](https://developers.google.com/web/fundamentals/getting-started/primers/shadowdom#composition_sl
-ot) for more information.
+styling rules to distributed children. See [*Composition and slots* in Eric Bidelman's article on shadow DOM](https://developers.google.com/web/fundamentals/getting-started/primers/shadowdom#composition_slot) for more information.
 
 ### Style slotted content (distributed children)
 
@@ -514,6 +511,74 @@ class myElement extends Polymer.Element(){
   ...
 }
 ```
+
+[See an example on Plunker](http://plnkr.co/edit/vWS9PIBTTbKHxRnJyT7T?p=preview)
+
+### Style directional text with the :dir() selector
+
+The `:dir()` CSS selector allows for styling text specific to its orientation 
+(right-to-left or left-to-right). See the [documentation on MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/:dir) for more information on the `:dir()`
+selector.
+
+The `Polymer.DirMixin` provides limited support for the `:dir()` selector. Use of `:dir()` requires the
+application to set the `dir` attribute on `<html>`. All elements will use the same direction.
+
+Individual elements can opt-out of the global direction by setting the `dir` attribute
+in HTML or in the `ready` callback, but the text direction of these elements must from then on be handled 
+manually.
+
+```
+<!-- the following element won't change to follow the dir setting on the document -->
+<my-element dir="rtl"></my-element>
+```
+
+Setting `dir` on an ancestor (other than `html`) has no effect.
+
+For elements that extend `Polymer.Element`, add the `Polymer.DirMixin` mixin to use
+`:dir()` styling. Elements that use the legacy `Polymer({})` call automatically include the 
+`Polymer.DirMixin` mixin.
+
+Here's an example use of the `:dir()` selector: 
+
+`using-dir-selector.html` { .caption}
+```html
+<link rel="import"  href="../polymer/polymer-element.html">
+<link rel="import"  href="../polymer/lib/mixins/dir-mixin.html">
+...
+<template>
+  <style>
+    :host {
+      display: block;
+      color: blue;
+    }
+    :host(:dir(rtl)) {
+      color: green;
+    }
+  </style>
+  ...
+</template>
+...
+class UsingDirSelector extends Polymer.DirMixin(Polymer.Element) {
+  static get is() { return 'using-dir-selector' }
+  ...
+}
+```
+
+`index.html` { .caption}
+```html
+<!doctype html>
+<html lang="en" dir="rtl">
+  <head>
+    ...
+    <link rel="import" href="using-dir-selector.html">
+  </head>
+  <body>
+    <using-dir-selector></using-dir-selector>
+  </body>
+</html>
+```
+
+[See an example use of the `:dir()` selector on Plunker](http://plnkr.co/edit/eXrI8fRQWTZ05JcUYU7H?p=preview).
 
 ## Share styles between elements
 

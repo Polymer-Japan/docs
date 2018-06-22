@@ -133,7 +133,7 @@ customElements.define('x-class', XClass);
 ```
 
 The `mixinBehavior` function also mixes in the Legacy APIs, the same as if you extended
-`Polymer.LegacyElement`. These APIs are required since since hybrid behaviors depend on them.
+`Polymer.LegacyElement`. These APIs are required since hybrid behaviors depend on them.
 
 ## Define an element in the main HTML document {#main-document-definitions}
 
@@ -180,7 +180,7 @@ all imports in the document have finished loading.
 
 ## Define a legacy element {#legacy-element}
 
-Legacy elements can use use the `Polymer` function to register an element.
+Legacy elements can use the `Polymer` function to register an element.
 The function takes as its argument the  prototype for the new element. The prototype
 must have an `is` property that specifies the HTML tag name for your custom element.
 
